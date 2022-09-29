@@ -12,6 +12,7 @@ public class DummyUserRosterCreator {
     @Bean
     public UserDao createUserRoster() {
         var userAnthony = new UserBuilder()
+            .setId(1)
             .setUserName(new UserAttribute<>("anthony2", Visibility.PUBLIC))
             .setFullName(new UserAttribute<>("Anthony Miller", Visibility.PUBLIC))
             .setEmailAddress(new UserAttribute<>("anthony2@gmail.com", Visibility.GROUPS_ONLY))
