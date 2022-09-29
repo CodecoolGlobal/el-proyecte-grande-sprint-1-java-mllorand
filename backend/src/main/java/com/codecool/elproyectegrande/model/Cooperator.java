@@ -14,6 +14,8 @@ public class Cooperator {
     private List<AffinityLabel> strengths;
     private List<AffinityLabelWithMonths> learnt;
     private List<AffinityLabelWithScale> interested;
+    private List<AffinityLabel> learnFromScratch;
+    private List<AffinityLabel> improveIn;
 
     //groups
 
@@ -88,5 +90,21 @@ public class Cooperator {
 
     public void setInterested(List<AffinityLabelWithScale> interested) {
         this.interested = interested;
+    }
+
+    public List<AffinityLabel> getLearnFromScratch() {
+        return learnFromScratch;
+    }
+
+    public void setLearnFromScratch(List<AffinityLabel> learnFromScratch) {
+        this.learnFromScratch = learnFromScratch;
+    }
+
+    public List<AffinityLabel> getImproveIn() {
+        return improveIn;
+    }
+
+    public void setImproveIn(List<AffinityLabel> improveIn) {
+        this.improveIn = improveIn;
     }
 }

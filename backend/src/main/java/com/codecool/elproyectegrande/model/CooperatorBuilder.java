@@ -79,6 +79,32 @@ public class CooperatorBuilder {
         return this;
     }
 
+    public CooperatorBuilder setLearnFromScratch(List<AffinityLabel> learnFromScratch) {
+        cooperatorUnderBuild.setLearnFromScratch(learnFromScratch);
+        return this;
+    }
+
+    public CooperatorBuilder addLearnFromScratch(AffinityLabel learnFromScratch) {
+        if(cooperatorUnderBuild.getLearnFromScratch() == null) {
+            cooperatorUnderBuild.setLearnFromScratch(new LinkedList<>());
+        }
+        cooperatorUnderBuild.getLearnFromScratch().add(learnFromScratch);
+        return this;
+    }
+
+    public CooperatorBuilder setImproveIn(List<AffinityLabel> improveIn) {
+        cooperatorUnderBuild.setImproveIn(improveIn);
+        return this;
+    }
+
+    public CooperatorBuilder addImproveIn(AffinityLabel improveIn) {
+        if(cooperatorUnderBuild.getImproveIn() == null) {
+            cooperatorUnderBuild.setImproveIn(new LinkedList<>());
+        }
+        cooperatorUnderBuild.getImproveIn().add(improveIn);
+        return this;
+    }
+
     public Cooperator build() {
         var tempUser = cooperatorUnderBuild;
         cooperatorUnderBuild = null;
