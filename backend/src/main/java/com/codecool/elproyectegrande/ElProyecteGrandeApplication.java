@@ -24,7 +24,7 @@ public class ElProyecteGrandeApplication {
 	public class ReactCorsConfigurer implements WebMvcConfigurer {
 		@Override
 		public void addCorsMappings(CorsRegistry registry) {
-			registry.addMapping("/profile/*")
+			registry.addMapping("/profile*")
 				.allowedOrigins(REACT_HOST)
 				.allowedOrigins(POSTMAN_HOST);
 		}
