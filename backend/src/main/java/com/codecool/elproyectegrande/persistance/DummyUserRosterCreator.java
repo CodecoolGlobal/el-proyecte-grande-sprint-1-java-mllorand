@@ -13,11 +13,11 @@ public class DummyUserRosterCreator {
     public UserDao createUserRoster() {
         var userAnthony = new UserBuilder()
             .setId(1)
-            .setUserName(new UserAttribute<>("anthony2", Visibility.PUBLIC))
-            .setFullName(new UserAttribute<>("Anthony Miller", Visibility.PUBLIC))
-            .setEmailAddress(new UserAttribute<>("anthony2@gmail.com", Visibility.GROUPS_ONLY))
-            .setAge(new UserAttribute<>(35, Visibility.PRIVATE))
-            .setGender(new UserAttribute<>(Gender.MALE, Visibility.PUBLIC))
+            .setUserName(new CooperatorAttribute<>("anthony2", Visibility.PUBLIC))
+            .setFullName(new CooperatorAttribute<>("Anthony Miller", Visibility.PUBLIC))
+            .setEmailAddress(new CooperatorAttribute<>("anthony2@gmail.com", Visibility.GROUPS_ONLY))
+            .setAge(new CooperatorAttribute<>(35, Visibility.PRIVATE))
+            .setGender(new CooperatorAttribute<>(Gender.MALE, Visibility.PUBLIC))
             .addStrength(new AffinityLabel(1, "js", "javascript"))
             .addInterested(new AffinityLabelWithScale(2, "java", "java", 8))
             .build();

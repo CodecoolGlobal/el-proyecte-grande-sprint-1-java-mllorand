@@ -15,27 +15,27 @@ public class UserBuilder {
         return this;
     }
 
-    public UserBuilder setUserName(UserAttribute<String> userName) {
+    public UserBuilder setUserName(CooperatorAttribute<String> userName) {
         cooperatorUnderBuild.setUserName(userName);
         return this;
     }
 
-    public UserBuilder setEmailAddress(UserAttribute<String> emailAddress) {
+    public UserBuilder setEmailAddress(CooperatorAttribute<String> emailAddress) {
         cooperatorUnderBuild.setEmailAddress(emailAddress);
         return this;
     }
 
-    public UserBuilder setFullName(UserAttribute<String> fullName) {
+    public UserBuilder setFullName(CooperatorAttribute<String> fullName) {
         cooperatorUnderBuild.setFullName(fullName);
         return this;
     }
 
-    public UserBuilder setAge(UserAttribute<Integer> age) {
+    public UserBuilder setAge(CooperatorAttribute<Integer> age) {
         cooperatorUnderBuild.setAge(age);
         return this;
     }
 
-    public UserBuilder setGender(UserAttribute<Gender> gender) {
+    public UserBuilder setGender(CooperatorAttribute<Gender> gender) {
         cooperatorUnderBuild.setGender(gender);
         return this;
     }

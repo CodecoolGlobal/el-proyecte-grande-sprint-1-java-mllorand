@@ -5,11 +5,11 @@ import java.util.List;
 public class Cooperator {
     private long id;
 
-    private UserAttribute<String> userName;
-    private UserAttribute<String> emailAddress;
-    private UserAttribute<String> fullName;
-    private UserAttribute<Integer> age;
-    private UserAttribute<Gender> gender;
+    private CooperatorAttribute<String> userName;
+    private CooperatorAttribute<String> emailAddress;
+    private CooperatorAttribute<String> fullName;
+    private CooperatorAttribute<Integer> age;
+    private CooperatorAttribute<Gender> gender;
 
     private List<AffinityLabel> strengths;
     private List<AffinityLabelWithMonths> learnt;
@@ -26,43 +26,43 @@ public class Cooperator {
         this.id = id;
     }
 
-    public UserAttribute<String> getUserName() {
+    public CooperatorAttribute<String> getUserName() {
         return userName;
     }
 
-    public void setUserName(UserAttribute<String> userName) {
+    public void setUserName(CooperatorAttribute<String> userName) {
         this.userName = userName;
     }
 
-    public UserAttribute<String> getEmailAddress() {
+    public CooperatorAttribute<String> getEmailAddress() {
         return emailAddress;
     }
 
-    public void setEmailAddress(UserAttribute<String> emailAddress) {
+    public void setEmailAddress(CooperatorAttribute<String> emailAddress) {
         this.emailAddress = emailAddress;
     }
 
-    public UserAttribute<String> getFullName() {
+    public CooperatorAttribute<String> getFullName() {
         return fullName;
     }
 
-    public void setFullName(UserAttribute<String> fullName) {
+    public void setFullName(CooperatorAttribute<String> fullName) {
         this.fullName = fullName;
     }
 
-    public UserAttribute<Integer> getAge() {
+    public CooperatorAttribute<Integer> getAge() {
         return age;
     }
 
-    public void setAge(UserAttribute<Integer> age) {
+    public void setAge(CooperatorAttribute<Integer> age) {
         this.age = age;
     }
 
-    public UserAttribute<Gender> getGender() {
+    public CooperatorAttribute<Gender> getGender() {
         return gender;
     }
 
-    public void setGender(UserAttribute<Gender> gender) {
+    public void setGender(CooperatorAttribute<Gender> gender) {
         this.gender = gender;
     }
 

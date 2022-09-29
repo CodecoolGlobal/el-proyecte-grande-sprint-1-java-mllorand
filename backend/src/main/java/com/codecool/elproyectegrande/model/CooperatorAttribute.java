@@ -1,10 +1,10 @@
 package com.codecool.elproyectegrande.model;
 
-public class UserAttribute<T> {
+public class CooperatorAttribute<T> {
     private final T attributeValue;
     private final Visibility visibility;
 
-    public UserAttribute(T attributeValue, Visibility visibility) {
+    public CooperatorAttribute(T attributeValue, Visibility visibility) {
         this.attributeValue = attributeValue;
         this.visibility = visibility;
     }
