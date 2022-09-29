@@ -20,6 +20,8 @@ public class DummyUserRosterCreator {
             .setGender(new CooperatorAttribute<>(Gender.MALE, Visibility.PUBLIC))
             .addStrength(new AffinityLabel(1, "js", "javascript"))
             .addInterested(new AffinityLabelWithScale(2, "java", "java", 8))
+            .addImproveIn(new AffinityLabel(3, "react", "React"))
+            .addLearnFromScratch(new AffinityLabel(4, "docker", "Docker"))
             .build();
         var userRoster = new LinkedList<Cooperator>();
         userRoster.add(userAnthony);
