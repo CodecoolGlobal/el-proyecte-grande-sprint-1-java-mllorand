@@ -1,5 +1,6 @@
 package com.codecool.elproyectegrande.model;
 
+import java.util.LinkedList;
 import java.util.List;
 
 public class UserBuilder {
@@ -45,6 +46,9 @@ public class UserBuilder {
     }
 
     public UserBuilder addStrength(AffinityLabel strength) {
+        if(userUnderBuild.getStrengths() == null) {
+            userUnderBuild.setStrengths(new LinkedList<>());
+        }
         userUnderBuild.getStrengths().add(strength);
         return this;
     }
@@ -55,6 +59,9 @@ public class UserBuilder {
     }
 
     public UserBuilder addLearnt(AffinityLabelWithMonths learnt) {
+        if(userUnderBuild.getLearnt() == null) {
+            userUnderBuild.setLearnt(new LinkedList<>());
+        }
         userUnderBuild.getLearnt().add(learnt);
         return this;
     }
@@ -65,6 +72,9 @@ public class UserBuilder {
     }
 
     public UserBuilder addInterested(AffinityLabelWithScale interested) {
+        if(userUnderBuild.getInterested() == null) {
+            userUnderBuild.setInterested(new LinkedList<>());
+        }
         userUnderBuild.getInterested().add(interested);
         return this;
     }
