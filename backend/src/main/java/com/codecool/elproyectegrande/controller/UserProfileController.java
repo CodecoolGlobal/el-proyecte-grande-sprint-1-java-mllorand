@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/profile")
 public class UserProfileController {
+    private static final int DEFAULT_USER_ID = 1;
+
     private final UserDao userDao;
 
     public UserProfileController(UserDao userDao) {
@@ -19,5 +21,10 @@ public class UserProfileController {
     @GetMapping("/{userId}")
     public Cooperator displayUserProfile(@PathVariable long userId) {
         return userDao.findById(userId);
+    }
+
+    @GetMapping("")
+    public Cooperator displayDefaultUserProfile() {
+        return userDao.findById(DEFAULT_USER_ID);
     }
 }
