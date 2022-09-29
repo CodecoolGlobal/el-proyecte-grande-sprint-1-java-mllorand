@@ -3,49 +3,49 @@ package com.codecool.elproyectegrande.model;
 import java.util.LinkedList;
 import java.util.List;
 
-public class UserBuilder {
+public class CooperatorBuilder {
     private Cooperator cooperatorUnderBuild;
 
-    public UserBuilder() {
+    public CooperatorBuilder() {
         cooperatorUnderBuild = new Cooperator();
     }
 
-    public UserBuilder setId(long id) {
+    public CooperatorBuilder setId(long id) {
         cooperatorUnderBuild.setId(id);
         return this;
     }
 
-    public UserBuilder setUserName(CooperatorAttribute<String> userName) {
+    public CooperatorBuilder setUserName(CooperatorAttribute<String> userName) {
         cooperatorUnderBuild.setUserName(userName);
         return this;
     }
 
-    public UserBuilder setEmailAddress(CooperatorAttribute<String> emailAddress) {
+    public CooperatorBuilder setEmailAddress(CooperatorAttribute<String> emailAddress) {
         cooperatorUnderBuild.setEmailAddress(emailAddress);
         return this;
     }
 
-    public UserBuilder setFullName(CooperatorAttribute<String> fullName) {
+    public CooperatorBuilder setFullName(CooperatorAttribute<String> fullName) {
         cooperatorUnderBuild.setFullName(fullName);
         return this;
     }
 
-    public UserBuilder setAge(CooperatorAttribute<Integer> age) {
+    public CooperatorBuilder setAge(CooperatorAttribute<Integer> age) {
         cooperatorUnderBuild.setAge(age);
         return this;
     }
 
-    public UserBuilder setGender(CooperatorAttribute<Gender> gender) {
+    public CooperatorBuilder setGender(CooperatorAttribute<Gender> gender) {
         cooperatorUnderBuild.setGender(gender);
         return this;
     }
 
-    public UserBuilder setStrengths(List<AffinityLabel> strengths) {
+    public CooperatorBuilder setStrengths(List<AffinityLabel> strengths) {
         cooperatorUnderBuild.setStrengths(strengths);
         return this;
     }
 
-    public UserBuilder addStrength(AffinityLabel strength) {
+    public CooperatorBuilder addStrength(AffinityLabel strength) {
         if(cooperatorUnderBuild.getStrengths() == null) {
             cooperatorUnderBuild.setStrengths(new LinkedList<>());
         }
@@ -53,12 +53,12 @@ public class UserBuilder {
         return this;
     }
 
-    public UserBuilder setLearnt(List<AffinityLabelWithMonths> learnt) {
+    public CooperatorBuilder setLearnt(List<AffinityLabelWithMonths> learnt) {
         cooperatorUnderBuild.setLearnt(learnt);
         return this;
     }
 
-    public UserBuilder addLearnt(AffinityLabelWithMonths learnt) {
+    public CooperatorBuilder addLearnt(AffinityLabelWithMonths learnt) {
         if(cooperatorUnderBuild.getLearnt() == null) {
             cooperatorUnderBuild.setLearnt(new LinkedList<>());
         }
@@ -66,12 +66,12 @@ public class UserBuilder {
         return this;
     }
 
-    public UserBuilder setInterested(List<AffinityLabelWithScale> interested) {
+    public CooperatorBuilder setInterested(List<AffinityLabelWithScale> interested) {
         cooperatorUnderBuild.setInterested(interested);
         return this;
     }
 
-    public UserBuilder addInterested(AffinityLabelWithScale interested) {
+    public CooperatorBuilder addInterested(AffinityLabelWithScale interested) {
         if(cooperatorUnderBuild.getInterested() == null) {
             cooperatorUnderBuild.setInterested(new LinkedList<>());
         }

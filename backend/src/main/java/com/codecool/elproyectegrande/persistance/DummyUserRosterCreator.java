@@ -11,7 +11,7 @@ import java.util.LinkedList;
 public class DummyUserRosterCreator {
     @Bean
     public UserDao createUserRoster() {
-        var userAnthony = new UserBuilder()
+        var userAnthony = new CooperatorBuilder()
             .setId(1)
             .setUserName(new CooperatorAttribute<>("anthony2", Visibility.PUBLIC))
             .setFullName(new CooperatorAttribute<>("Anthony Miller", Visibility.PUBLIC))
