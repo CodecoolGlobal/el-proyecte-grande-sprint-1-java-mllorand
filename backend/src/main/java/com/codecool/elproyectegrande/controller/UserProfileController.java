@@ -1,0 +1,23 @@
+package com.codecool.elproyectegrande.controller;
+
+import com.codecool.elproyectegrande.model.User;
+import com.codecool.elproyectegrande.persistance.UserDao;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping("/profile")
+public class UserProfileController {
+    private final UserDao userDao;
+
+    public UserProfileController(UserDao userDao) {
+        this.userDao = userDao;
+    }
+
+    @GetMapping("/{userId}")
+    public User displayUserProfile(@PathVariable long userId) {
+        return userDao.findById(userId);
+    }
+}
