@@ -21,7 +21,7 @@ public class DummyUserRosterCreator {
             .addStrength(new AffinityLabel(1, "js", "javascript"))
             .addInterested(new AffinityLabelWithScale(2, "java", "java", 8))
             .build();
-        var userRoster = new LinkedList<User>();
+        var userRoster = new LinkedList<Cooperator>();
         userRoster.add(userAnthony);
 
         return new DummyUserDao(userRoster);

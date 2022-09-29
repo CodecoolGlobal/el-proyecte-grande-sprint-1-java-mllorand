@@ -4,84 +4,84 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class UserBuilder {
-    private User userUnderBuild;
+    private Cooperator cooperatorUnderBuild;
 
     public UserBuilder() {
-        userUnderBuild = new User();
+        cooperatorUnderBuild = new Cooperator();
     }
 
     public UserBuilder setId(long id) {
-        userUnderBuild.setId(id);
+        cooperatorUnderBuild.setId(id);
         return this;
     }
 
     public UserBuilder setUserName(UserAttribute<String> userName) {
-        userUnderBuild.setUserName(userName);
+        cooperatorUnderBuild.setUserName(userName);
         return this;
     }
 
     public UserBuilder setEmailAddress(UserAttribute<String> emailAddress) {
-        userUnderBuild.setEmailAddress(emailAddress);
+        cooperatorUnderBuild.setEmailAddress(emailAddress);
         return this;
     }
 
     public UserBuilder setFullName(UserAttribute<String> fullName) {
-        userUnderBuild.setFullName(fullName);
+        cooperatorUnderBuild.setFullName(fullName);
         return this;
     }
 
     public UserBuilder setAge(UserAttribute<Integer> age) {
-        userUnderBuild.setAge(age);
+        cooperatorUnderBuild.setAge(age);
         return this;
     }
 
     public UserBuilder setGender(UserAttribute<Gender> gender) {
-        userUnderBuild.setGender(gender);
+        cooperatorUnderBuild.setGender(gender);
         return this;
     }
 
     public UserBuilder setStrengths(List<AffinityLabel> strengths) {
-        userUnderBuild.setStrengths(strengths);
+        cooperatorUnderBuild.setStrengths(strengths);
         return this;
     }
 
     public UserBuilder addStrength(AffinityLabel strength) {
-        if(userUnderBuild.getStrengths() == null) {
-            userUnderBuild.setStrengths(new LinkedList<>());
+        if(cooperatorUnderBuild.getStrengths() == null) {
+            cooperatorUnderBuild.setStrengths(new LinkedList<>());
         }
-        userUnderBuild.getStrengths().add(strength);
+        cooperatorUnderBuild.getStrengths().add(strength);
         return this;
     }
 
     public UserBuilder setLearnt(List<AffinityLabelWithMonths> learnt) {
-        userUnderBuild.setLearnt(learnt);
+        cooperatorUnderBuild.setLearnt(learnt);
         return this;
     }
 
     public UserBuilder addLearnt(AffinityLabelWithMonths learnt) {
-        if(userUnderBuild.getLearnt() == null) {
-            userUnderBuild.setLearnt(new LinkedList<>());
+        if(cooperatorUnderBuild.getLearnt() == null) {
+            cooperatorUnderBuild.setLearnt(new LinkedList<>());
         }
-        userUnderBuild.getLearnt().add(learnt);
+        cooperatorUnderBuild.getLearnt().add(learnt);
         return this;
     }
 
     public UserBuilder setInterested(List<AffinityLabelWithScale> interested) {
-        userUnderBuild.setInterested(interested);
+        cooperatorUnderBuild.setInterested(interested);
         return this;
     }
 
     public UserBuilder addInterested(AffinityLabelWithScale interested) {
-        if(userUnderBuild.getInterested() == null) {
-            userUnderBuild.setInterested(new LinkedList<>());
+        if(cooperatorUnderBuild.getInterested() == null) {
+            cooperatorUnderBuild.setInterested(new LinkedList<>());
         }
-        userUnderBuild.getInterested().add(interested);
+        cooperatorUnderBuild.getInterested().add(interested);
         return this;
     }
 
-    public User build() {
-        var tempUser = userUnderBuild;
-        userUnderBuild = null;
+    public Cooperator build() {
+        var tempUser = cooperatorUnderBuild;
+        cooperatorUnderBuild = null;
         return tempUser;
     }
 }

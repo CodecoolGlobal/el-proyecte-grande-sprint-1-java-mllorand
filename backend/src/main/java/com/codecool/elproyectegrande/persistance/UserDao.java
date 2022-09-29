@@ -1,12 +1,12 @@
 package com.codecool.elproyectegrande.persistance;
 
-import com.codecool.elproyectegrande.model.User;
+import com.codecool.elproyectegrande.model.Cooperator;
 
 import java.util.List;
 
 public interface UserDao {
-    User findById(long id);
-    void update(User updatedUser);
+    Cooperator findById(long id);
+    void update(Cooperator updatedCooperator);
     void deleteById(long id);
-    List<User> getAllUser();
+    List<Cooperator> getAllUser();
 }

@@ -2,7 +2,7 @@ package com.codecool.elproyectegrande.model;
 
 import java.util.List;
 
-public class User {
+public class Cooperator {
     private long id;
 
     private UserAttribute<String> userName;

@@ -1,6 +1,6 @@
 package com.codecool.elproyectegrande.controller;
 
-import com.codecool.elproyectegrande.model.User;
+import com.codecool.elproyectegrande.model.Cooperator;
 import com.codecool.elproyectegrande.persistance.UserDao;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,7 +17,7 @@ public class UserProfileController {
     }
 
     @GetMapping("/{userId}")
-    public User displayUserProfile(@PathVariable long userId) {
+    public Cooperator displayUserProfile(@PathVariable long userId) {
         return userDao.findById(userId);
     }
 }
