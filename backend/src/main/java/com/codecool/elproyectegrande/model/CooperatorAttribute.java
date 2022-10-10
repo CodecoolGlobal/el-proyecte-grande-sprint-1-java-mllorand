@@ -6,7 +6,7 @@ import lombok.NonNull;
 
 import javax.persistence.*;
 
-@Entity
+//@Entity
 @NoArgsConstructor
 @Getter
 public class CooperatorAttribute<T> {
