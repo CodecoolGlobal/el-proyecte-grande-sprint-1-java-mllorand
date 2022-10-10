@@ -1,13 +1,13 @@
 package com.codecool.elproyectegrande.persistance.dummy;
 
 import com.codecool.elproyectegrande.model.Cooperator;
-import com.codecool.elproyectegrande.persistance.UserDao;
+import com.codecool.elproyectegrande.persistance.CooperatorDAO;
 
 import java.util.List;
 import java.util.ListIterator;
 import java.util.NoSuchElementException;
 
-public class DummyUserDao implements UserDao {
+public class DummyUserDao implements CooperatorDAO {
     private final List<Cooperator> cooperatorStorage;
 
     public DummyUserDao(List<Cooperator> cooperatorStorage) {

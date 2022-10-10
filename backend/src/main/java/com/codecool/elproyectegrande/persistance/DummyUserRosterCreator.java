@@ -10,7 +10,7 @@ import java.util.LinkedList;
 @Configuration
 public class DummyUserRosterCreator {
     @Bean
-    public UserDao createUserRoster() {
+    public CooperatorDAO createUserRoster() {
         var userAnthony = new CooperatorBuilder()
             .setId(1)
             .setUserName(new CooperatorAttribute<>("anthony2", Visibility.PUBLIC))
