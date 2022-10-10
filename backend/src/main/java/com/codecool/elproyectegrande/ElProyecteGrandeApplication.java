@@ -18,18 +18,16 @@ public class ElProyecteGrandeApplication {
 
 	@Bean
 	public WebMvcConfigurer corsConfigurer() {
-		return new ReactCorsConfigurer();
-	}
-
-	public class ReactCorsConfigurer implements WebMvcConfigurer {
-		@Override
-		public void addCorsMappings(CorsRegistry registry) {
-			registry.addMapping("/profile*")
-				.allowedOrigins(REACT_HOST)
-				.allowedOrigins(POSTMAN_HOST);
-			registry.addMapping("/profile/**")
-				.allowedOrigins(REACT_HOST)
-				.allowedOrigins(POSTMAN_HOST);
-		}
+		return new WebMvcConfigurer() {
+			@Override
+			public void addCorsMappings(CorsRegistry registry) {
+				registry.addMapping("/profile")
+					.allowedOrigins(REACT_HOST)
+					.allowedOrigins(POSTMAN_HOST);
+				registry.addMapping("/profile/**")
+					.allowedOrigins(REACT_HOST)
+					.allowedOrigins(POSTMAN_HOST);
+			}
+		};
 	}
 }
