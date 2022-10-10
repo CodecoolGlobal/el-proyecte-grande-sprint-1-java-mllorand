@@ -1,20 +1,22 @@
 package com.codecool.elproyectegrande.model;
 
-public class AffinityLabelWithWeight<W> extends AffinityLabel {
-    private final W weightQuantity;
-    private final String weightUnit;
+import lombok.*;
 
-    public AffinityLabelWithWeight(long id, String internalName, String displayName, W weightQuantity, String weightUnit) {
+import javax.persistence.Entity;
+
+//@Entity
+@NoArgsConstructor
+@Getter
+@AllArgsConstructor
+public class AffinityLabelWithWeight<W> extends AffinityLabel {
+    @NonNull
+    private W weightQuantity;
+    @NonNull
+    private String weightUnit;
+
+    public AffinityLabelWithWeight(long id, @NonNull String internalName, @NonNull String displayName, @NonNull W weightQuantity, @NonNull String weightUnit) {
         super(id, internalName, displayName);
         this.weightQuantity = weightQuantity;
         this.weightUnit = weightUnit;
-    }
-
-    public W getWeightQuantity() {
-        return weightQuantity;
-    }
-
-    public String getWeightUnit() {
-        return weightUnit;
     }
 }

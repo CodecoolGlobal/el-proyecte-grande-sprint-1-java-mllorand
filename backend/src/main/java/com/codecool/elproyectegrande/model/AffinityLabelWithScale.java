@@ -1,10 +1,17 @@
 package com.codecool.elproyectegrande.model;
 
-public class AffinityLabelWithScale extends AffinityLabelWithWeight<Integer> {
-    private static final int MINIMUM_SCALE = 1;
-    private static final int MAXIMUM_SCALE = 10;
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
 
-    public AffinityLabelWithScale(long id, String internalName, String displayName, Integer weightQuantity) {
+import javax.persistence.Entity;
+
+//@Entity
+@NoArgsConstructor
+public class AffinityLabelWithScale extends AffinityLabelWithWeight<Integer> {
+    public static final int MINIMUM_SCALE = 1;
+    public static final int MAXIMUM_SCALE = 10;
+
+    public AffinityLabelWithScale(long id, String internalName, String displayName, @NonNull Integer weightQuantity) {
         super(id, internalName, displayName, weightQuantity, "");
         if (weightQuantity < MINIMUM_SCALE || weightQuantity > MAXIMUM_SCALE) {
             throw new LabelScaleOutOfBounds(
