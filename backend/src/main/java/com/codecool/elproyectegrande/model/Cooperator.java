@@ -1,110 +1,46 @@
 package com.codecool.elproyectegrande.model;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
+import lombok.Setter;
+
+import javax.persistence.*;
 import java.util.List;
 
+@Entity
+@NoArgsConstructor
+@Getter
+@Setter
 public class Cooperator {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @NonNull
+    @OneToOne
     private CooperatorAttribute<String> userName;
+    @NonNull
+    @OneToOne
     private CooperatorAttribute<String> emailAddress;
+    @OneToOne
     private CooperatorAttribute<String> fullName;
+    @OneToOne
     private CooperatorAttribute<Integer> age;
+    @OneToOne
     private CooperatorAttribute<Gender> gender;
 
+    @OneToMany
     private List<AffinityLabel> strengths;
+    @OneToMany
     private List<AffinityLabelWithMonths> learnt;
+    @OneToMany
     private List<AffinityLabelWithScale> interested;
+    @OneToMany
     private List<AffinityLabel> learnFromScratch;
+    @OneToMany
     private List<AffinityLabel> improveIn;
 
     //groups
 
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public CooperatorAttribute<String> getUserName() {
-        return userName;
-    }
-
-    public void setUserName(CooperatorAttribute<String> userName) {
-        this.userName = userName;
-    }
-
-    public CooperatorAttribute<String> getEmailAddress() {
-        return emailAddress;
-    }
-
-    public void setEmailAddress(CooperatorAttribute<String> emailAddress) {
-        this.emailAddress = emailAddress;
-    }
-
-    public CooperatorAttribute<String> getFullName() {
-        return fullName;
-    }
-
-    public void setFullName(CooperatorAttribute<String> fullName) {
-        this.fullName = fullName;
-    }
-
-    public CooperatorAttribute<Integer> getAge() {
-        return age;
-    }
-
-    public void setAge(CooperatorAttribute<Integer> age) {
-        this.age = age;
-    }
-
-    public CooperatorAttribute<Gender> getGender() {
-        return gender;
-    }
-
-    public void setGender(CooperatorAttribute<Gender> gender) {
-        this.gender = gender;
-    }
-
-    public List<AffinityLabel> getStrengths() {
-        return strengths;
-    }
-
-    public void setStrengths(List<AffinityLabel> strengths) {
-        this.strengths = strengths;
-    }
-
-    public List<AffinityLabelWithMonths> getLearnt() {
-        return learnt;
-    }
-
-    public void setLearnt(List<AffinityLabelWithMonths> learnt) {
-        this.learnt = learnt;
-    }
-
-    public List<AffinityLabelWithScale> getInterested() {
-        return interested;
-    }
-
-    public void setInterested(List<AffinityLabelWithScale> interested) {
-        this.interested = interested;
-    }
-
-    public List<AffinityLabel> getLearnFromScratch() {
-        return learnFromScratch;
-    }
-
-    public void setLearnFromScratch(List<AffinityLabel> learnFromScratch) {
-        this.learnFromScratch = learnFromScratch;
-    }
-
-    public List<AffinityLabel> getImproveIn() {
-        return improveIn;
-    }
-
-    public void setImproveIn(List<AffinityLabel> improveIn) {
-        this.improveIn = improveIn;
-    }
 }
