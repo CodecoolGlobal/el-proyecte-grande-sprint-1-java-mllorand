@@ -6,19 +6,21 @@ import lombok.NonNull;
 
 import javax.persistence.*;
 
-@Entity
 @NoArgsConstructor
 @Getter
+@MappedSuperclass
 public class CooperatorAttribute<T> {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "attributeGenerator")
+    @SequenceGenerator(name = "attributeGenerator", sequenceName = "attribute_seq")
+    protected long id;
     @NonNull
     private T attributeValue;
     @Enumerated(EnumType.STRING)
     private Visibility visibility;
 
-    public CooperatorAttribute(T attributeValue, Visibility visibility) {
+    public CooperatorAttribute(long id, T attributeValue, Visibility visibility) {
+        this.id = id;
         this.attributeValue = attributeValue;
         this.visibility = visibility;
     }
