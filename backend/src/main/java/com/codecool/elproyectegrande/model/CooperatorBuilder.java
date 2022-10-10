@@ -15,27 +15,27 @@ public class CooperatorBuilder {
         return this;
     }
 
-    public CooperatorBuilder setUserName(CooperatorAttribute<String> userName) {
+    public CooperatorBuilder setUserName(StringAttribute userName) {
         cooperatorUnderBuild.setUserName(userName);
         return this;
     }
 
-    public CooperatorBuilder setEmailAddress(CooperatorAttribute<String> emailAddress) {
+    public CooperatorBuilder setEmailAddress(StringAttribute emailAddress) {
         cooperatorUnderBuild.setEmailAddress(emailAddress);
         return this;
     }
 
-    public CooperatorBuilder setFullName(CooperatorAttribute<String> fullName) {
+    public CooperatorBuilder setFullName(StringAttribute fullName) {
         cooperatorUnderBuild.setFullName(fullName);
         return this;
     }
 
-    public CooperatorBuilder setAge(CooperatorAttribute<Integer> age) {
+    public CooperatorBuilder setAge(IntegerAttribute age) {
         cooperatorUnderBuild.setAge(age);
         return this;
     }
 
-    public CooperatorBuilder setGender(CooperatorAttribute<Gender> gender) {
+    public CooperatorBuilder setGender(GenderAttribute gender) {
         cooperatorUnderBuild.setGender(gender);
         return this;
     }
@@ -66,12 +66,12 @@ public class CooperatorBuilder {
         return this;
     }
 
-    public CooperatorBuilder setInterested(List<AffinityLabelWithPresetValues<InterestPriority>> interested) {
+    public CooperatorBuilder setInterested(List<InterestAffinityLabel> interested) {
         cooperatorUnderBuild.setInterested(interested);
         return this;
     }
 
-    public CooperatorBuilder addInterested(AffinityLabelWithPresetValues<InterestPriority> interested) {
+    public CooperatorBuilder addInterested(InterestAffinityLabel interested) {
         if(cooperatorUnderBuild.getInterested() == null) {
             cooperatorUnderBuild.setInterested(new LinkedList<>());
         }

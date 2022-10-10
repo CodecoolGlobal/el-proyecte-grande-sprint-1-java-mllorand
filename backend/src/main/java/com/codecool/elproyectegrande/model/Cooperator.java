@@ -14,28 +14,27 @@ import java.util.List;
 @Setter
 public class Cooperator {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "cooperatorGenerator")
+    @SequenceGenerator(name = "cooperatorGenerator", sequenceName = "cooperator_seq")
     private long id;
 
-    @NonNull
     @OneToOne
-    private CooperatorAttribute<String> userName;
-    @NonNull
+    private @NonNull StringAttribute userName;
     @OneToOne
-    private CooperatorAttribute<String> emailAddress;
+    private @NonNull StringAttribute emailAddress;
     @OneToOne
-    private CooperatorAttribute<String> fullName;
+    private StringAttribute fullName;
     @OneToOne
-    private CooperatorAttribute<Integer> age;
+    private IntegerAttribute age;
     @OneToOne
-    private CooperatorAttribute<Gender> gender;
+    private GenderAttribute gender;
 
     @OneToMany
     private List<AffinityLabel> strengths;
     @OneToMany
     private List<AffinityLabelWithMonths> learnt;
     @OneToMany
-    private List<AffinityLabelWithPresetValues<InterestPriority>> interested;
+    private List<InterestAffinityLabel> interested;
     @OneToMany
     private List<AffinityLabel> learnFromScratch;
     @OneToMany
