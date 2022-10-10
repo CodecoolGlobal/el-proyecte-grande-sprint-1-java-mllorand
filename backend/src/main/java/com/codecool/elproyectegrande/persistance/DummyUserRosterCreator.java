@@ -7,10 +7,8 @@ import org.springframework.context.annotation.Configuration;
 
 import java.util.LinkedList;
 
-@Configuration
 public class DummyUserRosterCreator {
-    @Bean
-    public CooperatorDAO createUserRoster() {
+    public DummyUserDao createUserRoster() {
         var userAnthony = new CooperatorBuilder()
             .setId(1)
             .setUserName(new CooperatorAttribute<>("anthony2", Visibility.PUBLIC))
