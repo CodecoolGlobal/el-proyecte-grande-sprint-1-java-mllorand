@@ -4,11 +4,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 
-import javax.persistence.Entity;
+import javax.persistence.MappedSuperclass;
 
-@Entity
 @NoArgsConstructor
 @Getter
+@MappedSuperclass
 public class AffinityLabelWithPresetValues<E> extends AffinityLabel{
     private E interestPriority;
 

@@ -4,18 +4,17 @@ package com.codecool.elproyectegrande.model;
 
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 @NoArgsConstructor
 @Getter
 @AllArgsConstructor
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class AffinityLabel {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "affinityGenerator")
+    @SequenceGenerator(name = "affinityGenerator", sequenceName = "affinity_seq")
     private long id;
     @NonNull
     private String internalName;

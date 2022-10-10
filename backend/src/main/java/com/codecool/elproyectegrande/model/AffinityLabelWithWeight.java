@@ -3,11 +3,12 @@ package com.codecool.elproyectegrande.model;
 import lombok.*;
 
 import javax.persistence.Entity;
+import javax.persistence.MappedSuperclass;
 
-@Entity
 @NoArgsConstructor
 @Getter
 @AllArgsConstructor
+@MappedSuperclass
 public class AffinityLabelWithWeight<W> extends AffinityLabel {
     @NonNull
     private W weightQuantity;
