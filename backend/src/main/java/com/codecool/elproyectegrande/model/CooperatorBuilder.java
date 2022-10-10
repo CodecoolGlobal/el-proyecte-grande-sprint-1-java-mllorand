@@ -66,12 +66,12 @@ public class CooperatorBuilder {
         return this;
     }
 
-    public CooperatorBuilder setInterested(List<AffinityLabelWithScale> interested) {
+    public CooperatorBuilder setInterested(List<AffinityLabelWithPresetValues<InterestPriority>> interested) {
         cooperatorUnderBuild.setInterested(interested);
         return this;
     }
 
-    public CooperatorBuilder addInterested(AffinityLabelWithScale interested) {
+    public CooperatorBuilder addInterested(AffinityLabelWithPresetValues<InterestPriority> interested) {
         if(cooperatorUnderBuild.getInterested() == null) {
             cooperatorUnderBuild.setInterested(new LinkedList<>());
         }

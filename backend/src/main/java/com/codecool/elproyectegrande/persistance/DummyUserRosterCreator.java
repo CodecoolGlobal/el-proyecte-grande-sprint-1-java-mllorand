@@ -19,9 +19,10 @@ public class DummyUserRosterCreator {
             .setAge(new CooperatorAttribute<>(35, Visibility.PRIVATE))
             .setGender(new CooperatorAttribute<>(Gender.MALE, Visibility.PUBLIC))
             .addStrength(new AffinityLabel(1, "js", "javascript"))
-            .addInterested(new AffinityLabelWithScale(2, "java", "java", 8))
+            .addInterested(new AffinityLabelWithPresetValues<>(2, "java", "java", InterestPriority.Primary))
             .addImproveIn(new AffinityLabel(3, "react", "React"))
             .addLearnFromScratch(new AffinityLabel(4, "docker", "Docker"))
+            .addLearnt(new AffinityLabelWithMonths(5, "react", "React", 3))
             .build();
         var userRoster = new LinkedList<Cooperator>();
         userRoster.add(userAnthony);

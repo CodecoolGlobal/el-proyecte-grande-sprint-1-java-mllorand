@@ -35,7 +35,7 @@ public class Cooperator {
     @OneToMany
     private List<AffinityLabelWithMonths> learnt;
     @OneToMany
-    private List<AffinityLabelWithScale> interested;
+    private List<AffinityLabelWithPresetValues<InterestPriority>> interested;
     @OneToMany
     private List<AffinityLabel> learnFromScratch;
     @OneToMany

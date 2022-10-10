@@ -20,7 +20,7 @@ public class AffinityLabel {
     @NonNull
     private String internalName;
     @NonNull
-    private String displayName;
+    private String toolTipText;
 
     //private final Color labelColor;
 }
