@@ -27,6 +27,9 @@ public class ElProyecteGrandeApplication {
 			registry.addMapping("/profile*")
 				.allowedOrigins(REACT_HOST)
 				.allowedOrigins(POSTMAN_HOST);
+			registry.addMapping("/profile/**")
+				.allowedOrigins(REACT_HOST)
+				.allowedOrigins(POSTMAN_HOST);
 		}
 	}
 }
