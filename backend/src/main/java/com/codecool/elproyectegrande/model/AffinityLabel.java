@@ -2,10 +2,7 @@ package com.codecool.elproyectegrande.model;
 
 //import java.awt.Color;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
+import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,7 +12,7 @@ import javax.persistence.Id;
 @Entity
 @NoArgsConstructor
 @Getter
-@Builder
+@AllArgsConstructor
 public class AffinityLabel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,10 +23,4 @@ public class AffinityLabel {
     private String displayName;
 
     //private final Color labelColor;
-
-    public AffinityLabel(long id, String internalName, String displayName) {
-        this.id = id;
-        this.internalName = internalName;
-        this.displayName = displayName;
-    }
 }
