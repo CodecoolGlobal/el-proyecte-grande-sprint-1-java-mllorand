@@ -1,20 +1,31 @@
 import React from 'react';
 import UserDetail from "./UserDetail";
 
-const UserDetails = () => {
+const UserDetails = ({ user }) => {
+	const { id, userName, emailAddress, fullName, age, gender } = user;
 	return (
 		<section id="user-detail-container">
 
-			<UserDetail fieldName='Username'
-									fieldValue='Sanyika'/>
-			<UserDetail fieldName='Full name'
-									fieldValue='Kovács Sándor'/>
-			<UserDetail fieldName='Gender'
-									fieldValue='Male'/>
-			<UserDetail fieldName='Age'
-									fieldValue='27 yrs'/>
-			<UserDetail fieldName='Address'
-									fieldValue='Dob utca 1'/>
+			<UserDetail
+				id={id}
+				fieldName='Username'
+				fieldValue={userName.attributeValue}/>
+			<UserDetail
+				id={id}
+				fieldName='Full name'
+				fieldValue={fullName.attributeValue}/>
+			<UserDetail
+				id={id}
+				fieldName='Gender'
+				fieldValue={gender.attributeValue}/>
+			<UserDetail
+				id={id}
+				fieldName='Age'
+				fieldValue={`${age.attributeValue} years`}/>
+			<UserDetail
+				id={id}
+				fieldName='Email'
+				fieldValue={emailAddress.attributeValue}/>
 		</section>
 	);
 };

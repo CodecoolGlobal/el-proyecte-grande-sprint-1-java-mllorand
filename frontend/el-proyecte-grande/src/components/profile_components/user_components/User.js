@@ -2,13 +2,13 @@ import React from 'react';
 import UserDetails from "./UserDetails";
 import UserGroups from "./UserGroups";
 
-const User = () => {
+const User = ({ user }) => {
 	return (
 		<>
 			<section id="profile-img">
-				<img src="" alt=""/>
+				<img src="/assets/logo.png" alt="profile pic"/>
 			</section>
-			<UserDetails />
+			<UserDetails user={user}/>
 			<UserGroups />
 		</>
 	);

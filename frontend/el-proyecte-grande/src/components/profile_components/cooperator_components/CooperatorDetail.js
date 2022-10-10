@@ -10,7 +10,7 @@ const CooperatorDetail = ({ fieldName, detailItems }) => {
 			<div className="coop-detail-item-container">
 				{detailItems.map(item => (
 					<div className="detail-item" key={item.id}>
-						<img src={`/skill_icons/${item.internalName}.png`} alt={item.displayName}/>
+						<img src={`/skill_icons/${item.internalName}.png`} alt={item.tooltipText}/>
 					</div>
 				))}
 			</div>
