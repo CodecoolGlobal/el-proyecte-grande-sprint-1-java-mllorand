@@ -5,7 +5,7 @@ import lombok.NonNull;
 
 import javax.persistence.Entity;
 
-//@Entity
+@Entity
 @NoArgsConstructor
 public class AffinityLabelWithScale extends AffinityLabelWithWeight<Integer> {
     public static final int MINIMUM_SCALE = 1;

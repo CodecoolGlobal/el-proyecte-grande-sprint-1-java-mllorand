@@ -5,7 +5,7 @@ import lombok.NonNull;
 
 import javax.persistence.Entity;
 
-//@Entity
+@Entity
 @NoArgsConstructor
 public class AffinityLabelWithMonths extends AffinityLabelWithWeight<Integer> {
     public AffinityLabelWithMonths(long id, @NonNull String internalName, @NonNull String displayName, @NonNull Integer weightQuantity) {

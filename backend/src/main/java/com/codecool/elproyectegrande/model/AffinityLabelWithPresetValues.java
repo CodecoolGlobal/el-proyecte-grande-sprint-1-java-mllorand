@@ -6,7 +6,7 @@ import lombok.NonNull;
 
 import javax.persistence.Entity;
 
-//@Entity
+@Entity
 @NoArgsConstructor
 @Getter
 public class AffinityLabelWithPresetValues<E> extends AffinityLabel{
