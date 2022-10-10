@@ -1,12 +1,8 @@
 package com.codecool.elproyectegrande.persistance;
 
 import com.codecool.elproyectegrande.model.Cooperator;
+import org.springframework.data.repository.CrudRepository;
 
-import java.util.List;
-
-public interface CooperatorDAO {
+public interface CooperatorDAO extends CrudRepository<Cooperator, Long> {
     Cooperator findById(long id);
-    void update(Cooperator updatedCooperator);
-    void deleteById(long id);
-    List<Cooperator> getAllUser();
 }
