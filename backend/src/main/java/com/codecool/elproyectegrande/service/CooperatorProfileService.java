@@ -67,4 +67,8 @@ public class CooperatorProfileService {
         var cooperator = cooperatorDAO.findById(userId);
         return cooperator.map(Cooperator::getUserName);
     }
+
+    public void updateUserName(StringAttribute updatedUserName) {
+        stringAttributeDAO.save(updatedUserName);
+    }
 }
