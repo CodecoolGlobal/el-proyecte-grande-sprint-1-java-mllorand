@@ -12,8 +12,12 @@
     padding: 0;
 }
 
-body {
+body, #root {
     background: var(--almost-white);
+    overflow-x: hidden;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 /***************************************Navbar CSS***************************************/
@@ -71,4 +75,42 @@ li, a, button {
     font-weight: 900;
     height: 5vh;
     width: clamp(70px, 16vw, 700px);
+}
+
+/***************************************Footer CSS***************************************/
+
+footer {
+    background: var(--dark-gray);
+    height: 20vh;
+    align-items: center;
+    padding-block: 2vh;
+    margin-top: auto;
+}
+
+footer, #nav-social, #nav-other, #nav-social ul, #nav-other ul {
+    justify-content: space-around;
+    width: 100vw;
+    list-style: none;
+    align-items: center;
+}
+
+.footer-copyright {
+    text-align: center;
+    padding-block: 2vh;
+    color: var(--almost-white);
+    font-size: clamp(20px, 1.5vw, 100px);
+}
+
+#nav-social ul {
+    width: 50vw;
+    height: 6vh;
+}
+
+#nav-other {
+    padding-block: 1vh;
+}
+
+#nav-social img {
+    width: clamp(30px, 2vw, 100px);
+    height: auto;
 }
