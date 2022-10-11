@@ -2,15 +2,13 @@ package com.codecool.elproyectegrande.controller;
 
 import com.codecool.elproyectegrande.model.Cooperator;
 import com.codecool.elproyectegrande.persistance.CooperatorDAO;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/profile")
 public class UserProfileController {
-    private static final int DEFAULT_USER_ID = 1;
+    private static final long DEFAULT_USER_ID = 1;
 
     private final CooperatorDAO cooperatorDAO;
 
@@ -19,12 +17,16 @@ public class UserProfileController {
     }
 
     @GetMapping("/{userId}")
-    public Cooperator displayUserProfile(@PathVariable long userId) {
-        return cooperatorDAO.findById(userId);
+    public ResponseEntity<Cooperator> displayUserProfile(@PathVariable long userId) {
+        return cooperatorDAO.findById(userId)
+            .map(ResponseEntity::ok)
+            .orElse(ResponseEntity.notFound().build());
     }
 
     @GetMapping("")
-    public Cooperator displayDefaultUserProfile() {
-        return cooperatorDAO.findById(DEFAULT_USER_ID);
+    public ResponseEntity<Cooperator> displayDefaultUserProfile() {
+        return cooperatorDAO.findById(DEFAULT_USER_ID)
+            .map(ResponseEntity::ok)
+            .orElse(ResponseEntity.notFound().build());
     }
 }
