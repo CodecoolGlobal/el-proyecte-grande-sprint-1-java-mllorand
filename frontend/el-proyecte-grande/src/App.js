@@ -9,7 +9,7 @@ function App() {
       <Router>
           <Routes>
             <Route path='/' element={<Layout children={<Home />}/>}/>
-            <Route path='/profile' element={<Layout children={<Profile />}/>}/>
+            <Route path='/profile' element={<Layout children={<Profile/>}/>}/>
           </Routes>
       </Router>
     </>
