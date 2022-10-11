@@ -1,20 +1,74 @@
+/***************************************Base CSS***************************************/
 :root {
+    --almost-white: #edf0f1;
+    --blue: #5E88FC;
     --dark-gray: #2E383F;
+    --orange: #F9A828;
 }
 
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
-header {
-    width: 100%;
-    background-color: var(--dark-gray);
+
+body {
+    background: var(--almost-white);
 }
+
+/***************************************Navbar CSS***************************************/
 header, header nav, .nav-links, .nav-footer, .nav-footer ul {
     display: flex;
 }
+
+header {
+    align-items: center;
+    background-color: var(--dark-gray);
+    height: 8vh;
+    width: 100%;
+}
+
+header nav {
+    justify-content: space-between;
+    padding: 1vw;
+    width: 80vw;
+}
+
+li, a, button {
+    color: var(--almost-white);
+    font-weight: 500;
+    font-size: clamp(14px, 1vw, 100px);
+    text-decoration: none;
+}
+
 #nav-logo {
-    width: 10vw;
+    cursor: pointer;
     height: auto;
+    width: clamp(80px, 20vw, 1000px);
+}
+
+.btn-nav, .btn-nav a {
+    background: var(--blue);
+    border: none;
+    border-radius: clamp(10px, 1.2vh, 50px);
+    font-size: clamp(10px, 1vw, 50px);
+    font-weight: 700;
+    height: 4vh;
+    padding-inline: 0.5vw;
+    width: clamp(50px, 9vw, 500px);
+}
+
+.nav-links {
+    align-items: center;
+    justify-content: space-between;
+    width: 30vw;
+}
+
+.btn-opp-browse {
+    background: var(--orange);
+    color: var(--dark-gray);
+    font-size: clamp(15px, 1.5vw, 75px);
+    font-weight: 900;
+    height: 5vh;
+    width: clamp(70px, 16vw, 700px);
 }
