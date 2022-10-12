@@ -2,14 +2,17 @@ import React from 'react';
 import UserDetails from "./UserDetails";
 import UserGroups from "./UserGroups";
 
-const User = ({ user }) => {
+const User = ({userData, setUserData}) => {
 	return (
 		<>
 			<section id="profile-img">
 				<img src="/assets/logo.png" alt="profile pic"/>
 			</section>
-			<UserDetails user={user}/>
-			<UserGroups />
+			<UserDetails
+				userData={userData}
+				setUserData={setUserData}
+			/>
+			<UserGroups/>
 		</>
 	);
 };

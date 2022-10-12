@@ -14,6 +14,24 @@ const Profile = () => {
 		url: '/2'
 	});
 
+	// useEffect(() => {
+	// 	useAxios({
+	// 		axiosInstance: axios,
+	// 		method: 'PATCH',
+	// 		url: '/2',
+	// 		data: {
+	// 			username.attributeValue: userData.userName.attributeValue
+	// 		}
+	// 	})
+	// }, [userData]);
+
+
+	useEffect(() => {
+		console.log('this is it');
+		console.log(userData);
+	}, [userData]);
+
+
 	useEffect(() => {
 		if (!loading && !error) {
 			setUserData({
@@ -43,10 +61,16 @@ const Profile = () => {
 			{!loading && !error && userData && cooperatorData &&
 				<article id="profile-content">
 					<aside id="user-details-content">
-						<User user={userData}/>
+						<User
+							userData={userData}
+							setUserData={setUserData}
+						/>
 					</aside>
 					<main id="cooperator-details-content">
-						<CooperatorDetails cooperator={cooperatorData}/>
+						<CooperatorDetails
+							cooperator={cooperatorData}
+							setCooperator={setCooperatorData}
+						/>
 					</main>
 				</article>}
 			{!loading && !error && !profile && <p>No profile data</p>}
