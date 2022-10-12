@@ -71,4 +71,13 @@ public class CooperatorProfileService {
     public void updateUserName(StringAttribute updatedUserName) {
         stringAttributeDAO.save(updatedUserName);
     }
+
+    public Optional<StringAttribute> getEmailAddress(long userId) {
+        var cooperator = cooperatorDAO.findById(userId);
+        return cooperator.map(Cooperator::getEmailAddress);
+    }
+
+    public void updateEmailAddress(StringAttribute updatedEmailAddress) {
+        stringAttributeDAO.save(updatedEmailAddress);
+    }
 }
