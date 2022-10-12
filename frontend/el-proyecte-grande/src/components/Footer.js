@@ -5,21 +5,32 @@ const Footer = () => {
 		<footer>
 			<nav id='nav-social' className='nav-footer'>
 				<ul>
-					<li><a href="#"><img src="" alt="Facebook logo"/></a></li>
-					<li><a href="#"><img src="" alt="Instagram logo"/></a></li>
-					<li><a href="#"><img src="" alt="Linkedin logo"/></a></li>
-					<li><a href="#"><img src="" alt="Twitter logo"/></a></li>
+					<li><a href="#"><img src="/assets/facebook.png" alt="Facebook logo"/></a></li>
+					<li><a href="#"><img src="/assets/Instagram.png" alt="Instagram logo"/></a></li>
+					<li><a href="#"><img src="/assets/linkedin.png" alt="Linkedin logo"/></a></li>
+					<li><a href="#"><img src="/assets/twitter.png" alt="Twitter logo"/></a></li>
 				</ul>
 			</nav>
 			<nav id='nav-other' className='nav-footer'>
 				<ul>
-					<li><a href="#"><img src="" alt="lorem"/></a></li>
-					<li><a href="#"><img src="" alt="ipsum"/></a></li>
-					<li><a href="#"><img src="" alt="dolor"/></a></li>
-					<li><a href="#"><img src="" alt="sit amet"/></a></li>
+					<li>
+						<p>Test</p>
+					</li>
+					<li>
+						<p>Test</p>
+					</li>
+					<li>
+						<p>Test</p>
+					</li>
+					<li>
+						<p>Test</p>
+					</li>
+					<li>
+						<p>Test</p>
+					</li>
 				</ul>
 			</nav>
-			<p>Company</p>
+			<p className="footer-copyright">Coopportunity©</p>
 		</footer>
 	);
 };

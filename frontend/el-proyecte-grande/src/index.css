@@ -1,20 +1,178 @@
+/***************************************Base CSS***************************************/
 :root {
+    --almost-white: #edf0f1;
+    --blue: #5E88FC;
     --dark-gray: #2E383F;
+    --orange: #F9A828;
 }
 
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
-header {
-    width: 100%;
-    background-color: var(--dark-gray);
+
+body, #root {
+    background: var(--almost-white);
+    overflow-x: hidden;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
-header, header nav, .nav-links, .nav-footer, .nav-footer ul {
+
+header, header nav, .nav-links, .nav-footer, .nav-footer ul, #profile-content, #user-detail-container, .usr-detail,
+#cooperator-details-content, .coop-detail-item-container, .detail-item, .exp-container {
     display: flex;
 }
+
+/***************************************Navbar CSS***************************************/
+
+header {
+    align-items: center;
+    background-color: var(--dark-gray);
+    height: 8vh;
+    width: 100%;
+}
+
+header nav {
+    justify-content: space-between;
+    padding: 1vw;
+    width: 80vw;
+}
+
+li, a, button {
+    color: var(--almost-white);
+    font-weight: 500;
+    font-size: clamp(14px, 1vw, 100px);
+    text-decoration: none;
+}
+
 #nav-logo {
-    width: 10vw;
+    cursor: pointer;
     height: auto;
+    width: clamp(80px, 20vw, 1000px);
+}
+
+.btn-nav, .btn-nav a {
+    background: var(--blue);
+    border: none;
+    border-radius: clamp(10px, 1.2vh, 50px);
+    font-size: clamp(10px, 1vw, 50px);
+    font-weight: 700;
+    height: 4vh;
+    padding-inline: 0.5vw;
+    width: clamp(50px, 9vw, 500px);
+}
+
+.nav-links {
+    align-items: center;
+    justify-content: space-between;
+    width: 30vw;
+}
+
+.btn-opp-browse {
+    background: var(--orange);
+    color: var(--dark-gray);
+    font-size: clamp(15px, 1.5vw, 75px);
+    font-weight: 900;
+    height: 5vh;
+    width: clamp(70px, 16vw, 700px);
+}
+
+/***************************************Footer CSS***************************************/
+
+footer {
+    align-items: center;
+    background: var(--dark-gray);
+    height: 20vh;
+    margin-top: auto;
+    padding-block: 2vh;
+}
+
+footer, #nav-social, #nav-other, #nav-social ul, #nav-other ul {
+    align-items: center;
+    justify-content: space-around;
+    list-style: none;
+    width: 100vw;
+}
+
+.footer-copyright {
+    color: var(--almost-white);
+    font-size: clamp(20px, 1.5vw, 100px);
+    padding-block: 2vh;
+    text-align: center;
+}
+
+#nav-social ul {
+    height: 6vh;
+    width: 50vw;
+}
+
+#nav-other {
+    padding-block: 1vh;
+}
+
+#nav-social img {
+    height: auto;
+    width: clamp(30px, 2vw, 100px);
+}
+
+/***************************************Profile CSS***************************************/
+
+.usr-detail {
+    justify-content: space-between;
+    align-items: center;
+    padding-right: 7vw;
+}
+
+.field {
+    text-align: center;
+    width: 15vw;
+    background: var(--orange);
+    padding-block: 0.5vh;
+    border: none;
+    border-radius: clamp(5px, 0.4vh, 40px);
+    font-weight: 600;
+}
+
+.label-container {
+    margin-bottom: 2vh;
+}
+
+#profile-content {
+    padding-inline: 1vw;
+}
+
+#user-details-content, #cooperator-details-content {
+    flex-basis: 50%;
+}
+
+#user-details-content {
+    padding-left: 10vw;
+}
+
+#profile-img img {
+    width: 20vw;
+    height: auto;
+}
+
+#profile-img {
+    margin-block: 3vh;
+    width: 25vw ;
+    height: 45vh;
+    background: black;
+}
+
+#user-detail-container {
+    flex-direction: column;
+    height: 30vh;
+    justify-content: space-around;
+    margin-bottom: 5vh;
+}
+
+#cooperator-details-content {
+    padding-left: 8vw;
+    margin-block: 3vh;
+    flex-direction: column;
+    justify-content: space-around;
 }
