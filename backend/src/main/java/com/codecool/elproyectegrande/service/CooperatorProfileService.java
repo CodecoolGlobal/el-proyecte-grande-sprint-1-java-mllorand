@@ -1,5 +1,6 @@
 package com.codecool.elproyectegrande.service;
 
+import com.codecool.elproyectegrande.model.AffinityLabel;
 import com.codecool.elproyectegrande.model.Cooperator;
 import com.codecool.elproyectegrande.model.StringAttribute;
 import com.codecool.elproyectegrande.persistance.*;
@@ -88,5 +89,17 @@ public class CooperatorProfileService {
 
     public void updateFullName(StringAttribute updatedFullName) {
         stringAttributeDAO.save(updatedFullName);
+    }
+
+    public boolean addNewStrength(long userId, AffinityLabel newStrength) {
+        var cooperator = cooperatorDAO.findById(userId);
+        if(cooperator.isPresent()) {
+            affinityLabelDAO.save(newStrength);
+            cooperator.get().getStrengths().add(newStrength);
+            cooperatorDAO.save(cooperator.get());
+            return true;
+        } else {
+            return false;
+        }
     }
 }
