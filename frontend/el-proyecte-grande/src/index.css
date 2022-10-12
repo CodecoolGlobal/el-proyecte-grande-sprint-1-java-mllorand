@@ -20,10 +20,12 @@ body, #root {
     flex-direction: column;
 }
 
-/***************************************Navbar CSS***************************************/
-header, header nav, .nav-links, .nav-footer, .nav-footer ul {
+header, header nav, .nav-links, .nav-footer, .nav-footer ul, #profile-content, #user-detail-container, .usr-detail,
+#cooperator-details-content, .coop-detail-item-container, .detail-item, .exp-container {
     display: flex;
 }
+
+/***************************************Navbar CSS***************************************/
 
 header {
     align-items: center;
@@ -80,30 +82,30 @@ li, a, button {
 /***************************************Footer CSS***************************************/
 
 footer {
+    align-items: center;
     background: var(--dark-gray);
     height: 20vh;
-    align-items: center;
-    padding-block: 2vh;
     margin-top: auto;
+    padding-block: 2vh;
 }
 
 footer, #nav-social, #nav-other, #nav-social ul, #nav-other ul {
-    justify-content: space-around;
-    width: 100vw;
-    list-style: none;
     align-items: center;
+    justify-content: space-around;
+    list-style: none;
+    width: 100vw;
 }
 
 .footer-copyright {
-    text-align: center;
-    padding-block: 2vh;
     color: var(--almost-white);
     font-size: clamp(20px, 1.5vw, 100px);
+    padding-block: 2vh;
+    text-align: center;
 }
 
 #nav-social ul {
-    width: 50vw;
     height: 6vh;
+    width: 50vw;
 }
 
 #nav-other {
@@ -111,6 +113,66 @@ footer, #nav-social, #nav-other, #nav-social ul, #nav-other ul {
 }
 
 #nav-social img {
-    width: clamp(30px, 2vw, 100px);
     height: auto;
+    width: clamp(30px, 2vw, 100px);
+}
+
+/***************************************Profile CSS***************************************/
+
+.usr-detail {
+    justify-content: space-between;
+    align-items: center;
+    padding-right: 7vw;
+}
+
+.field {
+    text-align: center;
+    width: 15vw;
+    background: var(--orange);
+    padding-block: 0.5vh;
+    border: none;
+    border-radius: clamp(5px, 0.4vh, 40px);
+    font-weight: 600;
+}
+
+.label-container {
+    margin-bottom: 2vh;
+}
+
+#profile-content {
+    padding-inline: 1vw;
+}
+
+#user-details-content, #cooperator-details-content {
+    flex-basis: 50%;
+}
+
+#user-details-content {
+    padding-left: 10vw;
+}
+
+#profile-img img {
+    width: 20vw;
+    height: auto;
+}
+
+#profile-img {
+    margin-block: 3vh;
+    width: 25vw ;
+    height: 45vh;
+    background: black;
+}
+
+#user-detail-container {
+    flex-direction: column;
+    height: 30vh;
+    justify-content: space-around;
+    margin-bottom: 5vh;
+}
+
+#cooperator-details-content {
+    padding-left: 8vw;
+    margin-block: 3vh;
+    flex-direction: column;
+    justify-content: space-around;
 }
