@@ -1,6 +1,7 @@
 package com.codecool.elproyectegrande.service;
 
 import com.codecool.elproyectegrande.model.Cooperator;
+import com.codecool.elproyectegrande.model.GenderAttribute;
 import com.codecool.elproyectegrande.model.StringAttribute;
 import com.codecool.elproyectegrande.persistance.*;
 import lombok.AllArgsConstructor;
@@ -70,5 +71,14 @@ public class CooperatorProfileService {
 
     public void updateUserName(StringAttribute updatedUserName) {
         stringAttributeDAO.save(updatedUserName);
+    }
+
+    public void updateGender(GenderAttribute updatedGender) {
+        genderAttributeDAO.save(updatedGender);
+    }
+
+    public Optional<GenderAttribute> getGender(long userId) {
+        var cooperator = cooperatorDAO.findById(userId);
+        return cooperator.map(Cooperator::getGender);
     }
 }

@@ -1,6 +1,7 @@
 package com.codecool.elproyectegrande.controller;
 
 import com.codecool.elproyectegrande.model.Cooperator;
+import com.codecool.elproyectegrande.model.GenderAttribute;
 import com.codecool.elproyectegrande.model.StringAttribute;
 import com.codecool.elproyectegrande.service.CooperatorProfileService;
 import org.springframework.http.ResponseEntity;
@@ -38,6 +39,18 @@ public class UserProfileController {
         if (userName.isPresent()) {
             updatedUserName.setId(userName.get().getId());
             cooperatorService.updateUserName(updatedUserName);
+            return ResponseEntity.ok("");
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @PutMapping("/{userId}/gender")
+    public ResponseEntity<String> changeUserName(@PathVariable long userId, @RequestBody GenderAttribute updatedGender) {
+        var gender = cooperatorService.getGender(userId);
+        if (gender.isPresent()) {
+            updatedGender.setId(gender.get().getId());
+            cooperatorService.updateGender(updatedGender);
             return ResponseEntity.ok("");
         } else {
             return ResponseEntity.notFound().build();
