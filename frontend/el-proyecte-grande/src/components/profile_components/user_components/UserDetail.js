@@ -1,10 +1,11 @@
 import React, {useEffect, useState} from 'react';
+import axios from "../../../apis/profileData";
 
 const UserDetail = ({id, fieldName, fieldValue, userData, setUserData}) => {
 		const [field, setField] = useState(fieldValue);
 
 		const handleChange = (value) => {
-			let newUserData = userData;
+			let newUserData = {...userData}
 			newUserData[fieldName].attributeValue = value;
 			setField(value);
 			setUserData(newUserData);

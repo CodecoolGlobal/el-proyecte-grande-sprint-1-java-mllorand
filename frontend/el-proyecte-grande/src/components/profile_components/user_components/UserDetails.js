@@ -36,7 +36,7 @@ const UserDetails = ({userData, setUserData}) => {
 			/>
 			<UserDetail
 				id={id}
-				fieldName=''
+				fieldName='email'
 				fieldValue={emailAddress.attributeValue}
 				userData={userData}
 				setUserData={setUserData}

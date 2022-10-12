@@ -14,44 +14,41 @@ const Profile = () => {
 		url: '/2'
 	});
 
-	// useEffect(() => {
-	// 	useAxios({
-	// 		axiosInstance: axios,
-	// 		method: 'PATCH',
-	// 		url: '/2',
-	// 		data: {
-	// 			username.attributeValue: userData.userName.attributeValue
-	// 		}
-	// 	})
-	// }, [userData]);
-
+	const axiosPut = (fieldName, fieldValue) => {
+		axios.put(`http://localhost:8080/profile/2/${fieldName}`, {
+			"attributeValue": fieldValue,
+			"visibility": "PRIVATE"
+		})
+	}
 
 	useEffect(() => {
-		console.log('this is it');
-		console.log(userData);
+		if (userData) {
+			axiosPut('username', userData.userName.attributeValue)
+		}
 	}, [userData]);
 
 
 	useEffect(() => {
-		if (!loading && !error) {
-			setUserData({
-				id: profile.id,
-				userName: profile.userName,
-				emailAddress: profile.emailAddress,
-				fullName: profile.fullName,
-				age: profile.age,
-				gender: profile.gender
-			});
-			setCooperatorData({
-				id: profile.id,
-				strengths: profile.strengths,
-				learnt: profile.learnt,
-				interested: profile.interested,
-				learnFromScratch: profile.learnFromScratch,
-				improveIn: profile.improveIn
-			})
-		}
-	}, [error, loading])
+			if (!loading && !error) {
+				setUserData({
+					id: profile.id,
+					userName: profile.userName,
+					emailAddress: profile.emailAddress,
+					fullName: profile.fullName,
+					age: profile.age,
+					gender: profile.gender
+				});
+				setCooperatorData({
+					id: profile.id,
+					strengths: profile.strengths,
+					learnt: profile.learnt,
+					interested: profile.interested,
+					learnFromScratch: profile.learnFromScratch,
+					improveIn: profile.improveIn
+				})
+			}
+		}, [error, loading]
+	)
 
 
 	return (
