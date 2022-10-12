@@ -57,5 +57,18 @@ public class UserProfileController {
             return ResponseEntity.notFound().build();
         }
     }
+
+    @PutMapping("/{userId}/full-name")
+    public ResponseEntity<String> changeFullName(@PathVariable long userId, @RequestBody StringAttribute updatedFullName) {
+        var fullName = cooperatorService.getFullName(userId);
+
+        if(fullName.isPresent()) {
+            updatedFullName.setId(fullName.get().getId());
+            cooperatorService.updateFullName(updatedFullName);
+            return ResponseEntity.ok("");
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
 }
 
