@@ -36,6 +36,7 @@ public class UserProfileController {
     @PutMapping("/{userId}/username")
     public ResponseEntity<String> changeUserName(@PathVariable long userId, @RequestBody StringAttribute updatedUserName) {
         var userName = cooperatorService.getUserName(userId);
+
         if (userName.isPresent()) {
             updatedUserName.setId(userName.get().getId());
             cooperatorService.updateUserName(updatedUserName);
@@ -51,6 +52,32 @@ public class UserProfileController {
         if (gender.isPresent()) {
             updatedGender.setId(gender.get().getId());
             cooperatorService.updateGender(updatedGender);
+            return ResponseEntity.ok("");
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @PutMapping("/{userId}/email-address")
+    public ResponseEntity<String> changeEmailAddress(@PathVariable long userId, @RequestBody StringAttribute updatedEmailAddress) {
+        var emailAddress = cooperatorService.getEmailAddress(userId);
+
+        if(emailAddress.isPresent()) {
+            updatedEmailAddress.setId(emailAddress.get().getId());
+            cooperatorService.updateEmailAddress(updatedEmailAddress);
+            return ResponseEntity.ok("");
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @PutMapping("/{userId}/full-name")
+    public ResponseEntity<String> changeFullName(@PathVariable long userId, @RequestBody StringAttribute updatedFullName) {
+        var fullName = cooperatorService.getFullName(userId);
+
+        if(fullName.isPresent()) {
+            updatedFullName.setId(fullName.get().getId());
+            cooperatorService.updateFullName(updatedFullName);
             return ResponseEntity.ok("");
         } else {
             return ResponseEntity.notFound().build();
