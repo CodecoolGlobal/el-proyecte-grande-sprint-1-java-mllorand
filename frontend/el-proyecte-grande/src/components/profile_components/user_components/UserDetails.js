@@ -1,31 +1,46 @@
 import React from 'react';
 import UserDetail from "./UserDetail";
 
-const UserDetails = ({ user }) => {
-	const { id, userName, emailAddress, fullName, age, gender } = user;
+const UserDetails = ({userData, setUserData}) => {
+	const {id, userName, emailAddress, fullName, age, gender} = userData;
 	return (
 		<section id="user-detail-container">
 
 			<UserDetail
 				id={id}
-				fieldName='Username'
-				fieldValue={userName.attributeValue}/>
+				fieldName='userName'
+				fieldValue={userName.attributeValue}
+				userData={userData}
+				setUserData={setUserData}
+			/>
 			<UserDetail
 				id={id}
-				fieldName='Full name'
-				fieldValue={fullName.attributeValue}/>
+				fieldName='fullName'
+				fieldValue={fullName.attributeValue}
+				userData={userData}
+				setUserData={setUserData}
+			/>
 			<UserDetail
 				id={id}
-				fieldName='Gender'
-				fieldValue={gender.attributeValue}/>
+				fieldName='gender'
+				fieldValue={gender.attributeValue}
+				userData={userData}
+				setUserData={setUserData}
+			/>
 			<UserDetail
 				id={id}
-				fieldName='Age'
-				fieldValue={`${age.attributeValue} years`}/>
+				fieldName='age'
+				fieldValue={`${age.attributeValue} years`}
+				userData={userData}
+				setUserData={setUserData}
+			/>
 			<UserDetail
 				id={id}
-				fieldName='Email'
-				fieldValue={emailAddress.attributeValue}/>
+				fieldName='email'
+				fieldValue={emailAddress.attributeValue}
+				userData={userData}
+				setUserData={setUserData}
+			/>
 		</section>
 	);
 };

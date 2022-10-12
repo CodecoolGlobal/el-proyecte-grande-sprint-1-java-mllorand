@@ -14,26 +14,41 @@ const Profile = () => {
 		url: '/2'
 	});
 
+	const axiosPut = (fieldName, fieldValue) => {
+		axios.put(`http://localhost:8080/profile/2/${fieldName}`, {
+			"attributeValue": fieldValue,
+			"visibility": "PRIVATE"
+		})
+	}
+
 	useEffect(() => {
-		if (!loading && !error) {
-			setUserData({
-				id: profile.id,
-				userName: profile.userName,
-				emailAddress: profile.emailAddress,
-				fullName: profile.fullName,
-				age: profile.age,
-				gender: profile.gender
-			});
-			setCooperatorData({
-				id: profile.id,
-				strengths: profile.strengths,
-				learnt: profile.learnt,
-				interested: profile.interested,
-				learnFromScratch: profile.learnFromScratch,
-				improveIn: profile.improveIn
-			})
+		if (userData) {
+			axiosPut('username', userData.userName.attributeValue)
 		}
-	}, [error, loading])
+	}, [userData]);
+
+
+	useEffect(() => {
+			if (!loading && !error) {
+				setUserData({
+					id: profile.id,
+					userName: profile.userName,
+					emailAddress: profile.emailAddress,
+					fullName: profile.fullName,
+					age: profile.age,
+					gender: profile.gender
+				});
+				setCooperatorData({
+					id: profile.id,
+					strengths: profile.strengths,
+					learnt: profile.learnt,
+					interested: profile.interested,
+					learnFromScratch: profile.learnFromScratch,
+					improveIn: profile.improveIn
+				})
+			}
+		}, [error, loading]
+	)
 
 
 	return (
@@ -43,10 +58,16 @@ const Profile = () => {
 			{!loading && !error && userData && cooperatorData &&
 				<article id="profile-content">
 					<aside id="user-details-content">
-						<User user={userData}/>
+						<User
+							userData={userData}
+							setUserData={setUserData}
+						/>
 					</aside>
 					<main id="cooperator-details-content">
-						<CooperatorDetails cooperator={cooperatorData}/>
+						<CooperatorDetails
+							cooperator={cooperatorData}
+							setCooperator={setCooperatorData}
+						/>
 					</main>
 				</article>}
 			{!loading && !error && !profile && <p>No profile data</p>}
