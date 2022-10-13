@@ -115,5 +115,23 @@ public class UserProfileController {
             return ResponseEntity.notFound().build();
         }
     }
+
+    @PatchMapping("{userId}/learnFromScratch")
+    public ResponseEntity<String> addNewLearnFromScratch(@PathVariable long userId, @RequestBody AffinityLabel newLearnFromScratch) {
+        if (cooperatorService.addNewLearnFromScratch(userId, newLearnFromScratch)) {
+            return ResponseEntity.ok("");
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @PatchMapping("{userId}/improveIn")
+    public ResponseEntity<String> addNewLImproveIn(@PathVariable long userId, @RequestBody AffinityLabel newImproveIn) {
+        if (cooperatorService.addNewImproveIn(userId, newImproveIn)) {
+            return ResponseEntity.ok("");
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
 }
 
