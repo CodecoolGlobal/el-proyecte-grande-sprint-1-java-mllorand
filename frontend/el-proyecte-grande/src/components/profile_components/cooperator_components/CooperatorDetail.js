@@ -12,11 +12,11 @@ const CooperatorDetail = ({ fieldName, detailItems, labels}) => {
 	return (
 		<section className="coop-detail-container">
 			<div className="label-container">
-				<span className='field-label'>{fieldName}</span>
+				<span className='field-label'>{fieldName}:</span>
 				<button className="btn-add"
 								onClick={e => handleAdd()}
 				>
-					<img src="" alt="add"/>
+					<img src="/assets/plus.png" alt="add"/>
 				</button>
 			</div>
 			<div className="coop-detail-item-container">

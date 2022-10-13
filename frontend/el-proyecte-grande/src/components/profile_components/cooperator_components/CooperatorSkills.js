@@ -6,7 +6,7 @@ const CooperatorSkills = ({ detailItems, labels}) => {
 		<section className="coop-detail-container">
 			<div className="label-container">
 				<span className='field-label'>Skills:</span>
-				<button className="btn-add"><img src="" alt="add"/></button>
+				<button className="btn-add"><img src="/assets/plus.png" alt="add"/></button>
 			</div>
 			<div className="coop-detail-item-container">
 				{detailItems.map(item => (
