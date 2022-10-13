@@ -30,13 +30,13 @@ const UserDetails = ({userData, setUserData}) => {
 			<UserDetail
 				id={id}
 				fieldName='age'
-				fieldValue={`${age.attributeValue} years`}
+				fieldValue={age.attributeValue}
 				userData={userData}
 				setUserData={setUserData}
 			/>
 			<UserDetail
 				id={id}
-				fieldName='email'
+				fieldName='emailAddress'
 				fieldValue={emailAddress.attributeValue}
 				userData={userData}
 				setUserData={setUserData}

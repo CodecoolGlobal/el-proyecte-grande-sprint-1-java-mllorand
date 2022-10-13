@@ -5,6 +5,7 @@ import com.codecool.elproyectegrande.persistance.*;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+
 import java.util.Optional;
 
 @Service
@@ -12,7 +13,6 @@ import java.util.Optional;
 public class CooperatorProfileService {
     public static final int MINIMUM_AGE = 0;
     public static final int MAXIMUM_AGE = 150;
-
     private CooperatorDAO cooperatorDAO;
     private AffinityLabelDAO affinityLabelDAO;
     private AffinityLabelWithMonthsDAO affinityLabelWithMonthsDAO;
@@ -101,18 +101,6 @@ public class CooperatorProfileService {
         stringAttributeDAO.save(updatedFullName);
     }
 
-    public Optional<IntegerAttribute> getAge(long userId) {
-        var cooperator = cooperatorDAO.findById(userId);
-        return cooperator.map(Cooperator::getAge);
-    }
-
-    public void updateAge(IntegerAttribute updatedAge) {
-        if(updatedAge.getAttributeValue() < MINIMUM_AGE || updatedAge.getAttributeValue() > MAXIMUM_AGE) {
-            throw new IllegalArgumentException();
-        }
-        integerAttributeDAO.save(updatedAge);
-    }
-
     public boolean addNewStrength(long userId, AffinityLabel newStrength) {
         var cooperator = cooperatorDAO.findById(userId);
         var affinityLabel = affinityLabelDAO.findById(newStrength.getId());
@@ -123,5 +111,17 @@ public class CooperatorProfileService {
         } else {
             return false;
         }
+    }
+
+    public Optional<IntegerAttribute> getAge(long userId) {
+        var cooperator = cooperatorDAO.findById(userId);
+        return cooperator.map(Cooperator::getAge);
+    }
+
+    public void updateAge(IntegerAttribute updatedAge) {
+        if(updatedAge.getAttributeValue() < MINIMUM_AGE || updatedAge.getAttributeValue() > MAXIMUM_AGE) {
+            throw new IllegalArgumentException();
+        }
+        integerAttributeDAO.save(updatedAge);
     }
 }
