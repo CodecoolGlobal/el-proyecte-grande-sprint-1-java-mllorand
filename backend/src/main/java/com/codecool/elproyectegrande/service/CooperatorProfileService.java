@@ -12,6 +12,7 @@ import java.util.Optional;
 public class CooperatorProfileService {
     public static final int MINIMUM_AGE = 0;
     public static final int MAXIMUM_AGE = 150;
+
     private CooperatorDAO cooperatorDAO;
     private AffinityLabelDAO affinityLabelDAO;
     private AffinityLabelWithMonthsDAO affinityLabelWithMonthsDAO;

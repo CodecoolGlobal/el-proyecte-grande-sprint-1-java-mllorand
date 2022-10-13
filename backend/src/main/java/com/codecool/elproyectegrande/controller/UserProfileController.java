@@ -2,6 +2,7 @@ package com.codecool.elproyectegrande.controller;
 
 import com.codecool.elproyectegrande.model.*;
 import com.codecool.elproyectegrande.service.CooperatorProfileService;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -88,7 +89,17 @@ public class UserProfileController {
 
         if(age.isPresent()) {
             updatedAge.setId(age.get().getId());
-            cooperatorService.updateAge(updatedAge);
+            try {
+                cooperatorService.updateAge(updatedAge);
+            } catch (IllegalArgumentException ignored) {
+                return ResponseEntity.badRequest()
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .body(String.format(
+                        "{\n  \"MINIMUM_AGE\": %d,\n  \"MAXIMUM_AGE\": %d\n}",
+                        CooperatorProfileService.MINIMUM_AGE,
+                        CooperatorProfileService.MAXIMUM_AGE
+                    ));
+            }
             return ResponseEntity.ok("");
         } else {
             return ResponseEntity.notFound().build();
