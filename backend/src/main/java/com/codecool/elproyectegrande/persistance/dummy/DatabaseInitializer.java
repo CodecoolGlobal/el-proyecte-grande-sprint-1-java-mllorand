@@ -5,6 +5,7 @@ import com.codecool.elproyectegrande.persistance.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.stream.StreamSupport;
 
 @Component
@@ -29,13 +30,21 @@ public class DatabaseInitializer implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        var cooperatorCount = StreamSupport.stream(
-                cooperatorDAO.findAll().spliterator(),
-                false
-            )
-            .count();
+        AffinityLabel jsLabel, javaLabel, reactLabel, dockerLabel;
+        if (affinityLabelDAO.count() <= 0) {
+            jsLabel = new AffinityLabel(0L, "js", "javascript");
+            javaLabel = new AffinityLabel(0L, "java", "Java");
+            reactLabel = new AffinityLabel(0L, "react", "React");
+            dockerLabel = new AffinityLabel(0L, "docker", "Docker");
+            affinityLabelDAO.saveAll(List.of(jsLabel, javaLabel, reactLabel, dockerLabel));
+        } else {
+            jsLabel = affinityLabelDAO.findById(0L).get();
+            javaLabel = affinityLabelDAO.findById(1L).get();
+            reactLabel = affinityLabelDAO.findById(2L).get();
+            dockerLabel = affinityLabelDAO.findById(3L).get();
+        }
 
-        if (cooperatorCount <= 0) {
+        if (cooperatorDAO.count() <= 0) {
             StringAttribute userName = new StringAttribute(0L, "anthony2", Visibility.PUBLIC);
             stringAttributeDAO.save(userName);
             StringAttribute fullName = new StringAttribute(0L, "Anthony Miller", Visibility.PUBLIC);
@@ -46,17 +55,11 @@ public class DatabaseInitializer implements CommandLineRunner {
             integerAttributeDAO.save(age);
             GenderAttribute gender = new GenderAttribute(0L, Gender.MALE, Visibility.PUBLIC);
             genderAttributeDAO.save(gender);
-            AffinityLabel strength = new AffinityLabel(0L, "js", "javascript");
-            affinityLabelDAO.save(strength);
-            InterestAffinityLabel interested = new InterestAffinityLabel(0L, "java", "java", InterestPriority.Primary);
+
+            var interested = new InterestAffinityLabel(0L, dockerLabel, InterestPriority.Primary);
             interestAffinityLabelDAO.save(interested);
-            AffinityLabel improveIn = new AffinityLabel(0L, "react", "React");
-            affinityLabelDAO.save(improveIn);
-            AffinityLabel learnFromScratch = new AffinityLabel(0L, "docker", "Docker");
-            affinityLabelDAO.save(learnFromScratch);
-            AffinityLabelWithMonths learnt = new AffinityLabelWithMonths(0L, "react", "React", 3);
+            var learnt = new AffinityLabelWithMonths(0L, javaLabel, 5);
             affinityLabelWithMonthsDAO.save(learnt);
-            affinityLabelDAO.save(new AffinityLabel(0L, "java", "Java"));
 
             var userAnthony = new CooperatorBuilder()
                 .setUserName(userName)
@@ -64,10 +67,10 @@ public class DatabaseInitializer implements CommandLineRunner {
                 .setEmailAddress(emailAddress)
                 .setAge(age)
                 .setGender(gender)
-                .addStrength(strength)
+                .addStrength(jsLabel)
                 .addInterested(interested)
-                .addImproveIn(improveIn)
-                .addLearnFromScratch(learnFromScratch)
+                .addImproveIn(javaLabel)
+                .addLearnFromScratch(dockerLabel)
                 .addLearnt(learnt)
                 .build();
             cooperatorDAO.save(userAnthony);
