@@ -8,7 +8,7 @@ import javax.persistence.Entity;
 @Entity
 @NoArgsConstructor
 public class AffinityLabelWithMonths extends AffinityLabelWithWeight<Integer> {
-    public AffinityLabelWithMonths(long id, @NonNull String internalName, @NonNull String displayName, @NonNull Integer weightQuantity) {
-        super(id, internalName, displayName, weightQuantity, "month");
+    public AffinityLabelWithMonths(long id, @NonNull AffinityLabel label, @NonNull Integer weightQuantity) {
+        super(id, label, weightQuantity, "month");
     }
 }
