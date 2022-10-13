@@ -34,7 +34,7 @@ public class UserProfileController {
             .orElse(ResponseEntity.notFound().build());
     }
 
-    @PutMapping("/{userId}/username")
+    @PatchMapping("/{userId}/username")
     public ResponseEntity<String> changeUserName(@PathVariable long userId, @RequestBody StringAttribute updatedUserName) {
         var userName = cooperatorService.getUserName(userId);
 
@@ -47,7 +47,7 @@ public class UserProfileController {
         }
     }
 
-    @PutMapping("/{userId}/gender")
+    @PatchMapping("/{userId}/gender")
     public ResponseEntity<String> changeUserName(@PathVariable long userId, @RequestBody GenderAttribute updatedGender) {
         var gender = cooperatorService.getGender(userId);
         if (gender.isPresent()) {
@@ -59,7 +59,7 @@ public class UserProfileController {
         }
     }
 
-    @PutMapping("/{userId}/email-address")
+    @PatchMapping("/{userId}/email-address")
     public ResponseEntity<String> changeEmailAddress(@PathVariable long userId, @RequestBody StringAttribute updatedEmailAddress) {
         var emailAddress = cooperatorService.getEmailAddress(userId);
 
@@ -72,7 +72,7 @@ public class UserProfileController {
         }
     }
 
-    @PutMapping("/{userId}/full-name")
+    @PatchMapping("/{userId}/full-name")
     public ResponseEntity<String> changeFullName(@PathVariable long userId, @RequestBody StringAttribute updatedFullName) {
         var fullName = cooperatorService.getFullName(userId);
 
