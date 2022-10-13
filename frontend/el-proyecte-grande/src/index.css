@@ -130,7 +130,6 @@ footer, #nav-social, #nav-other, #nav-social ul, #nav-other ul {
 .usr-detail {
     justify-content: space-between;
     align-items: center;
-    padding-right: 7vw;
 }
 
 .usr-detail button {
@@ -144,7 +143,7 @@ footer, #nav-social, #nav-other, #nav-social ul, #nav-other ul {
 
 .field {
     text-align: center;
-    width: 15vw;
+    width: clamp(120px, 15vw, 600px);
     height: 3.5vh;
     background: var(--orange);
     padding-block: 0.5vh;
@@ -153,12 +152,28 @@ footer, #nav-social, #nav-other, #nav-social ul, #nav-other ul {
     font-weight: 600;
 }
 
+.field option {
+    font-weight: 600;
+}
+
+.visibility-lvl, #prio, .visibility-lvl *, #prio * {
+    border: none;
+    border-radius: clamp(1px, 0.2vh, 20px);;
+    background: var(--almost-white);
+    width: clamp(70px, 5vw, 600px);
+
+}
+
 .field-label {
-    width: 6vw;
+    width: clamp(100px, 6vw, 600px);
 }
 
 .label-container {
     margin-bottom: 2vh;
+    align-items: center;
+    display: flex;
+    width: 35vw;
+    justify-content: space-between;
 }
 
 .detail-item {
@@ -182,6 +197,17 @@ footer, #nav-social, #nav-other, #nav-social ul, #nav-other ul {
     width: auto;
 }
 
+.btn-add {
+    border: none;
+    background: transparent;
+    align-items: center;
+}
+
+.btn-add img {
+    width: auto;
+    height: 2vh;
+}
+
 #profile-content {
     padding-inline: 1vw;
 }
@@ -195,15 +221,14 @@ footer, #nav-social, #nav-other, #nav-social ul, #nav-other ul {
 }
 
 #profile-img img {
-    width: 20vw;
+    width: clamp(200px, 20vw, 1000px);
     height: auto;
 }
 
 #profile-img {
     margin-block: 3vh;
-    width: 25vw ;
-    height: 45vh;
-    background: black;
+    width: clamp(200px, 20vw, 1000px);
+    height: 40vh;
 }
 
 #user-detail-container {
