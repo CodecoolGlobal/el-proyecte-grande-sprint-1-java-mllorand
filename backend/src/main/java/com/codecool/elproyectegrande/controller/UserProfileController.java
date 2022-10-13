@@ -31,7 +31,7 @@ public class UserProfileController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    @PutMapping("/{userId}/username")
+    @PutMapping("/{userId}/userName")
     public ResponseEntity<String> changeUserName(@PathVariable long userId, @RequestBody StringAttribute updatedUserName) {
         var userName = cooperatorService.getUserName(userId);
 
@@ -56,7 +56,7 @@ public class UserProfileController {
         }
     }
 
-    @PutMapping("/{userId}/email-address")
+    @PutMapping("/{userId}/emailAddress")
     public ResponseEntity<String> changeEmailAddress(@PathVariable long userId, @RequestBody StringAttribute updatedEmailAddress) {
         var emailAddress = cooperatorService.getEmailAddress(userId);
 
@@ -83,7 +83,7 @@ public class UserProfileController {
 
 
 
-    @PutMapping("/{userId}/full-name")
+    @PutMapping("/{userId}/fullName")
     public ResponseEntity<String> changeFullName(@PathVariable long userId, @RequestBody StringAttribute updatedFullName) {
         var fullName = cooperatorService.getFullName(userId);
 
