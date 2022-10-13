@@ -2,20 +2,29 @@ import React, {useEffect, useState} from 'react';
 import User from "./user_components/User";
 import CooperatorDetails from "./cooperator_components/CooperatorDetails";
 import useAxios from "../../hooks/useAxios";
-import axios from '../../apis/profileData'
+import profileAxios from '../../apis/profileData'
+import affinityAxios from '../../apis/affinityLabels'
+import {CooperatorContextProvider} from "../../context/CooperatorContext";
 
 const Profile = () => {
 	const [userData, setUserData] = useState(null);
 	const [cooperatorData, setCooperatorData] = useState(null);
 
-	const [profile, error, loading] = useAxios({
-		axiosInstance: axios,
+	const [profile, profileError, profileLoading] = useAxios({
+		axiosInstance: profileAxios,
 		method: 'GET',
-		url: '/2'
+		url: '/1'
 	});
 
+	const [labels, labelsError, labelsLoading] = useAxios({
+		axiosInstance: affinityAxios,
+		method: 'GET',
+		url: '/all'
+	});
+
+
 	useEffect(() => {
-			if (!loading && !error) {
+			if (!profileLoading && !profileError) {
 				setUserData({
 					id: profile.id,
 					userName: profile.userName,
@@ -33,15 +42,24 @@ const Profile = () => {
 					improveIn: profile.improveIn
 				})
 			}
-		}, [error, loading]
+		}, [profileError, profileLoading]
 	)
 
 
 	return (
 		<>
-			{loading && <p>Loading...</p>}
-			{!loading && error && <p>{error}</p>}
-			{!loading && !error && userData && cooperatorData &&
+			{profileLoading && <p>Loading...</p>}
+			{labelsLoading && <p>Loading...</p>}
+			{!profileLoading && profileError && <p>{profileError}</p>}
+			{!labelsLoading && labelsError && <p>{labelsError}</p>}
+			{!profileLoading &&
+				!profileError &&
+				!labelsLoading &&
+				!labelsError &&
+				userData &&
+				cooperatorData &&
+				labels
+				&&
 				<article id="profile-content">
 					<aside id="user-details-content">
 						<User
@@ -50,13 +68,17 @@ const Profile = () => {
 						/>
 					</aside>
 					<main id="cooperator-details-content">
-						<CooperatorDetails
-							cooperatorData={cooperatorData}
-							setCooperatorData={setCooperatorData}
-						/>
+						<CooperatorContextProvider>
+							<CooperatorDetails
+								cooperatorData={cooperatorData}
+								setCooperatorData={setCooperatorData}
+								labels={labels}
+							/>
+						</CooperatorContextProvider>
 					</main>
 				</article>}
-			{!loading && !error && !profile && <p>No profile data</p>}
+			{!profileLoading && !profileError && !profile && <p>No profile data</p>}
+			{!labelsLoading && !labelsError && !labels && <p>No label data</p>}
 		</>
 	);
 };

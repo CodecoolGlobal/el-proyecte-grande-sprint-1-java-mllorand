@@ -1,12 +1,12 @@
 import React from 'react';
 import CoopDetailItem from "./CoopDetailItem";
 
-const CooperatorSkills = ({ detailItems }) => {
+const CooperatorSkills = ({ detailItems, labels}) => {
 	return (
 		<section className="coop-detail-container">
 			<div className="label-container">
 				<span className='field-label'>Skills:</span>
-				<button className="btn-add"><img src="" alt=""/></button>
+				<button className="btn-add"><img src="" alt="add"/></button>
 			</div>
 			<div className="coop-detail-item-container">
 				{detailItems.map(item => (

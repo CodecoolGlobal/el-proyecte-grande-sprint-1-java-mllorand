@@ -6,7 +6,7 @@ const UserDetail = ({id, fieldName, fieldValue, userData, setUserData}) => {
 		const [visibility, setVisibility] = useState(userData[fieldName].visibility);
 
 		const axiosPatch = (fieldName, fieldValue, visibility) => {
-			axios.patch(`/profile/2/${fieldName}`, {
+			axios.patch(`/profile/${id}/${fieldName}`, {
 				"attributeValue": fieldValue,
 				"visibility": visibility
 			})
