@@ -133,6 +133,15 @@ footer, #nav-social, #nav-other, #nav-social ul, #nav-other ul {
     padding-right: 7vw;
 }
 
+.usr-detail button {
+    color: var(--orange);
+    background: var(--dark-gray);
+    padding-block: 0.5vh;
+    padding-inline: 1vw;
+    border: none;
+    border-radius: clamp(5px, 0.5vh, 40px);
+}
+
 .field {
     text-align: center;
     width: 15vw;
@@ -142,6 +151,10 @@ footer, #nav-social, #nav-other, #nav-social ul, #nav-other ul {
     border: none;
     border-radius: clamp(5px, 0.4vh, 40px);
     font-weight: 600;
+}
+
+.field-label {
+    width: 6vw;
 }
 
 .label-container {
