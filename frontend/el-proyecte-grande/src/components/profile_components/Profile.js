@@ -12,7 +12,7 @@ const Profile = () => {
 	const [profile, profileError, profileLoading] = useAxios({
 		axiosInstance: profileAxios,
 		method: 'GET',
-		url: '/2'
+		url: '/1'
 	});
 
 	const [labels, labelsError, labelsLoading] = useAxios({
