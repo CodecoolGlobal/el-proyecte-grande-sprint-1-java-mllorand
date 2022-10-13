@@ -51,8 +51,8 @@ const Profile = () => {
 					</aside>
 					<main id="cooperator-details-content">
 						<CooperatorDetails
-							cooperator={cooperatorData}
-							setCooperator={setCooperatorData}
+							cooperatorData={cooperatorData}
+							setCooperatorData={setCooperatorData}
 						/>
 					</main>
 				</article>}

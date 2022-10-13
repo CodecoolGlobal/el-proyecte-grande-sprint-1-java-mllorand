@@ -1,19 +1,23 @@
 package com.codecool.elproyectegrande.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
 
-import javax.persistence.MappedSuperclass;
+import javax.persistence.*;
 
 @NoArgsConstructor
 @Getter
+@AllArgsConstructor
 @MappedSuperclass
-public class AffinityLabelWithPresetValues<E> extends AffinityLabel{
-    private E interestPriority;
+public class AffinityLabelWithPresetValues<E> {
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "affinityPresetGenerator")
+    @SequenceGenerator(name = "affinityPresetGenerator", sequenceName = "affinity_preset_seq")
+    private long id;
 
-    public AffinityLabelWithPresetValues(long id, @NonNull String internalName, @NonNull String toolTipText, E interestPriority) {
-        super(id, internalName, toolTipText);
-        this.interestPriority = interestPriority;
-    }
+    @ManyToOne
+    private AffinityLabel label;
+
+    private E interestPriority;
 }

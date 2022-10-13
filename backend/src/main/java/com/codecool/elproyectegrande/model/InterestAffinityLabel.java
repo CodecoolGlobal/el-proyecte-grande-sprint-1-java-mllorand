@@ -8,7 +8,7 @@ import javax.persistence.Entity;
 @Entity
 @AllArgsConstructor
 public class InterestAffinityLabel extends AffinityLabelWithPresetValues<InterestPriority>{
-    public InterestAffinityLabel(long id, @NonNull String internalName, @NonNull String toolTipText, InterestPriority interestPriority) {
-        super(id, internalName, toolTipText, interestPriority);
+    public InterestAffinityLabel(long id, AffinityLabel label, InterestPriority interestPriority) {
+        super(id, label, interestPriority);
     }
 }

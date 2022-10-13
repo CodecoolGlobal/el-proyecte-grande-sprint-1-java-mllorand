@@ -3,14 +3,15 @@ import CooperatorSkills from "./CooperatorSkills";
 import CooperatorInterests from "./CooperatorInterests";
 import CooperatorDetail from "./CooperatorDetail";
 
-const CooperatorDetails = ({ cooperator }) => {
+const CooperatorDetails = ({ cooperatorData, setCooperatorData }) => {
+	const {strengths, learnt, interested, learnFromScratch, improveIn } = cooperatorData;
 	return (
 		<>
-				<CooperatorSkills detailItems={cooperator.learnt}/>
-				<CooperatorDetail fieldName='Strengths' detailItems={cooperator.strengths}/>
-				<CooperatorInterests detailItems={cooperator.interested}/>
-				<CooperatorDetail fieldName='Would like to start' detailItems={cooperator.learnFromScratch}/>
-				<CooperatorDetail fieldName='Would like to improve in' detailItems={cooperator.improveIn}/>
+				<CooperatorSkills detailItems={learnt}/>
+				<CooperatorDetail fieldName='Strengths' detailItems={strengths}/>
+				<CooperatorInterests detailItems={interested}/>
+				<CooperatorDetail fieldName='Would like to start' detailItems={learnFromScratch}/>
+				<CooperatorDetail fieldName='Would like to improve in' detailItems={improveIn}/>
 		</>
 	);
 };

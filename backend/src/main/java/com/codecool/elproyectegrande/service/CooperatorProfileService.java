@@ -103,9 +103,9 @@ public class CooperatorProfileService {
 
     public boolean addNewStrength(long userId, AffinityLabel newStrength) {
         var cooperator = cooperatorDAO.findById(userId);
-        if(cooperator.isPresent()) {
-            affinityLabelDAO.save(newStrength);
-            cooperator.get().getStrengths().add(newStrength);
+        var affinityLabel = affinityLabelDAO.findById(newStrength.getId());
+        if(cooperator.isPresent() && affinityLabel.isPresent()) {
+            cooperator.get().getStrengths().add(affinityLabel.get());
             cooperatorDAO.save(cooperator.get());
             return true;
         } else {
@@ -123,5 +123,29 @@ public class CooperatorProfileService {
             throw new IllegalArgumentException();
         }
         integerAttributeDAO.save(updatedAge);
+    }
+
+    public boolean addNewLearnFromScratch(long userId, AffinityLabel newLearnFromScratch) {
+        var cooperator = cooperatorDAO.findById(userId);
+        var affinityLabel = affinityLabelDAO.findById(newLearnFromScratch.getId());
+        if(cooperator.isPresent() && affinityLabel.isPresent()) {
+            cooperator.get().getLearnFromScratch().add(affinityLabel.get());
+            cooperatorDAO.save(cooperator.get());
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean addNewImproveIn(long userId, AffinityLabel newImproveIn) {
+        var cooperator = cooperatorDAO.findById(userId);
+        var affinityLabel = affinityLabelDAO.findById(newImproveIn.getId());
+        if(cooperator.isPresent() && affinityLabel.isPresent()) {
+            cooperator.get().getImproveIn().add(affinityLabel.get());
+            cooperatorDAO.save(cooperator.get());
+            return true;
+        } else {
+            return false;
+        }
     }
 }

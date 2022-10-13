@@ -2,6 +2,7 @@ package com.codecool.elproyectegrande.controller;
 
 import com.codecool.elproyectegrande.model.*;
 import com.codecool.elproyectegrande.service.CooperatorProfileService;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -107,12 +108,42 @@ public class UserProfileController {
         }
     }
 
-    @PostMapping("/{userId}/strength")
+    @PatchMapping("/{userId}/strength")
     public ResponseEntity<String> addNewCooperatorStrength(@PathVariable long userId, @RequestBody AffinityLabel newStrength) {
-        if (cooperatorService.addNewStrength(userId, newStrength)) {
-            return ResponseEntity.ok("");
-        } else {
-            return ResponseEntity.notFound().build();
+        try {
+            if (cooperatorService.addNewStrength(userId, newStrength)) {
+                return ResponseEntity.ok("");
+            } else {
+                return ResponseEntity.notFound().build();
+            }
+        } catch (DataIntegrityViolationException ignored) {
+            return ResponseEntity.badRequest().body("The user already has this label");
+        }
+    }
+
+    @PatchMapping("{userId}/learnFromScratch")
+    public ResponseEntity<String> addNewLearnFromScratch(@PathVariable long userId, @RequestBody AffinityLabel newLearnFromScratch) {
+        try {
+            if (cooperatorService.addNewLearnFromScratch(userId, newLearnFromScratch)) {
+                return ResponseEntity.ok("");
+            } else {
+                return ResponseEntity.notFound().build();
+            }
+        } catch (DataIntegrityViolationException ignored) {
+            return ResponseEntity.badRequest().body("The user already has this label");
+        }
+    }
+
+    @PatchMapping("{userId}/improveIn")
+    public ResponseEntity<String> addNewLImproveIn(@PathVariable long userId, @RequestBody AffinityLabel newImproveIn) {
+        try {
+            if (cooperatorService.addNewImproveIn(userId, newImproveIn)) {
+                return ResponseEntity.ok("");
+            } else {
+                return ResponseEntity.notFound().build();
+            }
+        } catch (DataIntegrityViolationException ignored) {
+            return ResponseEntity.badRequest().body("The user already has this label");
         }
     }
 }
