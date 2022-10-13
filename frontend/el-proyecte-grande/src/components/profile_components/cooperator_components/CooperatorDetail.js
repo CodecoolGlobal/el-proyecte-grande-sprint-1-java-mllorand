@@ -1,11 +1,23 @@
-import React from 'react';
+import {useContext} from "react";
+import {CooperatorContext} from "../../../context/CooperatorContext";
 
 const CooperatorDetail = ({ fieldName, detailItems, labels}) => {
+	const [showModal, setShowModal] = useContext(CooperatorContext);
+
+	const handleAdd = () => {
+		setShowModal(true);
+		console.log(showModal);
+	}
+
 	return (
 		<section className="coop-detail-container">
 			<div className="label-container">
 				<span className='field-label'>{fieldName}</span>
-				<button className="btn-add"><img src="" alt=""/></button>
+				<button className="btn-add"
+								onClick={e => handleAdd()}
+				>
+					<img src="" alt="add"/>
+				</button>
 			</div>
 			<div className="coop-detail-item-container">
 				{detailItems.map(item => (

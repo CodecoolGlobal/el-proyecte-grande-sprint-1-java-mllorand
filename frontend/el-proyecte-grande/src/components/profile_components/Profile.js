@@ -4,6 +4,7 @@ import CooperatorDetails from "./cooperator_components/CooperatorDetails";
 import useAxios from "../../hooks/useAxios";
 import profileAxios from '../../apis/profileData'
 import affinityAxios from '../../apis/affinityLabels'
+import {CooperatorContextProvider} from "../../context/CooperatorContext";
 
 const Profile = () => {
 	const [userData, setUserData] = useState(null);
@@ -67,11 +68,13 @@ const Profile = () => {
 						/>
 					</aside>
 					<main id="cooperator-details-content">
-						<CooperatorDetails
-							cooperatorData={cooperatorData}
-							setCooperatorData={setCooperatorData}
-							labels={labels}
-						/>
+						<CooperatorContextProvider>
+							<CooperatorDetails
+								cooperatorData={cooperatorData}
+								setCooperatorData={setCooperatorData}
+								labels={labels}
+							/>
+						</CooperatorContextProvider>
 					</main>
 				</article>}
 			{!profileLoading && !profileError && !profile && <p>No profile data</p>}

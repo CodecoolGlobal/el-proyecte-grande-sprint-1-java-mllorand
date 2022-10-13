@@ -4,6 +4,7 @@ import CooperatorInterests from "./CooperatorInterests";
 import CooperatorDetail from "./CooperatorDetail";
 
 const CooperatorDetails = ({cooperatorData, setCooperatorData, labels}) => {
+
 	const {strengths, learnt, interested, learnFromScratch, improveIn} = cooperatorData;
 	return (
 		<>
