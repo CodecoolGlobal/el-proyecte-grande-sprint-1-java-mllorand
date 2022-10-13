@@ -4,8 +4,8 @@ import axios from "axios";
 const UserDetail = ({id, fieldName, fieldValue, userData, setUserData}) => {
 	const [field, setField] = useState(fieldValue);
 
-	const axiosPut = (fieldName, fieldValue, visibility) => {
-		axios.put(`/profile/2/${fieldName}`, {
+	const axiosPatch = (fieldName, fieldValue, visibility) => {
+		axios.patch(`/profile/2/${fieldName}`, {
 			"attributeValue": fieldValue,
 			"visibility": visibility
 		})
@@ -19,7 +19,7 @@ const UserDetail = ({id, fieldName, fieldValue, userData, setUserData}) => {
 	}
 
 	const handleSaveBtn = (value) => {
-		axiosPut(fieldName, value, userData[fieldName].visibility)
+		axiosPatch(fieldName, value, userData[fieldName].visibility)
 	}
 
 

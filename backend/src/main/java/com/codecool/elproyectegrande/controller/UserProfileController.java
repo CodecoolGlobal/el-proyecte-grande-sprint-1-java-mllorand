@@ -2,6 +2,7 @@ package com.codecool.elproyectegrande.controller;
 
 import com.codecool.elproyectegrande.model.*;
 import com.codecool.elproyectegrande.service.CooperatorProfileService;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,7 +32,7 @@ public class UserProfileController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    @PutMapping("/{userId}/userName")
+    @PatchMapping("/{userId}/userName")
     public ResponseEntity<String> changeUserName(@PathVariable long userId, @RequestBody StringAttribute updatedUserName) {
         var userName = cooperatorService.getUserName(userId);
 
@@ -44,7 +45,7 @@ public class UserProfileController {
         }
     }
 
-    @PutMapping("/{userId}/gender")
+    @PatchMapping("/{userId}/gender")
     public ResponseEntity<String> changeUserName(@PathVariable long userId, @RequestBody GenderAttribute updatedGender) {
         var gender = cooperatorService.getGender(userId);
         if (gender.isPresent()) {
@@ -56,7 +57,7 @@ public class UserProfileController {
         }
     }
 
-    @PutMapping("/{userId}/emailAddress")
+    @PatchMapping("/{userId}/emailAddress")
     public ResponseEntity<String> changeEmailAddress(@PathVariable long userId, @RequestBody StringAttribute updatedEmailAddress) {
         var emailAddress = cooperatorService.getEmailAddress(userId);
 
@@ -69,25 +70,35 @@ public class UserProfileController {
         }
     }
 
-    @PutMapping("/{userId}/age")
+    @PatchMapping("/{userId}/age")
     public ResponseEntity<String> changeAge(@PathVariable long userId, @RequestBody IntegerAttribute updatedAge) {
-    var age = cooperatorService.getAge(userId);
-    if (age.isPresent()) {
-        updatedAge.setId(age.get().getId());
-        cooperatorService.updateAge(updatedAge);
-        return ResponseEntity.ok("");
-    } else {
-        return ResponseEntity.notFound().build();
+        var age = cooperatorService.getAge(userId);
+
+        if(age.isPresent()) {
+            updatedAge.setId(age.get().getId());
+            try {
+                cooperatorService.updateAge(updatedAge);
+            } catch (IllegalArgumentException ignored) {
+                return ResponseEntity.badRequest()
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .body(String.format(
+                                "{\n  \"MINIMUM_AGE\": %d,\n  \"MAXIMUM_AGE\": %d\n}",
+                                CooperatorProfileService.MINIMUM_AGE,
+                                CooperatorProfileService.MAXIMUM_AGE
+                        ));
+            }
+            return ResponseEntity.ok("");
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
-}
 
 
-
-    @PutMapping("/{userId}/fullName")
+    @PatchMapping("/{userId}/fullName")
     public ResponseEntity<String> changeFullName(@PathVariable long userId, @RequestBody StringAttribute updatedFullName) {
         var fullName = cooperatorService.getFullName(userId);
 
-        if(fullName.isPresent()) {
+        if (fullName.isPresent()) {
             updatedFullName.setId(fullName.get().getId());
             cooperatorService.updateFullName(updatedFullName);
             return ResponseEntity.ok("");
@@ -98,7 +109,7 @@ public class UserProfileController {
 
     @PostMapping("/{userId}/strength")
     public ResponseEntity<String> addNewCooperatorStrength(@PathVariable long userId, @RequestBody AffinityLabel newStrength) {
-        if(cooperatorService.addNewStrength(userId, newStrength)) {
+        if (cooperatorService.addNewStrength(userId, newStrength)) {
             return ResponseEntity.ok("");
         } else {
             return ResponseEntity.notFound().build();
