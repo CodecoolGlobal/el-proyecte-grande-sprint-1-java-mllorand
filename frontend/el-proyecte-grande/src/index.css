@@ -62,6 +62,14 @@ li, a, button {
     height: 4vh;
     padding-inline: 0.5vw;
     width: clamp(50px, 9vw, 500px);
+    transition: 0.5s;
+}
+
+.btn-nav:hover, .btn-nav:hover * {
+    border-radius: clamp(5px, 0.5vh, 30px);
+    background: var(--almost-white);
+    color: var(--dark-gray);
+    transition: 0.5s;
 }
 
 .nav-links {
@@ -128,6 +136,7 @@ footer, #nav-social, #nav-other, #nav-social ul, #nav-other ul {
 .field {
     text-align: center;
     width: 15vw;
+    height: 3.5vh;
     background: var(--orange);
     padding-block: 0.5vh;
     border: none;
@@ -137,6 +146,27 @@ footer, #nav-social, #nav-other, #nav-social ul, #nav-other ul {
 
 .label-container {
     margin-bottom: 2vh;
+}
+
+.detail-item {
+    align-items: center;
+    justify-content: space-around;
+    background: var(--dark-gray);
+    color: var(--almost-white);
+    width: 9vw;
+    padding-inline: 1vw;
+    padding-block: 1vh;
+    border-radius: clamp(10px, 1.5vh, 40px);
+}
+
+.exp-container {
+    justify-content: space-between;
+    width: 3vw;
+}
+
+.detail-item img {
+    height: 4vh;
+    width: auto;
 }
 
 #profile-content {
