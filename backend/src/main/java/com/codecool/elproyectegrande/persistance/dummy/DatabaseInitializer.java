@@ -56,6 +56,7 @@ public class DatabaseInitializer implements CommandLineRunner {
             affinityLabelDAO.save(learnFromScratch);
             AffinityLabelWithMonths learnt = new AffinityLabelWithMonths(0L, "react", "React", 3);
             affinityLabelWithMonthsDAO.save(learnt);
+            affinityLabelDAO.save(new AffinityLabel(0L, "java", "Java"));
 
             var userAnthony = new CooperatorBuilder()
                 .setUserName(userName)
