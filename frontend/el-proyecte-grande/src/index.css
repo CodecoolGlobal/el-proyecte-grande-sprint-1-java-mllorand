@@ -139,6 +139,14 @@ footer, #nav-social, #nav-other, #nav-social ul, #nav-other ul {
     padding-inline: 1vw;
     border: none;
     border-radius: clamp(5px, 0.5vh, 40px);
+    transition: 0.3s;
+}
+
+.usr-detail button:hover {
+    background: var(--orange);
+    color: var(--dark-gray);
+    border-radius: clamp(5px, 0.5vh, 30px);
+    transition: 0.5s;
 }
 
 .field {
@@ -165,7 +173,7 @@ footer, #nav-social, #nav-other, #nav-social ul, #nav-other ul {
 }
 
 .field-label {
-    width: clamp(100px, 6vw, 600px);
+    width: clamp(100px, 10vw, 600px);
 }
 
 .label-container {
@@ -181,7 +189,7 @@ footer, #nav-social, #nav-other, #nav-social ul, #nav-other ul {
     justify-content: space-around;
     background: var(--dark-gray);
     color: var(--almost-white);
-    width: 9vw;
+    width: 10vw;
     padding-inline: 1vw;
     padding-block: 1vh;
     border-radius: clamp(10px, 1.5vh, 40px);
@@ -193,14 +201,20 @@ footer, #nav-social, #nav-other, #nav-social ul, #nav-other ul {
 }
 
 .detail-item img {
-    height: 4vh;
+    height: 2vh;
     width: auto;
 }
 
-.btn-add {
+.btn-add, .btn-add * {
     border: none;
     background: transparent;
     align-items: center;
+    transition: 0.3s;
+}
+
+.btn-add:hover *, .btn-add {
+    height: 3vh;
+    transition: 0.3s;
 }
 
 .btn-add img {
