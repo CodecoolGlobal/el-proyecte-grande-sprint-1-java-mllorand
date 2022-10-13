@@ -1,9 +1,6 @@
 package com.codecool.elproyectegrande.controller;
 
-import com.codecool.elproyectegrande.model.AffinityLabel;
-import com.codecool.elproyectegrande.model.Cooperator;
-import com.codecool.elproyectegrande.model.GenderAttribute;
-import com.codecool.elproyectegrande.model.StringAttribute;
+import com.codecool.elproyectegrande.model.*;
 import com.codecool.elproyectegrande.service.CooperatorProfileService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -79,6 +76,19 @@ public class UserProfileController {
         if(fullName.isPresent()) {
             updatedFullName.setId(fullName.get().getId());
             cooperatorService.updateFullName(updatedFullName);
+            return ResponseEntity.ok("");
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @PatchMapping("/{userId}/age")
+    public ResponseEntity<String> changeAge(@PathVariable long userId, @RequestBody IntegerAttribute updatedAge) {
+        var age = cooperatorService.getAge(userId);
+
+        if(age.isPresent()) {
+            updatedAge.setId(age.get().getId());
+            cooperatorService.updateAge(updatedAge);
             return ResponseEntity.ok("");
         } else {
             return ResponseEntity.notFound().build();
