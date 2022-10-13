@@ -10,11 +10,11 @@ const CooperatorInterests = ({ detailItems, labels }) => {
 			<div className="coop-detail-item-container">
 				{detailItems.map(item => (
 					<div className="detail-item" key={item.id}>
-						<img src={`/skill_icons/${item.internalName}.png`} alt={item.tooltipText}/>
+						<img src={`/skill_icons/${item.label.internalName}.png`} alt={item.label.tooltipText}/>
 						<select name="prio" value={item.interestPriority} id="prio">
-							<option value="">First</option>
-							<option value="">Second</option>
-							<option value="">Third</option>
+							<option value="Primary">Primary</option>
+							<option value="Secondary">Secondary</option>
+							<option value="Tertiary">Tertiary</option>
 						</select>
 					</div>
 				))}
