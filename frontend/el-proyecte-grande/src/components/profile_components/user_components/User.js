@@ -6,7 +6,7 @@ const User = ({userData, setUserData}) => {
 	return (
 		<>
 			<section id="profile-img">
-				<img src="/assets/logo.png" alt="profile pic"/>
+				<img src="/assets/lori.png" alt="profile pic"/>
 			</section>
 			<UserDetails
 				userData={userData}
