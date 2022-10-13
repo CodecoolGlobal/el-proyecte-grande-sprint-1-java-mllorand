@@ -10,7 +10,6 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Getter
 @AllArgsConstructor
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class AffinityLabel {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "affinityGenerator")
