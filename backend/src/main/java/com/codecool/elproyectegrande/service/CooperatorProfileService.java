@@ -115,9 +115,9 @@ public class CooperatorProfileService {
 
     public boolean addNewStrength(long userId, AffinityLabel newStrength) {
         var cooperator = cooperatorDAO.findById(userId);
-        if(cooperator.isPresent()) {
-            affinityLabelDAO.save(newStrength);
-            cooperator.get().getStrengths().add(newStrength);
+        var affinityLabel = affinityLabelDAO.findById(newStrength.getId());
+        if(cooperator.isPresent() && affinityLabel.isPresent()) {
+            cooperator.get().getStrengths().add(affinityLabel.get());
             cooperatorDAO.save(cooperator.get());
             return true;
         } else {
