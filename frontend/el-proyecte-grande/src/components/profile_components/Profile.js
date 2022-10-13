@@ -14,20 +14,6 @@ const Profile = () => {
 		url: '/2'
 	});
 
-	const axiosPut = (fieldName, fieldValue) => {
-		axios.put(`http://localhost:8080/profile/2/${fieldName}`, {
-			"attributeValue": fieldValue,
-			"visibility": "PRIVATE"
-		})
-	}
-
-	useEffect(() => {
-		if (userData) {
-			axiosPut('username', userData.userName.attributeValue)
-		}
-	}, [userData]);
-
-
 	useEffect(() => {
 			if (!loading && !error) {
 				setUserData({
