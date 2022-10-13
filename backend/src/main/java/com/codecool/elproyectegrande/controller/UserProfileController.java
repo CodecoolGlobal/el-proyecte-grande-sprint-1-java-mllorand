@@ -1,9 +1,6 @@
 package com.codecool.elproyectegrande.controller;
 
-import com.codecool.elproyectegrande.model.AffinityLabel;
-import com.codecool.elproyectegrande.model.Cooperator;
-import com.codecool.elproyectegrande.model.GenderAttribute;
-import com.codecool.elproyectegrande.model.StringAttribute;
+import com.codecool.elproyectegrande.model.*;
 import com.codecool.elproyectegrande.service.CooperatorProfileService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,15 +20,15 @@ public class UserProfileController {
     @GetMapping("/{userId}")
     public ResponseEntity<Cooperator> displayUserProfile(@PathVariable long userId) {
         return cooperatorService.findById(userId)
-            .map(ResponseEntity::ok)
-            .orElse(ResponseEntity.notFound().build());
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 
     @GetMapping("")
     public ResponseEntity<Cooperator> displayDefaultUserProfile() {
         return cooperatorService.findById(DEFAULT_USER_ID)
-            .map(ResponseEntity::ok)
-            .orElse(ResponseEntity.notFound().build());
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 
     @PutMapping("/{userId}/username")
@@ -63,7 +60,7 @@ public class UserProfileController {
     public ResponseEntity<String> changeEmailAddress(@PathVariable long userId, @RequestBody StringAttribute updatedEmailAddress) {
         var emailAddress = cooperatorService.getEmailAddress(userId);
 
-        if(emailAddress.isPresent()) {
+        if (emailAddress.isPresent()) {
             updatedEmailAddress.setId(emailAddress.get().getId());
             cooperatorService.updateEmailAddress(updatedEmailAddress);
             return ResponseEntity.ok("");
@@ -71,6 +68,20 @@ public class UserProfileController {
             return ResponseEntity.notFound().build();
         }
     }
+
+    @PutMapping("/{userId}/age")
+    public ResponseEntity<String> changeAge(@PathVariable long userId, @RequestBody IntegerAttribute updatedAge) {
+    var age = cooperatorService.getAge(userId);
+    if (age.isPresent()) {
+        updatedAge.setId(age.get().getId());
+        cooperatorService.updateAge(updatedAge);
+        return ResponseEntity.ok("");
+    } else {
+        return ResponseEntity.notFound().build();
+    }
+}
+
+
 
     @PutMapping("/{userId}/full-name")
     public ResponseEntity<String> changeFullName(@PathVariable long userId, @RequestBody StringAttribute updatedFullName) {

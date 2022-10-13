@@ -1,9 +1,6 @@
 package com.codecool.elproyectegrande.service;
 
-import com.codecool.elproyectegrande.model.AffinityLabel;
-import com.codecool.elproyectegrande.model.Cooperator;
-import com.codecool.elproyectegrande.model.GenderAttribute;
-import com.codecool.elproyectegrande.model.StringAttribute;
+import com.codecool.elproyectegrande.model.*;
 import com.codecool.elproyectegrande.persistance.*;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -111,5 +108,14 @@ public class CooperatorProfileService {
         } else {
             return false;
         }
+    }
+
+    public Optional<IntegerAttribute> getAge(long userId) {
+        var cooperator = cooperatorDAO.findById(userId);
+        return cooperator.map(Cooperator::getAge);
+    }
+
+    public void updateAge(IntegerAttribute updatedAge) {
+        integerAttributeDAO.save(updatedAge);
     }
 }
