@@ -38,10 +38,10 @@ public class DatabaseInitializer implements CommandLineRunner {
             dockerLabel = new AffinityLabel(0L, "docker", "Docker");
             affinityLabelDAO.saveAll(List.of(jsLabel, javaLabel, reactLabel, dockerLabel));
         } else {
-            jsLabel = affinityLabelDAO.findById(0L).get();
-            javaLabel = affinityLabelDAO.findById(1L).get();
-            reactLabel = affinityLabelDAO.findById(2L).get();
-            dockerLabel = affinityLabelDAO.findById(3L).get();
+            jsLabel = affinityLabelDAO.findById(1L).get();
+            javaLabel = affinityLabelDAO.findById(2L).get();
+            reactLabel = affinityLabelDAO.findById(3L).get();
+            dockerLabel = affinityLabelDAO.findById(4L).get();
         }
 
         if (cooperatorDAO.count() <= 0) {
