@@ -38,8 +38,7 @@ const UserDetail = ({id, fieldName, fieldValue, userData, setUserData}) => {
 					fieldName !== 'gender' &&
 					<input type='text' className='field' value={field}
 								 onChange={e => handleChange(e.target.value)}
-					>
-					</input>
+					></input>
 				}
 				{
 					fieldName === 'gender' &&
