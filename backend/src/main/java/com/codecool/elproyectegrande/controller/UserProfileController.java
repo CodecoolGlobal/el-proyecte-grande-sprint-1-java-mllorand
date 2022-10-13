@@ -1,5 +1,6 @@
 package com.codecool.elproyectegrande.controller;
 
+import com.codecool.elproyectegrande.model.AffinityLabel;
 import com.codecool.elproyectegrande.model.Cooperator;
 import com.codecool.elproyectegrande.model.GenderAttribute;
 import com.codecool.elproyectegrande.model.StringAttribute;
@@ -78,6 +79,15 @@ public class UserProfileController {
         if(fullName.isPresent()) {
             updatedFullName.setId(fullName.get().getId());
             cooperatorService.updateFullName(updatedFullName);
+            return ResponseEntity.ok("");
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @PostMapping("/{userId}/strength")
+    public ResponseEntity<String> addNewCooperatorStrength(@PathVariable long userId, @RequestBody AffinityLabel newStrength) {
+        if(cooperatorService.addNewStrength(userId, newStrength)) {
             return ResponseEntity.ok("");
         } else {
             return ResponseEntity.notFound().build();
