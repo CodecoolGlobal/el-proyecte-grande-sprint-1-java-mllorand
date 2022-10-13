@@ -1,6 +1,6 @@
 import React from 'react';
 
-const CooperatorDetail = ({ fieldName, detailItems }) => {
+const CooperatorDetail = ({ fieldName, detailItems, labels}) => {
 	return (
 		<section className="coop-detail-container">
 			<div className="label-container">
