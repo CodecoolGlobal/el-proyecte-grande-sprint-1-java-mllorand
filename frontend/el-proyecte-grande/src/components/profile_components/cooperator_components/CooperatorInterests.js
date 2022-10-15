@@ -1,6 +1,9 @@
-import React from 'react';
+import React, {useContext} from 'react';
+import {ProfileContext} from "../../../context/ProfileContext";
 
-const CooperatorInterests = ({ detailItems, labels }) => {
+const CooperatorInterests = () => {
+	const {cooperatorData} = useContext(ProfileContext);
+
 	return (
 		<section className="coop-detail-container">
 			<div className="label-container">
@@ -8,7 +11,7 @@ const CooperatorInterests = ({ detailItems, labels }) => {
 				<button className="btn-add"><img src="/assets/plus.png" alt="add"/></button>
 			</div>
 			<div className="coop-detail-item-container">
-				{detailItems.map(item => (
+				{cooperatorData.interested.map(item => (
 					<div className="detail-item" key={item.id}>
 						<img src={`/skill_icons/${item.label.internalName}.png`} alt={item.label.tooltipText}/>
 						<select name="prio" value={item.interestPriority} id="prio">
