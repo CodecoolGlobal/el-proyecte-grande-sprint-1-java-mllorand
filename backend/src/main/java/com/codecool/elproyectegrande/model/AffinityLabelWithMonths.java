@@ -11,4 +11,8 @@ public class AffinityLabelWithMonths extends AffinityLabelWithWeight<Integer> {
     public AffinityLabelWithMonths(long id, @NonNull AffinityLabel label, @NonNull Integer weightQuantity) {
         super(id, label, weightQuantity, "month");
     }
+
+    public AffinityLabelWithMonths(AffinityLabel label, Integer weightQuantity) {
+        super(label, weightQuantity, "month");
+    }
 }
