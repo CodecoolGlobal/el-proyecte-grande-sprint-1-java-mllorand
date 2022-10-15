@@ -108,7 +108,7 @@ public class UserProfileController {
         }
     }
 
-    @PatchMapping("/{userId}/strength")
+    @PatchMapping("/{userId}/strengths")
     public ResponseEntity<String> addNewCooperatorStrength(@PathVariable long userId, @RequestBody AffinityLabel newStrength) {
         try {
             if (cooperatorService.addNewStrength(userId, newStrength)) {
