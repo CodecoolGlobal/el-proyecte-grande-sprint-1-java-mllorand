@@ -1,35 +1,42 @@
-import React from 'react';
 import CooperatorSkills from "./CooperatorSkills";
 import CooperatorInterests from "./CooperatorInterests";
 import CooperatorDetail from "./CooperatorDetail";
+import axios from "axios";
+import {useContext} from "react";
+import {ProfileContext} from "../../../context/ProfileContext";
 
-const CooperatorDetails = ({cooperatorData, setCooperatorData, labels}) => {
+const CooperatorDetails = () => {
+	const {cooperatorData, setCooperatorData} = useContext(ProfileContext);
 
-	const {strengths, learnt, interested, learnFromScratch, improveIn} = cooperatorData;
+	const handleAddLabel = (label, fieldName) => {
+		let newCooperatorData = {...cooperatorData}
+		newCooperatorData[fieldName] = [...newCooperatorData[fieldName], label]
+		axios.patch(`/profile/${cooperatorData.id}/${fieldName}`, {
+			"id": label.id
+		})
+		setCooperatorData(newCooperatorData);
+	}
+
 	return (
 		<>
-			<CooperatorSkills
-				detailItems={learnt}
-				labels={labels}
-			/>
+
+			<CooperatorSkills/>
+
 			<CooperatorDetail
-				fieldName='Strengths'
-				detailItems={strengths}
-				labels={labels}
+				fieldName='strengths'
+				handleAdd={handleAddLabel}
 			/>
-			<CooperatorInterests
-				detailItems={interested}
-				labels={labels}
-			/>
+
+			<CooperatorInterests/>
+
 			<CooperatorDetail
-				fieldName='Would like to start'
-				detailItems={learnFromScratch}
-				labels={labels}
+				fieldName='learnFromScratch'
+				handleAdd={handleAddLabel}
 			/>
+
 			<CooperatorDetail
-				fieldName='Would like to improve in'
-				detailItems={improveIn}
-				labels={labels}
+				fieldName='improveIn'
+				handleAdd={handleAddLabel}
 			/>
 		</>
 	);

@@ -1,12 +1,14 @@
-import {useContext} from "react";
-import {CooperatorContext} from "../../../context/CooperatorContext";
+import React, {useContext, useState} from "react";
+import Modal from "../Modal";
+import {ProfileContext} from "../../../context/ProfileContext";
 
-const CooperatorDetail = ({ fieldName, detailItems, labels}) => {
-	const [showModal, setShowModal] = useContext(CooperatorContext);
+const CooperatorDetail = ({fieldName, handleAdd}) => {
+	const [showModal, setShowModal] = useState(false);
+	const {cooperatorData} = useContext(ProfileContext);
 
-	const handleAdd = () => {
-		setShowModal(true);
-		console.log(showModal);
+
+	const handleShowModal = () => {
+		setShowModal(true)
 	}
 
 	return (
@@ -14,18 +16,25 @@ const CooperatorDetail = ({ fieldName, detailItems, labels}) => {
 			<div className="label-container">
 				<span className='field-label'>{fieldName}:</span>
 				<button className="btn-add"
-								onClick={e => handleAdd()}
+								onClick={() => handleShowModal()}
 				>
 					<img src="/assets/plus.png" alt="add"/>
 				</button>
 			</div>
 			<div className="coop-detail-item-container">
-				{detailItems.map(item => (
+				{cooperatorData[fieldName].map(item => (
 					<div className="detail-item" key={item.id}>
 						<img src={`/skill_icons/${item.internalName}.png`} alt={item.tooltipText}/>
 					</div>
 				))}
 			</div>
+			{
+				showModal
+				&&
+				<Modal
+					handleAdd={(label) => handleAdd(label, fieldName)}
+				/>
+			}
 		</section>
 	);
 };
