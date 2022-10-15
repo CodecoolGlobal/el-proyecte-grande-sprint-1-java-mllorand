@@ -1,7 +1,10 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import CoopDetailItem from "./CoopDetailItem";
+import {ProfileContext} from "../../../context/ProfileContext";
 
-const CooperatorSkills = ({ detailItems, labels}) => {
+const CooperatorSkills = () => {
+	const {cooperatorData} = useContext(ProfileContext);
+
 	return (
 		<section className="coop-detail-container">
 			<div className="label-container">
@@ -9,7 +12,7 @@ const CooperatorSkills = ({ detailItems, labels}) => {
 				<button className="btn-add"><img src="/assets/plus.png" alt="add"/></button>
 			</div>
 			<div className="coop-detail-item-container">
-				{detailItems.map(item => (
+				{cooperatorData.learnt.map(item => (
 					<CoopDetailItem item={item} key={item.id}/>
 				))}
 			</div>
