@@ -104,7 +104,7 @@ public class CooperatorProfileService {
     public boolean addNewStrength(long userId, AffinityLabel newStrength) {
         var cooperator = cooperatorDAO.findById(userId);
         var affinityLabel = affinityLabelDAO.findById(newStrength.getId());
-        if(cooperator.isPresent() && affinityLabel.isPresent()) {
+        if (cooperator.isPresent() && affinityLabel.isPresent()) {
             cooperator.get().getStrengths().add(affinityLabel.get());
             cooperatorDAO.save(cooperator.get());
             return true;
@@ -119,7 +119,7 @@ public class CooperatorProfileService {
     }
 
     public void updateAge(IntegerAttribute updatedAge) {
-        if(updatedAge.getAttributeValue() < MINIMUM_AGE || updatedAge.getAttributeValue() > MAXIMUM_AGE) {
+        if (updatedAge.getAttributeValue() < MINIMUM_AGE || updatedAge.getAttributeValue() > MAXIMUM_AGE) {
             throw new IllegalArgumentException();
         }
         integerAttributeDAO.save(updatedAge);
@@ -128,7 +128,7 @@ public class CooperatorProfileService {
     public boolean addNewLearnFromScratch(long userId, AffinityLabel newLearnFromScratch) {
         var cooperator = cooperatorDAO.findById(userId);
         var affinityLabel = affinityLabelDAO.findById(newLearnFromScratch.getId());
-        if(cooperator.isPresent() && affinityLabel.isPresent()) {
+        if (cooperator.isPresent() && affinityLabel.isPresent()) {
             cooperator.get().getLearnFromScratch().add(affinityLabel.get());
             cooperatorDAO.save(cooperator.get());
             return true;
@@ -140,8 +140,26 @@ public class CooperatorProfileService {
     public boolean addNewImproveIn(long userId, AffinityLabel newImproveIn) {
         var cooperator = cooperatorDAO.findById(userId);
         var affinityLabel = affinityLabelDAO.findById(newImproveIn.getId());
-        if(cooperator.isPresent() && affinityLabel.isPresent()) {
+        if (cooperator.isPresent() && affinityLabel.isPresent()) {
             cooperator.get().getImproveIn().add(affinityLabel.get());
+            cooperatorDAO.save(cooperator.get());
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean addNewLearnt(long userId, AffinityLabelWithMonths newLearnt) {
+        var cooperator = cooperatorDAO.findById(userId);
+//        TODO:
+//         Help needed, deserialized AffinityLabel in newLearnt of class AffinityLabelWithMonths
+//         is 0.
+//         For POST example see CodeCrush/Cooppoortunity in postman.
+        System.out.println(newLearnt.getLabel().getId());
+        var affinityLabel = affinityLabelDAO.findById(newLearnt.getLabel().getId());
+        if (cooperator.isPresent() && affinityLabel.isPresent()) {
+            var affinityLabelWithMonths = new AffinityLabelWithMonths(affinityLabel.get(), newLearnt.getWeightQuantity());
+            cooperator.get().getLearnt().add(affinityLabelWithMonths);
             cooperatorDAO.save(cooperator.get());
             return true;
         } else {
