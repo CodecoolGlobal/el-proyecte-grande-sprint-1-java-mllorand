@@ -159,5 +159,18 @@ public class UserProfileController {
             return ResponseEntity.badRequest().body("The user already has this label");
         }
     }
+
+    @PostMapping("{userId}/interested")
+    public ResponseEntity<String> addNewInterest(@PathVariable long userId, @RequestBody InterestAffinityLabel newInterest) {
+        try {
+            if (cooperatorService.addNewInterest(userId, newInterest)) {
+                return ResponseEntity.ok("");
+            } else {
+                return ResponseEntity.notFound().build();
+            }
+        } catch (DataIntegrityViolationException ignored) {
+            return ResponseEntity.badRequest().body("The user already has this label");
+        }
+    }
 }
 
