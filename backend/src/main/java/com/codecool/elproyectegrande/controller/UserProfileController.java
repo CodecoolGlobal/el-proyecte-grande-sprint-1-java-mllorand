@@ -75,7 +75,7 @@ public class UserProfileController {
     public ResponseEntity<String> changeAge(@PathVariable long userId, @RequestBody IntegerAttribute updatedAge) {
         var age = cooperatorService.getAge(userId);
 
-        if(age.isPresent()) {
+        if (age.isPresent()) {
             updatedAge.setId(age.get().getId());
             try {
                 cooperatorService.updateAge(updatedAge);
@@ -138,6 +138,19 @@ public class UserProfileController {
     public ResponseEntity<String> addNewLImproveIn(@PathVariable long userId, @RequestBody AffinityLabel newImproveIn) {
         try {
             if (cooperatorService.addNewImproveIn(userId, newImproveIn)) {
+                return ResponseEntity.ok("");
+            } else {
+                return ResponseEntity.notFound().build();
+            }
+        } catch (DataIntegrityViolationException ignored) {
+            return ResponseEntity.badRequest().body("The user already has this label");
+        }
+    }
+
+    @PostMapping("{userId}/learnt")
+    public ResponseEntity<String> addNewLearnt(@PathVariable long userId, @RequestBody AffinityLabelWithMonths newLearnt) {
+        try {
+            if (cooperatorService.addNewLearnt(userId, newLearnt)) {
                 return ResponseEntity.ok("");
             } else {
                 return ResponseEntity.notFound().build();
