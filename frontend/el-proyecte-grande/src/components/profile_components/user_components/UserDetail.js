@@ -1,8 +1,11 @@
 import React, {useContext, useEffect, useState} from 'react';
 import axios from "axios";
+import {ProfileContext} from "../../../context/ProfileContext";
 
-const UserDetail = ({id, fieldName, fieldValue, userData, setUserData}) => {
-		const [field, setField] = useState(fieldValue);
+const UserDetail = ({fieldName}) => {
+		const { userData, setUserData } = useContext(ProfileContext);
+		const { id } = userData;
+		const [field, setField] = useState(userData[fieldName].attributeValue);
 		const [visibility, setVisibility] = useState(userData[fieldName].visibility);
 
 		const axiosPatch = (fieldName, fieldValue, visibility) => {
