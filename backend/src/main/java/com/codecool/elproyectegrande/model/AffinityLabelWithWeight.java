@@ -13,7 +13,6 @@ public class AffinityLabelWithWeight<W> {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "affinityWeightGenerator")
     @SequenceGenerator(name = "affinityWeightGenerator", sequenceName = "affinity_weight_seq")
-    @JsonIgnore
     private long id;
 
     @NonNull

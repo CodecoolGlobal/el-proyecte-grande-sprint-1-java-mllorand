@@ -1,5 +1,6 @@
 package com.codecool.elproyectegrande.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
@@ -31,7 +32,7 @@ public class Cooperator {
 
     @OneToMany
     private List<AffinityLabel> strengths;
-    @OneToMany
+    @OneToMany(cascade = {CascadeType.ALL})
     private List<AffinityLabelWithMonths> learnt;
     @OneToMany
     private List<InterestAffinityLabel> interested;
