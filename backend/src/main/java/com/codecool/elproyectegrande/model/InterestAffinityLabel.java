@@ -11,4 +11,8 @@ public class InterestAffinityLabel extends AffinityLabelWithPresetValues<Interes
     public InterestAffinityLabel(long id, AffinityLabel label, InterestPriority interestPriority) {
         super(id, label, interestPriority);
     }
+
+    public InterestAffinityLabel(AffinityLabel affinityLabel, InterestPriority interestPriority) {
+        super(affinityLabel, interestPriority);
+    }
 }

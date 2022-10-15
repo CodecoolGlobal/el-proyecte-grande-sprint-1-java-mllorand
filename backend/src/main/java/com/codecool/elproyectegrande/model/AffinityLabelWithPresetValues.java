@@ -20,4 +20,9 @@ public class AffinityLabelWithPresetValues<E> {
     private AffinityLabel label;
 
     private E interestPriority;
+
+    public AffinityLabelWithPresetValues(AffinityLabel label, E interestPriority) {
+        this.label = label;
+        this.interestPriority = interestPriority;
+    }
 }
