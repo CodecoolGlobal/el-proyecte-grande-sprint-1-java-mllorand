@@ -5,8 +5,8 @@ const CoopDetailItem = ({ item }) => {
 		<div className="detail-item">
 			<img src={`/skill_icons/${item.label.internalName}.png`} alt={item.label.tooltipText} />
 			<div className='exp-container'>
-				<p>{item.weightQuantity}</p>
-				<p>{item.weightUnit}</p>
+				<input className='weight-quantity' value={item.weightQuantity}></input>
+				<input className='weight-unit' value={item.weightUnit}></input>
 			</div>
 		</div>
 	);
