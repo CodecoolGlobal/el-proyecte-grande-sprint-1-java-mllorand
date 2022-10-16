@@ -1,14 +1,24 @@
-import React, {useContext} from 'react';
+import React, {useContext, useState} from 'react';
 import {ProfileContext} from "../../../context/ProfileContext";
+import Modal from "../Modal";
 
-const CooperatorInterests = () => {
+const CooperatorInterests = ({handleAdd}) => {
 	const {cooperatorData} = useContext(ProfileContext);
+	const [showModal, setShowModal] = useState(false);
+
+	const handleShowModal = () => {
+		setShowModal(true)
+	}
 
 	return (
 		<section className="coop-detail-container">
 			<div className="label-container">
 				<span className='field-label'>Interests:</span>
-				<button className="btn-add"><img src="/assets/plus.png" alt="add"/></button>
+				<button className="btn-add"
+								onClick={() => handleShowModal()}
+				>
+					<img src="/assets/plus.png" alt="add"/>
+				</button>
 			</div>
 			<div className="coop-detail-item-container">
 				{cooperatorData.interested.map(item => (
@@ -22,6 +32,14 @@ const CooperatorInterests = () => {
 					</div>
 				))}
 			</div>
+			{
+				showModal
+				&&
+				<Modal
+					fieldName='interests'
+					handleAdd={(label, prio) => handleAdd(label, 'interested', prio, null, null)}
+				/>
+			}
 		</section>
 	);
 };
