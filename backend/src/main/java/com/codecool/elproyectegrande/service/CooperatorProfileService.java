@@ -26,6 +26,10 @@ public class CooperatorProfileService {
         return cooperator.map(Cooperator::getUserName);
     }
 
+    public Optional<Cooperator> findById(Long aLong) {
+        return cooperatorDAO.findById(aLong);
+    }
+
     public void updateUserName(StringAttribute updatedUserName) {
         stringAttributeDAO.save(updatedUserName);
     }
