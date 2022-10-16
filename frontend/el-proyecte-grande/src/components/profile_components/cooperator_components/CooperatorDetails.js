@@ -1,33 +1,28 @@
 import CooperatorSkills from "./CooperatorSkills";
 import CooperatorInterests from "./CooperatorInterests";
 import CooperatorDetail from "./CooperatorDetail";
-import axios from "axios";
 import {useContext} from "react";
 import {ProfileContext} from "../../../context/ProfileContext";
+import useAddLabel from "../../../hooks/useAddLabel";
 
 const CooperatorDetails = () => {
 	const {cooperatorData, setCooperatorData} = useContext(ProfileContext);
-
-	const handleAddLabel = (label, fieldName) => {
-		let newCooperatorData = {...cooperatorData}
-		newCooperatorData[fieldName] = [...newCooperatorData[fieldName], label]
-		axios.patch(`/profile/${cooperatorData.id}/${fieldName}`, {
-			"id": label.id
-		})
-		setCooperatorData(newCooperatorData);
-	}
-
+	const handleAddLabel = useAddLabel(cooperatorData, setCooperatorData);
 	return (
 		<>
 
-			<CooperatorSkills/>
+			<CooperatorSkills
+				handleAdd={handleAddLabel}
+			/>
 
 			<CooperatorDetail
 				fieldName='strengths'
 				handleAdd={handleAddLabel}
 			/>
 
-			<CooperatorInterests/>
+			<CooperatorInterests
+				handleAdd={handleAddLabel}
+			/>
 
 			<CooperatorDetail
 				fieldName='learnFromScratch'
