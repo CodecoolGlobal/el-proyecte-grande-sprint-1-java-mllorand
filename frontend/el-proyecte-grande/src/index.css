@@ -258,3 +258,9 @@ footer, #nav-social, #nav-other, #nav-social ul, #nav-other ul {
     flex-direction: column;
     justify-content: space-around;
 }
+.weight-quantity {
+    width: 20px;
+}
+.weight-unit {
+    width: 40px;
+}
