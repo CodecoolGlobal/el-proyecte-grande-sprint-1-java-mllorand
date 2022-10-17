@@ -4,7 +4,7 @@ const addLabel = (cooperatorData, setCooperatorData) => {
 		(label, fieldName, prio, weightQuantity, weightUnit) => {
 			let newCooperatorData = {...cooperatorData}
 			if (prio) {
-				const newInterestId = newCooperatorData[fieldName].id + 1
+				const newInterestId = parseInt(newCooperatorData[fieldName].id) + 1
 				const newInterest = {
 					id: newInterestId,
 					label: label,
@@ -17,7 +17,7 @@ const addLabel = (cooperatorData, setCooperatorData) => {
 				})
 				setCooperatorData(newCooperatorData);
 			} else if (weightQuantity && weightQuantity) {
-				const newLearntId = newCooperatorData[fieldName].id + 1
+				const newLearntId = parseInt(newCooperatorData[fieldName].id) + 1
 				const newLearnt = {
 					id: newLearntId,
 					label: label,
