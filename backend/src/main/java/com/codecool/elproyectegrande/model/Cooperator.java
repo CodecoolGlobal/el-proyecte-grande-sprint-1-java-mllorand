@@ -31,9 +31,9 @@ public class Cooperator {
 
     @OneToMany
     private List<AffinityLabel> strengths;
-    @OneToMany(cascade = {CascadeType.ALL})
+    @OneToMany(cascade = {CascadeType.MERGE})
     private List<AffinityLabelWithMonths> learnt;
-    @OneToMany(cascade = {CascadeType.ALL})
+    @OneToMany(cascade = {CascadeType.MERGE})
     private List<InterestAffinityLabel> interested;
     @OneToMany
     private List<AffinityLabel> learnFromScratch;
