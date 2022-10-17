@@ -21,12 +21,15 @@ const Modal = ({fieldName, handleAdd}) => {
 								 else handleAdd(label);
 							 }}
 					/>
-					{fieldName === 'skills' && <input className='weight-quantity'
-																						onChange={(e) => setWeightQuantity(e.target.value)}
-					></input>}
-					{fieldName === 'skills' && <input className='weight-unit'
-																						onChange={(e) => setWeightUnit(e.target.value)}
-					></input>}
+					{fieldName === 'skills' &&
+						<>
+							<input className='weight-quantity'
+										 onChange={(e) => setWeightQuantity(e.target.value)}
+							></input>
+							<input className='weight-unit'
+										 onChange={(e) => setWeightUnit(e.target.value)}
+							></input>
+						</>}
 					{fieldName === 'interests' &&
 						<select name="prio" id="prio"
 										onChange={(e) => setPrio(e.currentTarget.value)}

@@ -10,7 +10,6 @@ const CooperatorDetails = () => {
 	const handleAddLabel = useAddLabel(cooperatorData, setCooperatorData);
 	return (
 		<>
-
 			<CooperatorSkills
 				handleAdd={handleAddLabel}
 			/>

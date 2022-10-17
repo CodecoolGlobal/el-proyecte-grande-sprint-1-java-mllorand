@@ -37,7 +37,7 @@ const CooperatorInterests = ({handleAdd}) => {
 				&&
 				<Modal
 					fieldName='interests'
-					handleAdd={(label, prio) => handleAdd(label, 'interested', prio, null, null)}
+					handleAdd={(label, prio) => handleAdd(label, 'interested', prio)}
 				/>
 			}
 		</section>
