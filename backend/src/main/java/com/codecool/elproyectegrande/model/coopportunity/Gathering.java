@@ -17,4 +17,5 @@ public class Gathering {
 
     @OneToOne(cascade = {CascadeType.ALL})
     private @NonNull Mission mission;
+//    TODO: date
 }

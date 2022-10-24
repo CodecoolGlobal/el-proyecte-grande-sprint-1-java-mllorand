@@ -52,26 +52,22 @@ public class CooperatorService implements UserDetailsService {
         else throw new CooperatorNotFoundException();
     }
 
-    public Cooperator updateName(Long id, String updatedName) {
-        var cooperator = findById(id);
+    public Cooperator updateName(Cooperator cooperator, String updatedName) {
         cooperator.setName(updatedName);
         return cooperator;
     }
 
-    public Cooperator updateFullName(Long id, StringAttribute updatedFullName) {
-        var cooperator = findById(id);
+    public Cooperator updateFullName(Cooperator cooperator, StringAttribute updatedFullName) {
         cooperator.setFullName(updatedFullName);
         return cooperator;
     }
 
-    public Cooperator updateGender(Long id, GenderAttribute updatedGender) {
-        var cooperator = findById(id);
+    public Cooperator updateGender(Cooperator cooperator, GenderAttribute updatedGender) {
         cooperator.setGender(updatedGender);
         return cooperator;
     }
 
-    public Cooperator updateAge(Long id, AgeAttribute updatedAge) {
-        var cooperator = findById(id);
+    public Cooperator updateAge(Cooperator cooperator, AgeAttribute updatedAge) {
         if (updatedAge.getAttributeValue() < MINIMUM_AGE || updatedAge.getAttributeValue() > MAXIMUM_AGE) {
             throw new IllegalArgumentException();
         }
@@ -79,40 +75,34 @@ public class CooperatorService implements UserDetailsService {
         return cooperator;
     }
 
-    public Cooperator updateEmailAddress(Long id, StringAttribute updatedEmailAddress) {
-        Cooperator cooperator = findById(id);
+    public Cooperator updateEmailAddress(Cooperator cooperator, StringAttribute updatedEmailAddress) {
         cooperator.setEmailAddress(updatedEmailAddress);
         return cooperator;
     }
 
-    public Cooperator addNewStrength(Long id, TechLabel newStrength) {
-        var cooperator = findById(id);
+    public Cooperator addNewStrength(Cooperator cooperator, TechLabel newStrength) {
         cooperator.getStrengths().add(newStrength);
         return cooperator;
     }
 
-    public Cooperator addNewLearnFromScratch(Long id, TechLabel newLearnFromScratch) {
-        var cooperator = findById(id);
+    public Cooperator addNewLearnFromScratch(Cooperator cooperator, TechLabel newLearnFromScratch) {
         cooperator.getLearnFromScratch().add(newLearnFromScratch);
         return cooperator;
     }
 
-    public Cooperator addNewImproveIn(Long id, TechLabel newImproveIn) {
-        var cooperator = findById(id);
+    public Cooperator addNewImproveIn(Cooperator cooperator, TechLabel newImproveIn) {
         cooperator.getImproveIn().add(newImproveIn);
         return cooperator;
     }
 
-    public Cooperator addNewSkill(Long id, @Validated SkillLabel newSkill) {
+    public Cooperator addNewSkill(Cooperator cooperator, @Validated SkillLabel newSkill) {
         skillLabelRepo.save(newSkill);
         log.info("new skill with id: {} created", newSkill.getId());
-        var cooperator = findById(id);
         cooperator.getSkills().add(newSkill);
         return cooperator;
     }
 
-    public Cooperator addNewInterest(Long id, InterestLabel newInterest) {
-        var cooperator = findById(id);
+    public Cooperator addNewInterest(Cooperator cooperator, InterestLabel newInterest) {
         cooperator.getInterests().add(newInterest);
         return cooperator;
     }
@@ -162,6 +152,31 @@ public class CooperatorService implements UserDetailsService {
     public List<Cooperator> getUsers() {
         log.info("Fetching all cooperators");
         return cooperatorRepo.findAll();
+    }
+
+    public Cooperator deleteStrength(Cooperator cooperator, TechLabel strength) {
+        cooperator.getStrengths().remove(strength);
+        return cooperator;
+    }
+
+    public Cooperator deleteLearnFromScratch(Cooperator cooperator, TechLabel learnFromScratch) {
+        cooperator.getLearnFromScratch().remove(learnFromScratch);
+        return cooperator;
+    }
+
+    public Cooperator deleteImproveIn(Cooperator cooperator, TechLabel improveIn) {
+        cooperator.getImproveIn().remove(improveIn);
+        return cooperator;
+    }
+
+    public Cooperator deleteSkill(Cooperator cooperator, SkillLabel skill) {
+        cooperator.getSkills().remove(skill);
+        return cooperator;
+    }
+
+    public Cooperator deleteInterest(Cooperator cooperator, InterestLabel interest) {
+        cooperator.getInterests().remove(interest);
+        return cooperator;
     }
 }
 
