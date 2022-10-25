@@ -31,12 +31,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder);
     }
 
-    @Override
-    public void configure(WebSecurity web) throws Exception {
-        web
-                .ignoring()
-                .antMatchers("/db/**");
-    }
+//    @Override
+//    public void configure(WebSecurity web) throws Exception {
+//        web
+//                .ignoring()
+//                .antMatchers("/db/**");
+//    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -46,15 +46,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.sessionManagement().sessionCreationPolicy(STATELESS);
         http.authorizeRequests()
                 .antMatchers("/login/**").permitAll()
+                .antMatchers("/db/**").permitAll()
                 .antMatchers(GET, "/cooperator/**").hasAuthority("ROLE_COOPERATOR")
                 .antMatchers(POST, "/cooperator/**").hasAuthority("ROLE_COOPERATOR")
                 .antMatchers(PATCH, "/cooperator/**").hasAuthority("ROLE_COOPERATOR")
-                .antMatchers(GET, "/cooperator/save/**").hasAuthority("ROLE_SUPER_USER")
-                .antMatchers(POST, "/cooperator/save/**").hasAuthority("ROLE_SUPER_USER")
-                .antMatchers(PATCH, "/cooperator/save/**").hasAuthority("ROLE_SUPER_USER")
-                .antMatchers(GET, "/cooperator/save/**").hasAuthority("ROLE_ADMIN")
-                .antMatchers(POST, "/cooperator/save/**").hasAuthority("ROLE_ADMIN")
-                .antMatchers(PATCH, "/cooperator/save/**").hasAuthority("ROLE_ADMIN")
+                .antMatchers(DELETE, "/cooperator/**").hasAuthority("ROLE_COOPERATOR")
+                .antMatchers(GET, "/label/**").hasAuthority("ROLE_COOPERATOR")
                 .anyRequest().authenticated();
         http.addFilter(customAuthenticationFilter);
         http.addFilterBefore(new CustomAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);
