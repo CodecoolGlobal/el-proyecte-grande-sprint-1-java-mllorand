@@ -22,7 +22,7 @@ const CooperatorSkills = ({handleAdd}) => {
 				</button>
 			</div>
 			<div className="coop-detail-item-container">
-				{cooperatorData.learnt.map(item => (
+				{cooperatorData.skills.map(item => (
 					<CoopDetailItem item={item} key={item.id}/>
 				))}
 			</div>

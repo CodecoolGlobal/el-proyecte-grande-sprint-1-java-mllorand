@@ -14,12 +14,12 @@ const CooperatorDetails = () => {
 				handleAdd={handleAddLabel}
 			/>
 
-			<CooperatorDetail
-				fieldName='strengths'
+			<CooperatorInterests
 				handleAdd={handleAddLabel}
 			/>
 
-			<CooperatorInterests
+			<CooperatorDetail
+				fieldName='strengths'
 				handleAdd={handleAddLabel}
 			/>
 
