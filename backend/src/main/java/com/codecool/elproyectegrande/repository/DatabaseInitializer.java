@@ -30,6 +30,7 @@ public class DatabaseInitializer implements CommandLineRunner {
     private final TagRepo tagRepo;
     private final TechLabelRepo techLabelRepo;
     private final CooperatorService cooperatorService;
+    private final RoleRepo roleRepo;
     
     @Override
     public void run(String... args) throws Exception {
@@ -62,6 +63,9 @@ public class DatabaseInitializer implements CommandLineRunner {
             var coOpportunities = new ArrayList<CoOpportunity>();
             var password = "1234";
             var roles = new ArrayList<Role>();
+            var role = new Role(null, "ROLE_COOPERATOR");
+            roleRepo.save(role);
+            roles.add(role);
 
             var userAnthony = new Cooperator(null, name, emailAddress, fullName, age, gender, skills, interests, strengths, learnFromScratch, improveIn, coOpportunities, password, roles);
             cooperatorService.saveUser(userAnthony);

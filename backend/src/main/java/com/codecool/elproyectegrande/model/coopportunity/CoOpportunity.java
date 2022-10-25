@@ -2,7 +2,6 @@ package com.codecool.elproyectegrande.model.coopportunity;
 
 import com.codecool.elproyectegrande.model.*;
 import com.codecool.elproyectegrande.model.cooperator.Cooperator;
-import com.codecool.elproyectegrande.model.cooperator.attribute.StringAttribute;
 import com.codecool.elproyectegrande.model.label.InterestLabel;
 import lombok.*;
 
@@ -21,8 +20,7 @@ public class CoOpportunity {
     @SequenceGenerator(name = "coOpportunityGenerator", sequenceName = "coOpportunity_seq")
     private Long id;
 
-    @OneToOne(cascade = {CascadeType.ALL})
-    private @NonNull StringAttribute name;
+    private @NonNull String name;
 
     @OneToMany(cascade = {CascadeType.MERGE})
     private List<InterestLabel> interestLabels;

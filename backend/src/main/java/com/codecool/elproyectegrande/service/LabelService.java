@@ -1,5 +1,6 @@
 package com.codecool.elproyectegrande.service;
 
+import com.codecool.elproyectegrande.model.cooperator.Cooperator;
 import com.codecool.elproyectegrande.model.customexception.InterestLabelNotFoundException;
 import com.codecool.elproyectegrande.model.customexception.SkillLabelNotFoundException;
 import com.codecool.elproyectegrande.model.label.InterestLabel;
@@ -44,8 +45,7 @@ public class LabelService {
     }
 
 
-    public SkillLabel updateSkill(Long cooperatorId, SkillLabel updatedSkill) {
-        var cooperator = cooperatorService.findById(cooperatorId);
+    public SkillLabel updateSkill(Cooperator cooperator, SkillLabel updatedSkill) {
         List<Long> coopSkillIds = cooperator.getSkills().stream().map(SkillLabel::getId).toList();
         for (var id : coopSkillIds) {
             if (Objects.equals(id, updatedSkill.getId())) {
@@ -55,14 +55,11 @@ public class LabelService {
                 return skillLabel;
             }
         }
-        {
-           log.error("Skill {} not in cooperator", updatedSkill);
-            throw new RuntimeException("skill not in cooperator");
-        }
+        log.error("Skill {} not in cooperator", updatedSkill);
+        throw new RuntimeException("skill not in cooperator");
     }
 
-    public InterestLabel updateInterest(Long cooperatorId, InterestLabel updatedInterest) {
-        var cooperator = cooperatorService.findById(cooperatorId);
+    public InterestLabel updateInterest(Cooperator cooperator, InterestLabel updatedInterest) {
         List<Long> coopInterestIds = cooperator.getInterests().stream().map(InterestLabel::getId).toList();
         for (var id : coopInterestIds) {
             if (Objects.equals(id, updatedInterest.getId())) {
@@ -72,9 +69,7 @@ public class LabelService {
                 return interestLabel;
             }
         }
-        {
-            log.error("interest {} not in cooperator", updatedInterest);
-            throw new RuntimeException("interest not in cooperator");
-        }
+        log.error("interest {} not in cooperator", updatedInterest);
+        throw new RuntimeException("interest not in cooperator");
     }
 }
