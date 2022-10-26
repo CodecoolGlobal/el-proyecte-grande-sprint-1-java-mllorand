@@ -14,11 +14,11 @@ public class CoOpportunityController {
 
     @GetMapping("/coopportunities")
     public Iterable<CoOpportunity> getAllCooperators() {
-        return coOpportinityService.findAllVisibleToCooperator(1);
+        return coOpportinityService.findAllVisibleToCooperator(0);
     }
 
     @GetMapping("/coopportunities/{pageNumber}")
     public Iterable<CoOpportunity> getAllCooperators(@PathVariable int pageNumber) {
-        return coOpportinityService.findAllVisibleToCooperator(pageNumber);
+        return coOpportinityService.findAllVisibleToCooperator(pageNumber - 1);
     }
 }
