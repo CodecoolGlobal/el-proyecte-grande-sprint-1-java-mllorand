@@ -41,11 +41,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         CustomAuthenticationFilter customAuthenticationFilter = new CustomAuthenticationFilter(authenticationManagerBean());
-        customAuthenticationFilter.setFilterProcessesUrl("/login");
+        customAuthenticationFilter.setFilterProcessesUrl("/api/login");
         http.csrf().disable();
         http.sessionManagement().sessionCreationPolicy(STATELESS);
         http.authorizeRequests()
-                .antMatchers("/login/**").permitAll()
+                .antMatchers("/api/login/**").permitAll()
                 .antMatchers("/db/**").permitAll()
                 .antMatchers(GET, "/cooperator/**").hasAuthority("ROLE_COOPERATOR")
                 .antMatchers(POST, "/cooperator/**").hasAuthority("ROLE_COOPERATOR")

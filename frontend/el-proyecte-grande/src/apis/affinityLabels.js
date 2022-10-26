@@ -1,5 +1,5 @@
 import axios from "axios";
-const BASE_URL = '/label';
+const BASE_URL = '/api/label';
 
 export default (token) => axios.create({
 	baseURL: BASE_URL,

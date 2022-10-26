@@ -6,14 +6,22 @@ import profileAxios from '../../apis/profileData'
 import affinityAxios from '../../apis/affinityLabels'
 import {ProfileContext} from "../../context/ProfileContext";
 import {AuthContext} from "../../context/AuthContext";
+import {useNavigate} from "react-router-dom";
 
 const Profile = () => {
 	const {userData, setUserData} = useContext(ProfileContext);
 	const {cooperatorData, setCooperatorData} = useContext(ProfileContext);
 	const {setLabels} = useContext(ProfileContext);
 	const {authToken} = useContext(AuthContext);
+	const navigate = useNavigate();
+
+	useEffect(() => {
+		if (!authToken) navigate('/login');
+	}, [authToken])
 
 
+	console.log('profile')
+	console.log(authToken)
 	const [profile, profileError, profileLoading] = useAxios({
 		axiosInstance: profileAxios(authToken),
 		method: 'GET',
@@ -28,7 +36,7 @@ const Profile = () => {
 
 
 	useEffect(() => {
-			if (!profileLoading && !profileError && !labelsLoading && !labelsError) {
+			if (authToken && !profileLoading && !profileError && !labelsLoading && !labelsError) {
 				setUserData({
 					id: profile.id,
 					userName: profile.userName,
@@ -49,6 +57,8 @@ const Profile = () => {
 			}
 		}, [profileError, profileLoading, labelsError, labelsLoading]
 	)
+
+	if (!authToken) return 'loading..';
 
 	if (!(
 		!profileLoading &&

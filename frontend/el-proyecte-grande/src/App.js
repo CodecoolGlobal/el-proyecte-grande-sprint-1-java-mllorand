@@ -10,6 +10,7 @@ function App() {
 	return (
 		<>
 			<Router>
+				<AuthContextProvider>
 				<Routes>
 					<Route path='/' element={<Layout children={<Home/>}/>}/>
 					<Route path='/profile' element={<Layout children={
@@ -19,6 +20,7 @@ function App() {
 					}/>}/>
 					<Route path='/login' element={<Layout children={<Login/>}/>} />
 				</Routes>
+				</AuthContextProvider>
 			</Router>
 		</>
 	);

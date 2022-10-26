@@ -1,5 +1,5 @@
 import axios from "axios";
-const BASE_URL = '/cooperator';
+const BASE_URL = '/api/cooperator';
 
 export default (token) => axios.create({
 	baseURL: BASE_URL,

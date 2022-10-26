@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @CrossOrigin({"http://localhost:3000", "https://codecrush.postman.co"})
-@RequestMapping("/label")
+@RequestMapping("/api/label")
 @RequiredArgsConstructor
 public class LabelController {
     private final LabelService labelService;

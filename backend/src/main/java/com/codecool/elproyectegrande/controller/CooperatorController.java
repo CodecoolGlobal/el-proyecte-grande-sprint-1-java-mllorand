@@ -20,7 +20,7 @@ import java.net.URI;
 
 @RestController
 @CrossOrigin(origins = {"http://localhost:3000", "https://codecrush.postman.co"}, allowedHeaders = {"authorization"})
-@RequestMapping("/cooperator")
+@RequestMapping("/api/cooperator")
 @RequiredArgsConstructor
 public class CooperatorController {
     private static final Long DEFAULT_USER_ID = 1L;
@@ -42,7 +42,7 @@ public class CooperatorController {
         return ResponseEntity.ok().body(cooperatorService.findById(DEFAULT_USER_ID));
     }
 
-    @PostMapping("/cooperator/save")
+    @PostMapping("/save")
     public ResponseEntity<Cooperator> saveUser(@RequestBody Cooperator appUser) {
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/cooperator/save").toUriString());
         return ResponseEntity.created(uri).body(cooperatorService.saveUser(appUser));
