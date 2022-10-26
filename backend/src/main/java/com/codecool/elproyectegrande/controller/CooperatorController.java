@@ -19,7 +19,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
 
 @RestController
-@CrossOrigin({"http://localhost:3000", "https://codecrush.postman.co"})
+@CrossOrigin(origins = {"http://localhost:3000", "https://codecrush.postman.co"}, allowedHeaders = {"authorization"})
 @RequestMapping("/cooperator")
 @RequiredArgsConstructor
 public class CooperatorController {

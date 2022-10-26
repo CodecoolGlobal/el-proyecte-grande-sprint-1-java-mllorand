@@ -5,23 +5,25 @@ import useAxios from "../../hooks/useAxios";
 import profileAxios from '../../apis/profileData'
 import affinityAxios from '../../apis/affinityLabels'
 import {ProfileContext} from "../../context/ProfileContext";
+import {AuthContext} from "../../context/AuthContext";
 
 const Profile = () => {
 	const {userData, setUserData} = useContext(ProfileContext);
 	const {cooperatorData, setCooperatorData} = useContext(ProfileContext);
 	const {setLabels} = useContext(ProfileContext);
+	const {authToken} = useContext(AuthContext);
 
 
 	const [profile, profileError, profileLoading] = useAxios({
-		axiosInstance: profileAxios(),
+		axiosInstance: profileAxios(authToken),
 		method: 'GET',
 		url: '/1',
 	});
 
 	const [labels, labelsError, labelsLoading] = useAxios({
-		axiosInstance: affinityAxios(),
+		axiosInstance: affinityAxios(authToken),
 		method: 'GET',
-		url: '/all'
+		url: '/labels'
 	});
 
 

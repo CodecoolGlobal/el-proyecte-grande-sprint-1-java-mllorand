@@ -1,10 +1,10 @@
 import axios from "axios";
-const BASE_URL = 'http://localhost:8080/cooperator';
+const BASE_URL = '/cooperator';
 
-export default () => axios.create({
+export default (token) => axios.create({
 	baseURL: BASE_URL,
 	headers: {
-		'Authorization': 'Bearer ' + localStorage.getItem('access_token'),
+		'Authorization': 'Bearer ' + token,
 		'Content-Type': 'application/json',
 		'Accept': 'application/json'
 	}
