@@ -1,6 +1,6 @@
 import React, {useContext, useEffect} from 'react';
 import User from "./user_components/User";
-import CooperatorDetails from "./cooperator_components/CooperatorDetails";
+import Cooperator from "./cooperator_components/Cooperator";
 import useAxios from "../../hooks/useAxios";
 import profileAxios from '../../apis/profileData'
 import affinityAxios from '../../apis/affinityLabels'
@@ -13,13 +13,13 @@ const Profile = () => {
 
 
 	const [profile, profileError, profileLoading] = useAxios({
-		axiosInstance: profileAxios,
+		axiosInstance: profileAxios(),
 		method: 'GET',
-		url: '/1'
+		url: '/1',
 	});
 
 	const [labels, labelsError, labelsLoading] = useAxios({
-		axiosInstance: affinityAxios,
+		axiosInstance: affinityAxios(),
 		method: 'GET',
 		url: '/all'
 	});
@@ -71,7 +71,7 @@ const Profile = () => {
 						<User/>
 					</aside>
 					<main id="cooperator-details-content">
-						<CooperatorDetails/>
+						<Cooperator/>
 					</main>
 				</article>
 	);

@@ -1,38 +1,41 @@
-import CooperatorSkills from "./CooperatorSkills";
-import CooperatorInterests from "./CooperatorInterests";
-import CooperatorDetail from "./CooperatorDetail";
-import {useContext} from "react";
+import React, {useContext, useState} from "react";
+import Modal from "../Modal";
 import {ProfileContext} from "../../../context/ProfileContext";
-import useAddLabel from "../../../hooks/useAddLabel";
 
-const CooperatorDetails = () => {
-	const {cooperatorData, setCooperatorData} = useContext(ProfileContext);
-	const handleAddLabel = useAddLabel(cooperatorData, setCooperatorData);
+const CooperatorDetails = ({fieldName, handleAdd}) => {
+	const [showModal, setShowModal] = useState(false);
+	const {cooperatorData} = useContext(ProfileContext);
+
+
+	const handleShowModal = () => {
+		setShowModal(true)
+	}
+
 	return (
-		<>
-			<CooperatorSkills
-				handleAdd={handleAddLabel}
-			/>
-
-			<CooperatorInterests
-				handleAdd={handleAddLabel}
-			/>
-
-			<CooperatorDetail
-				fieldName='strengths'
-				handleAdd={handleAddLabel}
-			/>
-
-			<CooperatorDetail
-				fieldName='learnFromScratch'
-				handleAdd={handleAddLabel}
-			/>
-
-			<CooperatorDetail
-				fieldName='improveIn'
-				handleAdd={handleAddLabel}
-			/>
-		</>
+		<section className="coop-detail-container">
+			<div className="label-container">
+				<span className='field-label'>{fieldName}:</span>
+				<button className="btn-add"
+								onClick={() => handleShowModal()}
+				>
+					<img src="/assets/plus.png" alt="add"/>
+				</button>
+			</div>
+			<div className="coop-detail-item-container">
+				{cooperatorData[fieldName].map(item => (
+					<div className="detail-item" key={item.id}>
+						<img src={`/skill_icons/${item.internalName}.png`} alt={item.tooltipText}/>
+					</div>
+				))}
+			</div>
+			{
+				showModal
+				&&
+				<Modal
+					handleAdd={(label) => handleAdd(label, fieldName)}
+				/>
+			}
+		</section>
 	);
 };
 
