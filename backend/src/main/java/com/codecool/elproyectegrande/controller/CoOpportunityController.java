@@ -11,7 +11,7 @@ import java.net.URI;
 
 @RestController
 @CrossOrigin({"http://localhost:3000", "https://codecrush.postman.co"})
-@RequestMapping("/coopportunity")
+@RequestMapping("/api/coopportunity")
 @RequiredArgsConstructor
 public class CoOpportunityController {
     private final CoOpportunityService coOpportinityService;
