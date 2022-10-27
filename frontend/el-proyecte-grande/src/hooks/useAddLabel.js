@@ -1,7 +1,7 @@
 import axios from "axios";
 const addLabel = (cooperatorData, setCooperatorData) => {
 	return (
-		(label, fieldName, prio, weightQuantity, weightUnit) => {
+		(label, fieldName, prio, weightQuantity, weightUnit, requestType) => {
 			let newCooperatorData = {...cooperatorData}
 			if (prio) {
 				const newInterestId = parseInt(newCooperatorData[fieldName].id) + 1
@@ -11,11 +11,14 @@ const addLabel = (cooperatorData, setCooperatorData) => {
 					interestPriority: prio
 				}
 				newCooperatorData[fieldName] = [...newCooperatorData[fieldName], newInterest]
-				axios.post(`/profile/${cooperatorData.id}/${fieldName}`, {
+				const data = {
 					"label": label,
 					"interestPriority": prio
-				})
+				};
+				if (requestType === 'post') axios.post(`/cooperator/${fieldName}`, data)
+				else axios.patch(`/cooperator/${fieldName}`, data)
 				setCooperatorData(newCooperatorData);
+
 			} else if (weightQuantity && weightQuantity) {
 				const newLearntId = parseInt(newCooperatorData[fieldName].id) + 1
 				const newLearnt = {
@@ -25,16 +28,21 @@ const addLabel = (cooperatorData, setCooperatorData) => {
 					weightUnit: weightUnit
 				}
 				newCooperatorData[fieldName] = [...newCooperatorData[fieldName], newLearnt]
-				axios.post(`/profile/${cooperatorData.id}/${fieldName}`, {
+				const data = {
 					"label": label,
 					"weightQuantity": weightQuantity,
 					"weightUnit": weightUnit
-				})
+				};
+				if (requestType === 'post') axios.post(`/cooperator/${fieldName}`, data)
+				else axios.patch(`/cooperator/${fieldName}`, data)
 				setCooperatorData(newCooperatorData);
+
 			} else {
 				newCooperatorData[fieldName] = [...newCooperatorData[fieldName], label]
-				axios.patch(`/profile/${cooperatorData.id}/${fieldName}`, {
-					"id": label.id
+				axios.post(`/cooperator/${fieldName}`, {
+					"id": label.id,
+					"internalName": label.internalName,
+					"toolTipText": label.toolTipText
 				})
 				setCooperatorData(newCooperatorData);
 			}

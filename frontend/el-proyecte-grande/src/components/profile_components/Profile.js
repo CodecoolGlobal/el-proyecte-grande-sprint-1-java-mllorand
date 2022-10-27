@@ -1,32 +1,42 @@
 import React, {useContext, useEffect} from 'react';
 import User from "./user_components/User";
-import CooperatorDetails from "./cooperator_components/CooperatorDetails";
+import Cooperator from "./cooperator_components/Cooperator";
 import useAxios from "../../hooks/useAxios";
 import profileAxios from '../../apis/profileData'
 import affinityAxios from '../../apis/affinityLabels'
 import {ProfileContext} from "../../context/ProfileContext";
+import {AuthContext} from "../../context/AuthContext";
+import {useNavigate} from "react-router-dom";
 
 const Profile = () => {
 	const {userData, setUserData} = useContext(ProfileContext);
 	const {cooperatorData, setCooperatorData} = useContext(ProfileContext);
 	const {setLabels} = useContext(ProfileContext);
+	const {authToken} = useContext(AuthContext);
+	const navigate = useNavigate();
+
+	useEffect(() => {
+		if (!authToken) navigate('/login');
+	}, [authToken])
 
 
+	console.log('profile')
+	console.log(authToken)
 	const [profile, profileError, profileLoading] = useAxios({
-		axiosInstance: profileAxios,
+		axiosInstance: profileAxios(authToken),
 		method: 'GET',
-		url: '/1'
+		url: '/1',
 	});
 
 	const [labels, labelsError, labelsLoading] = useAxios({
-		axiosInstance: affinityAxios,
+		axiosInstance: affinityAxios(authToken),
 		method: 'GET',
-		url: '/all'
+		url: '/labels'
 	});
 
 
 	useEffect(() => {
-			if (!profileLoading && !profileError && !labelsLoading && !labelsError) {
+			if (authToken && !profileLoading && !profileError && !labelsLoading && !labelsError) {
 				setUserData({
 					id: profile.id,
 					userName: profile.userName,
@@ -47,6 +57,8 @@ const Profile = () => {
 			}
 		}, [profileError, profileLoading, labelsError, labelsLoading]
 	)
+
+	if (!authToken) return 'loading..';
 
 	if (!(
 		!profileLoading &&
@@ -71,7 +83,7 @@ const Profile = () => {
 						<User/>
 					</aside>
 					<main id="cooperator-details-content">
-						<CooperatorDetails/>
+						<Cooperator/>
 					</main>
 				</article>
 	);

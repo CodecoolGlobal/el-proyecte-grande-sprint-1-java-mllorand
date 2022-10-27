@@ -4,15 +4,20 @@ import {ProfileContext} from "../../../context/ProfileContext";
 
 const UserDetail = ({fieldName}) => {
 		const { userData, setUserData } = useContext(ProfileContext);
-		const { id } = userData;
 		const [field, setField] = useState(userData[fieldName].attributeValue);
 		const [visibility, setVisibility] = useState(userData[fieldName].visibility);
 
 		const axiosPatch = (fieldName, fieldValue, visibility) => {
-			axios.patch(`/profile/${id}/${fieldName}`, {
-				"attributeValue": fieldValue,
-				"visibility": visibility
-			})
+			if (fieldName === "name") {
+				axios.patch(`/${fieldName}`, {
+					"attributeValue": fieldValue
+				})
+			} else {
+				axios.patch(`/${fieldName}`, {
+					"attributeValue": fieldValue,
+					"visibility": visibility
+				})
+			}
 		}
 
 		const handleChange = (value) => {
@@ -43,6 +48,7 @@ const UserDetail = ({fieldName}) => {
 								 onChange={e => handleChange(e.target.value)}
 					></input>
 				}
+
 				{
 					fieldName === 'gender' &&
 					<select className="field" value={field}
@@ -53,13 +59,17 @@ const UserDetail = ({fieldName}) => {
 						<option value="OTHER">Other</option>
 					</select>
 				}
-				<select className="visibility-lvl" value={visibility}
-								onChange={e => handleChangeVisibility(e.target.value)}
-				>
-					<option value="PRIVATE">Private</option>
-					<option value="PUBLIC">Public</option>
-					<option value="GROUPS_ONLY">Groups only</option>
-				</select>
+
+				{
+					fieldName !== 'name' &&
+					<select className="visibility-lvl" value={visibility}
+							onChange={e => handleChangeVisibility(e.target.value)}
+					>
+						<option value="PRIVATE">Private</option>
+						<option value="PUBLIC">Public</option>
+					</select>
+				}
+
 				<button onClick={() => handleSaveBtn(field)}>
 					update
 				</button>

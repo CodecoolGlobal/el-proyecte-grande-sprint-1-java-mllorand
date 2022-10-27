@@ -23,7 +23,9 @@ const useAxios = (configObj) => {
 				});
 				setResponse(res.data);
 			} catch (err) {
-				setError(err.message);
+				if (err.message !== 'canceled') {
+					setError(err.message);
+				}
 			} finally {
 				setLoading(false);
 			}
