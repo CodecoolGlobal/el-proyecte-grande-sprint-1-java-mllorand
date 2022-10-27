@@ -56,7 +56,7 @@ public class CoOpportunityService {
         }
 
         coOpportunity.setInterestLabels(coOpportunity.getInterestLabels().stream()
-            .map(labelService::findOrCreateInterestLabel)
+            .map(labelService::createInterestLabel)
             .collect(Collectors.toList())
         );
 

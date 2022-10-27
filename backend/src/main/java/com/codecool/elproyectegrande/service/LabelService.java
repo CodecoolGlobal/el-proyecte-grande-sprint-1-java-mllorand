@@ -78,13 +78,7 @@ public class LabelService {
         throw new RuntimeException("interest not in cooperator");
     }
 
-    public InterestLabel findOrCreateInterestLabel(InterestLabel label) {
-        return interestLabelRepo.findOne(Example.of(label))
-            .orElse(createInterestLabel(label));
-
-    }
-
-    private InterestLabel createInterestLabel(InterestLabel interestLabel) {
+    public InterestLabel createInterestLabel(InterestLabel interestLabel) {
         interestLabel.setLabel(techLabelRepo.findOne(Example.of(interestLabel.getLabel())).orElseThrow());
 
         interestLabel.setTags(interestLabel.getTags().stream()
