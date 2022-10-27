@@ -1,5 +1,7 @@
 package com.codecool.elproyectegrande.model.label;
 
+import com.codecool.elproyectegrande.model.views.FeedView;
+import com.fasterxml.jackson.annotation.JsonView;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,12 +22,15 @@ public class InterestLabel {
     @SequenceGenerator(name = "interestLabelGenerator", sequenceName = "interestLabel_seq")
     private Long id;
 
+    @JsonView(FeedView.Feed.class)
     @ManyToOne(cascade = {CascadeType.MERGE})
     private TechLabel label;
 
+    @JsonView(FeedView.Feed.class)
     @OneToMany(cascade = {CascadeType.MERGE})
     private List<Tag> tags;
 
+    @JsonView(FeedView.Feed.class)
     @Enumerated(EnumType.STRING)
     private InterestPriority interestPriority;
 }

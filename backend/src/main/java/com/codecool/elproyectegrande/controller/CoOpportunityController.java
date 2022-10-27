@@ -1,7 +1,9 @@
 package com.codecool.elproyectegrande.controller;
 
 import com.codecool.elproyectegrande.model.coopportunity.CoOpportunity;
+import com.codecool.elproyectegrande.model.views.FeedView;
 import com.codecool.elproyectegrande.service.CoOpportunityService;
+import com.fasterxml.jackson.annotation.JsonView;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -17,11 +19,13 @@ import java.net.URI;
 public class CoOpportunityController {
     private final CoOpportunityService coOpportinityService;
 
+    @JsonView(FeedView.Feed.class)
     @GetMapping("/coopportunities")
     public Iterable<CoOpportunity> getAllCooperators() {
         return coOpportinityService.findAllVisible(0);
     }
 
+    @JsonView(FeedView.Feed.class)
     @GetMapping("/coopportunities/{pageNumber}")
     public Iterable<CoOpportunity> getAllCooperators(@PathVariable int pageNumber) {
         return coOpportinityService.findAllVisible(pageNumber - 1);
