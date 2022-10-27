@@ -2,23 +2,115 @@ package com.codecool.elproyectegrande.service;
 
 import com.codecool.elproyectegrande.model.Visibility;
 import com.codecool.elproyectegrande.model.coopportunity.CoOpportunity;
-import com.codecool.elproyectegrande.repository.CoOpportunityRepo;
+import com.codecool.elproyectegrande.model.coopportunity.JoinPolicy;
+import com.codecool.elproyectegrande.model.label.InterestLabel;
+import com.codecool.elproyectegrande.repository.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Example;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 @Transactional
 @Slf4j
 public class CoOpportunityService {
-    private final CoOpportunityRepo coOpportunityRepo;
+    private static final int PAGE_SIZE = 10;
+    private static final Visibility DEFAULT_VISIBILITY = Visibility.PUBLIC;
+    private static final JoinPolicy DEFAULT_JOIN_POLICY = JoinPolicy.OPEN;
 
-    public Iterable<CoOpportunity> findAllVisibleToCooperator(int pageNumber) {
-        Pageable paging = PageRequest.of(pageNumber, 10);
-        return coOpportunityRepo.findByVisibility(Visibility.PUBLIC, paging);
+    private final CoOpportunityRepo coOpportunityRepo;
+    private final InterestLabelRepo interestLabelRepo;
+    private final TechLabelRepo techLabelRepo;
+    private final TagRepo tagRepo;
+    private final MissionRepo missionRepo;
+
+    public Iterable<CoOpportunity> findAllVisible(int pageNumber) {
+        log.info("Retrieving page {} coopportunity with a page size {}", pageNumber, PAGE_SIZE);
+        Pageable paging = PageRequest.of(pageNumber, PAGE_SIZE);
+        List<CoOpportunity> coOpportunityList = coOpportunityRepo.findByVisibility(Visibility.PUBLIC, paging);
+        log.debug(coOpportunityList.toString());
+        return coOpportunityList;
+    }
+
+    public CoOpportunity saveCoOpportunity(CoOpportunity coOpportunity) {
+        //TODO: split method up
+        //TODO: create custom exceptions
+        log.info("Checking, then saving new CoOpportunity");
+
+        log.debug("Checking name");
+        if (coOpportunity.getName() == null || coOpportunity.getName().isBlank()) {
+            log.warn("name is invalid: {}", coOpportunity.getName());
+            throw new IllegalArgumentException();
+        }
+
+        log.debug("Checking interest labels");
+        if (coOpportunity.getInterestLabels() == null || coOpportunity.getInterestLabels().size() < 1) {
+            log.warn("interest label invalid: {}", coOpportunity.getInterestLabels());
+            throw new IllegalArgumentException();
+        }
+        findOrCreateInterestLabels(coOpportunity);
+
+        log.debug("checking missions");
+        if (coOpportunity.getMission() == null) {
+            log.warn("mission is invalid: {}", coOpportunity.getMission());
+            throw new IllegalArgumentException();
+        }
+        coOpportunity.setMission(missionRepo.save(coOpportunity.getMission()));
+
+
+        log.debug("checking visibility");
+        if (coOpportunity.getVisibility() == null) {
+            log.debug("no visibility found, reverting to default: {}", DEFAULT_VISIBILITY);
+            coOpportunity.setVisibility(DEFAULT_VISIBILITY);
+        }
+
+        log.debug("checking join policy");
+        if (coOpportunity.getJoinPolicy() == null) {
+            log.debug("no join policy found, reverting to default: {}", DEFAULT_JOIN_POLICY);
+            coOpportunity.setJoinPolicy(DEFAULT_JOIN_POLICY);
+        }
+
+        log.debug("checking cooperators");
+        if (coOpportunity.getCooperators() == null || coOpportunity.getCooperators().size() < 1) {
+            log.debug("no cooperators");
+            throw new IllegalArgumentException();
+        }
+
+        return coOpportunityRepo.save(coOpportunity);
+    }
+
+    private void findOrCreateInterestLabels(CoOpportunity coOpportunity) {
+        coOpportunity.setInterestLabels(coOpportunity.getInterestLabels().stream()
+            .map(label ->
+                interestLabelRepo.findOne(Example.of(label))
+                    .orElse(createInterestLabel(label))
+            )
+            .collect(Collectors.toList())
+        );
+    }
+
+    private InterestLabel createInterestLabel(InterestLabel interestLabel) {
+        interestLabel.setLabel(techLabelRepo.findOne(Example.of(interestLabel.getLabel())).orElseThrow());
+
+        createOrFindTags(interestLabel);
+
+        return interestLabelRepo.save(interestLabel);
+    }
+
+    private void createOrFindTags(InterestLabel interestLabel) {
+        interestLabel.setTags(interestLabel.getTags().stream()
+            .map(tag ->
+                tagRepo.findOne(Example.of(tag))
+                    .orElse(tagRepo.save(tag))
+            )
+            .collect(Collectors.toList())
+        );
     }
 }
