@@ -30,6 +30,7 @@ public class CoOpportunityService {
     private final TechLabelRepo techLabelRepo;
     private final TagRepo tagRepo;
     private final MissionRepo missionRepo;
+    private final CooperatorService cooperatorService;
 
     public Iterable<CoOpportunity> findAllVisible(int pageNumber) {
         log.info("Retrieving page {} coopportunity with a page size {}", pageNumber, PAGE_SIZE);
@@ -39,7 +40,7 @@ public class CoOpportunityService {
         return coOpportunityList;
     }
 
-    public CoOpportunity saveCoOpportunity(CoOpportunity coOpportunity) {
+    public CoOpportunity saveCoOpportunity(CoOpportunity coOpportunity, String userName) {
         //TODO: split method up
         //TODO: create custom exceptions
         log.info("Checking, then saving new CoOpportunity");
@@ -77,11 +78,7 @@ public class CoOpportunityService {
             coOpportunity.setJoinPolicy(DEFAULT_JOIN_POLICY);
         }
 
-        log.debug("checking cooperators");
-        if (coOpportunity.getCooperators() == null || coOpportunity.getCooperators().size() < 1) {
-            log.debug("no cooperators");
-            throw new IllegalArgumentException();
-        }
+        coOpportunity.setCooperators(List.of(cooperatorService.findByName(userName)));
 
         return coOpportunityRepo.save(coOpportunity);
     }
