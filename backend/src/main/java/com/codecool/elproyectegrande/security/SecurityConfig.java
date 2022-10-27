@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
@@ -22,6 +23,8 @@ import static org.springframework.security.config.http.SessionCreationPolicy.STA
 @EnableWebSecurity
 @RequiredArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+    public static final String ROLE_COOPERATOR = "ROLE_COOPERATOR";
+
     private final UserDetailsService userDetailsService;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
@@ -47,13 +50,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests()
                 .antMatchers("/login/**").permitAll()
                 .antMatchers("/db/**").permitAll()
-                .antMatchers(GET, "/cooperator/**").hasAuthority("ROLE_COOPERATOR")
-                .antMatchers(POST, "/cooperator/**").hasAuthority("ROLE_COOPERATOR")
-                .antMatchers(PATCH, "/cooperator/**").hasAuthority("ROLE_COOPERATOR")
-                .antMatchers(DELETE, "/cooperator/**").hasAuthority("ROLE_COOPERATOR")
-                .antMatchers(GET, "/label/**").hasAuthority("ROLE_COOPERATOR")
-                .antMatchers("/coopportunity/**").permitAll()
-                .anyRequest().authenticated();
+                .antMatchers(GET, "/cooperator/**").hasAuthority(ROLE_COOPERATOR)
+                .antMatchers(POST, "/cooperator/**").hasAuthority(ROLE_COOPERATOR)
+                .antMatchers(PATCH, "/cooperator/**").hasAuthority(ROLE_COOPERATOR)
+                .antMatchers(DELETE, "/cooperator/**").hasAuthority(ROLE_COOPERATOR)
+                .antMatchers(GET, "/label/**").hasAuthority(ROLE_COOPERATOR)
+                .antMatchers(GET,"/coopportunity/coopportunities").permitAll()
+                .antMatchers(POST, "/coopportunity/save").hasAuthority(ROLE_COOPERATOR);
         http.addFilter(customAuthenticationFilter);
         http.addFilterBefore(new CustomAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);
     }
