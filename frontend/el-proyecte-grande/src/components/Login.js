@@ -1,13 +1,11 @@
 import React, {useContext, useState} from 'react';
 import axios from "axios";
-import {AuthContext} from "../context/AuthContext";
 
 const Login = () => {
     const [username, setUsername] = useState(null);
     const [password, setPassword] = useState(null);
-    const {setAuthToken} = useContext(AuthContext);
 
-    const login = async (username, password) => {
+    const handleLogin = async (username, password) => {
         const response = await axios.post("/api/login", {
             'username': username,
             'password': password
@@ -17,9 +15,7 @@ const Login = () => {
             }
         });
         if (response) {
-            console.log('login')
-            console.log(response.data['access_token'])
-            setAuthToken(response.data['access_token']);
+            localStorage.setItem('access_token', response.data['access_token']);
         }
     }
 
@@ -27,7 +23,7 @@ const Login = () => {
         <>
             <input type="text" onChange={event => setUsername(event.target.value)}/>
             <input type="text" onChange={event => setPassword(event.target.value)}/>
-            <button onClick={() => login(username, password)}>login</button>
+            <button onClick={() => handleLogin(username, password)}>login</button>
         </>
     );
 };

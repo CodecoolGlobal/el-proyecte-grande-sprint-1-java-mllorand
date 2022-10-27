@@ -3,10 +3,9 @@ import axios from "axios";
 import {ProfileContext} from "../../../context/ProfileContext";
 
 const UserDetail = ({fieldName}) => {
-		const { userData, setUserData } = useContext(ProfileContext);
-		const [field, setField] = useState(userData[fieldName].attributeValue);
-		const [visibility, setVisibility] = useState(userData[fieldName].visibility);
-
+		const {userData, setUserData} = useContext(ProfileContext);
+		const [field, setField] = useState(fieldName === 'name' ? userData[fieldName] : userData[fieldName].attributeValue);
+		const [visibility, setVisibility] = useState(fieldName === "name" ? true : userData[fieldName].visibility);
 		const axiosPatch = (fieldName, fieldValue, visibility) => {
 			if (fieldName === "name") {
 				axios.patch(`/${fieldName}`, {
@@ -63,7 +62,7 @@ const UserDetail = ({fieldName}) => {
 				{
 					fieldName !== 'name' &&
 					<select className="visibility-lvl" value={visibility}
-							onChange={e => handleChangeVisibility(e.target.value)}
+									onChange={e => handleChangeVisibility(e.target.value)}
 					>
 						<option value="PRIVATE">Private</option>
 						<option value="PUBLIC">Public</option>

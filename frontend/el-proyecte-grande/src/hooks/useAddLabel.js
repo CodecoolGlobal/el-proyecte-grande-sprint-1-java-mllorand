@@ -1,22 +1,31 @@
 import axios from "axios";
-const addLabel = (cooperatorData, setCooperatorData) => {
+
+const useAddLabel = (cooperatorData, setCooperatorData) => {
+	const requestConfig = {
+		headers:
+			{
+				Authorization: localStorage.getItem('access_token')
+			}
+	};
 	return (
-		(label, fieldName, prio, weightQuantity, weightUnit, requestType) => {
+		(label, fieldName, prio, tags, weightQuantity, weightUnit, requestType) => {
 			let newCooperatorData = {...cooperatorData}
-			if (prio) {
+			if (prio && tags) {
 				const newInterestId = parseInt(newCooperatorData[fieldName].id) + 1
 				const newInterest = {
 					id: newInterestId,
 					label: label,
-					interestPriority: prio
+					interestPriority: prio,
+					tags: tags
 				}
 				newCooperatorData[fieldName] = [...newCooperatorData[fieldName], newInterest]
 				const data = {
 					"label": label,
-					"interestPriority": prio
+					"interestPriority": prio,
+					"tags": tags
 				};
-				if (requestType === 'post') axios.post(`/cooperator/${fieldName}`, data)
-				else axios.patch(`/cooperator/${fieldName}`, data)
+				if (requestType === 'post') axios.post(`/cooperator/${fieldName}`, data, requestConfig)
+				else axios.patch(`/cooperator/${fieldName}`, data, requestConfig)
 				setCooperatorData(newCooperatorData);
 
 			} else if (weightQuantity && weightQuantity) {
@@ -33,8 +42,8 @@ const addLabel = (cooperatorData, setCooperatorData) => {
 					"weightQuantity": weightQuantity,
 					"weightUnit": weightUnit
 				};
-				if (requestType === 'post') axios.post(`/cooperator/${fieldName}`, data)
-				else axios.patch(`/cooperator/${fieldName}`, data)
+				if (requestType === 'post') axios.post(`/cooperator/${fieldName}`, data, requestConfig)
+				else axios.patch(`/cooperator/${fieldName}`, data, requestConfig)
 				setCooperatorData(newCooperatorData);
 
 			} else {
@@ -43,11 +52,11 @@ const addLabel = (cooperatorData, setCooperatorData) => {
 					"id": label.id,
 					"internalName": label.internalName,
 					"toolTipText": label.toolTipText
-				})
+				}, requestConfig)
 				setCooperatorData(newCooperatorData);
 			}
 		}
 	)
 }
 
-export default addLabel;
+export default useAddLabel;
