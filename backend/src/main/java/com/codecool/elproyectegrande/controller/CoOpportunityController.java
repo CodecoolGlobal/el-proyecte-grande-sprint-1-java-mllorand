@@ -4,6 +4,7 @@ import com.codecool.elproyectegrande.model.coopportunity.CoOpportunity;
 import com.codecool.elproyectegrande.service.CoOpportunityService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -27,8 +28,8 @@ public class CoOpportunityController {
     }
 
     @PostMapping("/save")
-    public ResponseEntity<CoOpportunity> createNewCoOpportunity(@RequestBody CoOpportunity coOpportunity) {
+    public ResponseEntity<CoOpportunity> createNewCoOpportunity(@RequestBody CoOpportunity coOpportunity, @AuthenticationPrincipal String userName) {
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/cooperator/save").toUriString());
-        return ResponseEntity.created(uri).body(coOpportinityService.saveCoOpportunity(coOpportunity));
+        return ResponseEntity.created(uri).body(coOpportinityService.saveCoOpportunity(coOpportunity, userName));
     }
 }
