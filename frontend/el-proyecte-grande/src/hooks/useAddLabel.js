@@ -4,7 +4,7 @@ const useAddLabel = (cooperatorData, setCooperatorData) => {
 	const requestConfig = {
 		headers:
 			{
-				Authorization: localStorage.getItem('access_token')
+				Authorization: 'Bearer ' + localStorage.getItem('access_token')
 			}
 	};
 	return (

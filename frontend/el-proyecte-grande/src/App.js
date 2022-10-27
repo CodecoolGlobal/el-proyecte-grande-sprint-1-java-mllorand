@@ -3,7 +3,6 @@ import {BrowserRouter as Router, Routes, Route} from "react-router-dom";
 import Layout from "./components/Layout";
 import Home from "./components/Home";
 import {ProfileContextProvider} from "./context/ProfileContext";
-import {AuthContextProvider} from "./context/AuthContext";
 import Login from "./components/Login";
 
 function App() {

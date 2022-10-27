@@ -78,6 +78,7 @@ public class CooperatorController {
     @PatchMapping("/fullName")
     public ResponseEntity<Cooperator> changeFullName(@RequestBody StringAttribute updatedFullName, @AuthenticationPrincipal String userName) {
         Cooperator cooperator = cooperatorService.findByName(userName);
+        log.info(userName);
         return ResponseEntity.ok().body(cooperatorService.updateFullName(cooperator, updatedFullName));
     }
 
