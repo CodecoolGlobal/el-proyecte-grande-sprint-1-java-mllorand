@@ -3,20 +3,27 @@ import axios from "axios";
 import {ProfileContext} from "../../../context/ProfileContext";
 
 const UserDetail = ({fieldName}) => {
-		const { userData, setUserData } = useContext(ProfileContext);
-		const [field, setField] = useState(userData[fieldName].attributeValue);
-		const [visibility, setVisibility] = useState(userData[fieldName].visibility);
+		const {userData, setUserData} = useContext(ProfileContext);
+		const [field, setField] = useState(fieldName === 'name' ? userData[fieldName] : userData[fieldName].attributeValue);
+		const [visibility, setVisibility] = useState(fieldName === "name" ? true : userData[fieldName].visibility);
+
+		const requestConfig = {
+			headers:
+				{
+					Authorization: 'Bearer ' + localStorage.getItem('access_token')
+				}
+		};
 
 		const axiosPatch = (fieldName, fieldValue, visibility) => {
 			if (fieldName === "name") {
-				axios.patch(`/${fieldName}`, {
+				axios.patch(`/api/cooperator/${fieldName}`, {
 					"attributeValue": fieldValue
-				})
+				}, requestConfig)
 			} else {
-				axios.patch(`/${fieldName}`, {
+				axios.patch(`/api/cooperator/${fieldName}`, {
 					"attributeValue": fieldValue,
 					"visibility": visibility
-				})
+				}, requestConfig)
 			}
 		}
 
@@ -35,18 +42,23 @@ const UserDetail = ({fieldName}) => {
 		}
 
 		const handleSaveBtn = (value) => {
-			axiosPatch(fieldName, value, userData[fieldName].visibility)
+			axiosPatch(fieldName, value, userData[fieldName] === 'name' ? null : userData[fieldName].visibility)
 		}
 
 
 		return (
 			<div className="usr-detail">
 				<span className='field-label'>{fieldName}:</span>
+
 				{
-					fieldName !== 'gender' &&
+					fieldName !== 'gender' && fieldName !== 'name' &&
 					<input type='text' className='field' value={field}
 								 onChange={e => handleChange(e.target.value)}
 					></input>
+				}
+
+				{fieldName === 'name' &&
+					<p className='field'>{field}</p>
 				}
 
 				{
@@ -62,17 +74,20 @@ const UserDetail = ({fieldName}) => {
 
 				{
 					fieldName !== 'name' &&
-					<select className="visibility-lvl" value={visibility}
-							onChange={e => handleChangeVisibility(e.target.value)}
-					>
-						<option value="PRIVATE">Private</option>
-						<option value="PUBLIC">Public</option>
-					</select>
+					<>
+						<select className="visibility-lvl" value={visibility}
+										onChange={e => handleChangeVisibility(e.target.value)}
+						>
+							<option value="PRIVATE">Private</option>
+							<option value="PUBLIC">Public</option>
+						</select>
+
+						<button onClick={() => handleSaveBtn(field)}>
+							update
+						</button>
+					</>
 				}
 
-				<button onClick={() => handleSaveBtn(field)}>
-					update
-				</button>
 			</div>
 		);
 	}

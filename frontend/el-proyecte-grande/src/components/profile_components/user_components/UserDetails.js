@@ -4,7 +4,7 @@ const UserDetails = () => {
 	return (
 		<section id="user-detail-container">
 			<UserDetail
-				fieldName='userName'
+				fieldName='name'
 			/>
 			<UserDetail
 				fieldName='fullName'

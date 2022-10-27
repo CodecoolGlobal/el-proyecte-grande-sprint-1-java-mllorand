@@ -20,4 +20,5 @@ public class Tag {
     @JsonView(FeedView.Feed.class)
     @NonNull
     private String name;
+
 }

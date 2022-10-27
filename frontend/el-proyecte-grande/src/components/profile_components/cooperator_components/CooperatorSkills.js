@@ -26,15 +26,14 @@ const CooperatorSkills = ({handleAdd}) => {
 	}
 
 	const handleSave = () => {
-		editedSkills.forEach(skill => handleAdd(skill.label, 'skill', null, skill.skillQuantity, skill.skillUnit, 'patch'));
-		addedSkills.forEach(skill => handleAdd(skill.label, 'skill', null, skill.skillQuantity, skill.skillUnit, 'post'));
+		editedSkills.forEach(skill => handleAdd(skill.label, 'skill', null, null, skill.skillQuantity, skill.skillUnit, 'patch'));
+		addedSkills.forEach(skill => handleAdd(skill.label, 'skill', null, null, skill.skillQuantity, skill.skillUnit, 'post'));
 	}
 
 	return (
 		<section className="coop-detail-container">
 			<div className="label-container">
 				<span className='field-label'>Skills:</span>
-
 				{skillsAreEdited &&
 					<>
 						<button className="btn-save"
@@ -55,8 +54,8 @@ const CooperatorSkills = ({handleAdd}) => {
 							<img src="/assets/cancel.png" alt="cancel"/>
 						</button>
 					</>
-
 				}
+
 				{!skillsAreEdited &&
 					<button className="btn-add"
 									onClick={() => {
@@ -67,7 +66,6 @@ const CooperatorSkills = ({handleAdd}) => {
 						<img src="/assets/plus.png" alt="add"/>
 					</button>
 				}
-
 			</div>
 			<div className="coop-detail-item-container">
 				{currentSkills.map(skill => (

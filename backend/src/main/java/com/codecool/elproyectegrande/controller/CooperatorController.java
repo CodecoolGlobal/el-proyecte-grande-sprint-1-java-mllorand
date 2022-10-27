@@ -10,6 +10,7 @@ import com.codecool.elproyectegrande.model.label.TechLabel;
 import com.codecool.elproyectegrande.service.CooperatorService;
 import com.codecool.elproyectegrande.service.LabelService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.User;
@@ -22,6 +23,7 @@ import java.net.URI;
 @CrossOrigin(origins = {"http://localhost:3000", "https://codecrush.postman.co"}, allowedHeaders = {"authorization"})
 @RequestMapping("/api/cooperator")
 @RequiredArgsConstructor
+@Slf4j
 public class CooperatorController {
     private static final Long DEFAULT_USER_ID = 1L;
     private final CooperatorService cooperatorService;
@@ -76,6 +78,7 @@ public class CooperatorController {
     @PatchMapping("/fullName")
     public ResponseEntity<Cooperator> changeFullName(@RequestBody StringAttribute updatedFullName, @AuthenticationPrincipal String userName) {
         Cooperator cooperator = cooperatorService.findByName(userName);
+        log.info(userName);
         return ResponseEntity.ok().body(cooperatorService.updateFullName(cooperator, updatedFullName));
     }
 

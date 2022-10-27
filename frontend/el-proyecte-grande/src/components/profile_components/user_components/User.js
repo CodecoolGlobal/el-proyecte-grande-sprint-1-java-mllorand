@@ -6,7 +6,7 @@ const User = () => {
 	return (
 		<>
 			<section id="profile-img">
-				<img src="/assets/lori.png" alt="profile pic"/>
+				<img src="/assets/mark.jpg" alt="profile pic"/>
 			</section>
 			<UserDetails/>
 			<UserGroups/>
