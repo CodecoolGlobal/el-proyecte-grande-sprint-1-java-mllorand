@@ -40,6 +40,9 @@ public class CoOpportunity {
     @OneToMany(cascade = {CascadeType.MERGE})
     private List<Repo> repos;
 
+    @ManyToOne(cascade = {CascadeType.MERGE})
+    private Cooperator owner;
+
     @OneToMany(cascade = {CascadeType.MERGE})
     private @NonNull List<Cooperator> cooperators;
 

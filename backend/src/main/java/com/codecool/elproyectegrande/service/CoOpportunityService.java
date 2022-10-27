@@ -1,6 +1,7 @@
 package com.codecool.elproyectegrande.service;
 
 import com.codecool.elproyectegrande.model.Visibility;
+import com.codecool.elproyectegrande.model.cooperator.Cooperator;
 import com.codecool.elproyectegrande.model.coopportunity.CoOpportunity;
 import com.codecool.elproyectegrande.model.coopportunity.JoinPolicy;
 import com.codecool.elproyectegrande.model.label.InterestLabel;
@@ -78,7 +79,9 @@ public class CoOpportunityService {
             coOpportunity.setJoinPolicy(DEFAULT_JOIN_POLICY);
         }
 
-        coOpportunity.setCooperators(List.of(cooperatorService.findByName(userName)));
+        Cooperator firstMember = cooperatorService.findByName(userName);
+        coOpportunity.setOwner(firstMember);
+        coOpportunity.setCooperators(List.of(firstMember));
 
         return coOpportunityRepo.save(coOpportunity);
     }
