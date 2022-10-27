@@ -16,8 +16,8 @@ import java.util.List;
 @Setter
 public class InterestLabel {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "techLabelGenerator")
-    @SequenceGenerator(name = "techLabelGenerator", sequenceName = "techLabel_seq")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "interestLabelGenerator")
+    @SequenceGenerator(name = "interestLabelGenerator", sequenceName = "interestLabel_seq")
     private Long id;
 
     @ManyToOne(cascade = {CascadeType.MERGE})
