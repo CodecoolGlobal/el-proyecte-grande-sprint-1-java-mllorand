@@ -8,12 +8,10 @@ const useAddLabel = (cooperatorData, setCooperatorData) => {
 			}
 	};
 	return (
-		(label, fieldName, prio, tags, weightQuantity, weightUnit, requestType) => {
+		(label, fieldName, prio, tags, skillQuantity, skillUnit, requestType) => {
 			let newCooperatorData = {...cooperatorData}
 			if (prio && tags) {
-				const newInterestId = parseInt(newCooperatorData[fieldName].id) + 1
 				const newInterest = {
-					id: newInterestId,
 					label: label,
 					interestPriority: prio,
 					tags: tags
@@ -24,31 +22,33 @@ const useAddLabel = (cooperatorData, setCooperatorData) => {
 					"interestPriority": prio,
 					"tags": tags
 				};
-				if (requestType === 'post') axios.post(`/cooperator/${fieldName}`, data, requestConfig)
-				else axios.patch(`/cooperator/${fieldName}`, data, requestConfig)
+				if (requestType === 'post') axios.post(`/api/cooperator/${fieldName}`, data, requestConfig)
+				else axios.patch(`/api/cooperator/${fieldName}`, data, requestConfig)
 				setCooperatorData(newCooperatorData);
 
-			} else if (weightQuantity && weightQuantity) {
-				const newLearntId = parseInt(newCooperatorData[fieldName].id) + 1
+			} else if (skillQuantity && skillUnit) {
 				const newLearnt = {
-					id: newLearntId,
+					id: null,
 					label: label,
-					weightQuantity: weightQuantity,
-					weightUnit: weightUnit
+					skillQuantity: skillQuantity,
+					skillUnit: skillUnit
 				}
+				console.log(cooperatorData)
 				newCooperatorData[fieldName] = [...newCooperatorData[fieldName], newLearnt]
 				const data = {
+					'id': null,
 					"label": label,
-					"weightQuantity": weightQuantity,
-					"weightUnit": weightUnit
+					"skillQuantity": skillQuantity,
+					"skillUnit": skillUnit
 				};
-				if (requestType === 'post') axios.post(`/cooperator/${fieldName}`, data, requestConfig)
-				else axios.patch(`/cooperator/${fieldName}`, data, requestConfig)
+				if (requestType === 'post') axios.post(`/api/cooperator/${fieldName}`, data, requestConfig)
+				else axios.patch(`/api/cooperator/${fieldName}`, data, requestConfig)
 				setCooperatorData(newCooperatorData);
 
 			} else {
+				console.log(newCooperatorData)
 				newCooperatorData[fieldName] = [...newCooperatorData[fieldName], label]
-				axios.post(`/cooperator/${fieldName}`, {
+				axios.post(`/api/cooperator/${fieldName}`, {
 					"id": label.id,
 					"internalName": label.internalName,
 					"toolTipText": label.toolTipText

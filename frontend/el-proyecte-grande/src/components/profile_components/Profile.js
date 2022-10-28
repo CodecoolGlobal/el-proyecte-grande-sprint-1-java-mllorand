@@ -12,10 +12,7 @@ const Profile = () => {
 	const authToken = localStorage.getItem("access_token");
 	const [profile, setProfile] = useState(null);
 	const navigate = useNavigate();
-
-	useEffect(() => {
-		if (!authToken) navigate('/login');
-	}, [authToken])
+	// const [cooperator, setCooperator] = useState(null);
 
 
 	useEffect(() => {
@@ -33,8 +30,12 @@ const Profile = () => {
 
 	}, []);
 
+	useEffect(() => {
+		if (!authToken) navigate('/login');
+	}, [authToken])
 
 	useEffect(() => {
+		// console.log(profile)
 			if (profile) {
 				setUserData({
 					id: profile.id,
@@ -46,15 +47,27 @@ const Profile = () => {
 				});
 				setCooperatorData({
 					id: profile.id,
-					strengths: profile.strengths,
-					skills: profile.skills,
-					interests: profile.interests,
+					strength: profile.strengths,
+					skill: profile.skills,
+					interest: profile.interests,
 					learnFromScratch: profile.learnFromScratch,
 					improveIn: profile.improveIn
 				});
+				// setCooperator({...userData,...cooperatorData});
 			}
 		}, [profile]
 	)
+
+	// useEffect(() => {
+	// 	setCooperator({...userData,...cooperatorData});
+	// 	return () => {
+	// 		console.log("component did unmount")
+	// 	};
+	// }, [cooperatorData]);
+
+
+
+
 
 	if (!authToken) return 'loading..';
 

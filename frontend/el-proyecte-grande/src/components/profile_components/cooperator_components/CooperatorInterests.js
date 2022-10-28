@@ -6,7 +6,7 @@ import CoopInterest from "./CoopInterest";
 const CooperatorInterests = ({handleAdd}) => {
 	const {cooperatorData} = useContext(ProfileContext);
 	const [showModal, setShowModal] = useState(false);
-	const [currentInterests, setCurrentInterests] = useState(cooperatorData.interests);
+	const [currentInterests, setCurrentInterests] = useState(cooperatorData.interest);
 	const [interestsAreEdited, setInterestsAreEdited] = useState(false);
 	const [editedInterests, setEditedInterests] = useState([]);
 	const [addedInterests, setAddedInterests] = useState([]);
@@ -85,13 +85,12 @@ const CooperatorInterests = ({handleAdd}) => {
 				showModal
 				&&
 				<Modal
-					fieldName='interests'
+					fieldName='interest'
 					currentItems={currentInterests}
 					setCurrentItems={setCurrentInterests}
 					addedItems={addedInterests}
 					setAddedItems={setAddedInterests}
 					itemTemplate={{
-						"id": null,
 						"label": null,
 						"interestPriority": null,
 						"tags": []

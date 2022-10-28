@@ -19,7 +19,7 @@ const Cooperator = () => {
 			/>
 
 			<CooperatorDetails
-				fieldName='strengths'
+				fieldName='strength'
 				handleAdd={handleAddLabel}
 			/>
 
