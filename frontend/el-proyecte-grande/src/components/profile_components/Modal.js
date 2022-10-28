@@ -13,10 +13,10 @@ const Modal = ({itemTemplate, setShowModal, currentSkills, setCurrentSkills, set
 					<button className="btn-label"
 									onClick={() => {
 										itemTemplate.label = label;
-										let newCurrentSkills = {...currentSkills}
-										newCurrentSkills.skill = [...newCurrentSkills.skill, itemTemplate]
-										setCurrentSkills(newCurrentSkills)
+										let newCurrentSkills = [...currentSkills]
+										newCurrentSkills = [...newCurrentSkills, itemTemplate]
 										setFocusedSkill(itemTemplate)
+										setCurrentSkills(newCurrentSkills)
 										setShowModal(false)
 									}
 									}>
