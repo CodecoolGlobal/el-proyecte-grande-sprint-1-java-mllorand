@@ -10,7 +10,7 @@ const useAddLabel = (cooperatorData, setCooperatorData) => {
 	return (
 		(updatedEntity, fieldName) => {
 			let newCooperatorData = {...cooperatorData}
-			if (updatedEntity.id) {
+			if (!updatedEntity.id) {
 				axios.post(`/api/cooperator/${fieldName}`, updatedEntity, requestConfig)
 				newCooperatorData[fieldName] = [...newCooperatorData[fieldName], updatedEntity]
 			} else {

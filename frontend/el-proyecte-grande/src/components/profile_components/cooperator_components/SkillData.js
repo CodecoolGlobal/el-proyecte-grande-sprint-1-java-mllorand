@@ -2,6 +2,8 @@ import React, {useState} from 'react';
 
 const SkillData = ({skill, focusedSkill, setFocusedSkill}) => {
 	const [unitSelectOn, setUnitSelectOn] = useState(false);
+	console.log('skill', skill)
+	console.log('focused', focusedSkill)
 
 
 	function handleChange(value) {
@@ -19,8 +21,7 @@ const SkillData = ({skill, focusedSkill, setFocusedSkill}) => {
 
 	return (
 		<div className="skill-data-container">
-			{/*focused skill is edited*/}
-			{focusedSkill.id === skill.id &&
+			{focusedSkill && focusedSkill.id === skill.id &&
 				<>
 					{!unitSelectOn &&
 						<>
@@ -48,7 +49,7 @@ const SkillData = ({skill, focusedSkill, setFocusedSkill}) => {
 				</>
 			}
 			{/*skill is displayed*/}
-			{focusedSkill.id !== skill.id &&
+			{focusedSkill && focusedSkill.id !== skill.id &&
 				<div onClick={setFocusedSkill(skill)}>
 					<p>{skill.skillQuantity}</p>
 					<p>{skill.skillUnit}</p>
