@@ -7,7 +7,6 @@ import {v4 as uuid} from 'uuid';
 const CooperatorSkills = ({handleAdd}) => {
 	const {cooperatorData} = useContext(ProfileContext);
 	const [showModal, setShowModal] = useState(false);
-	const [skillsAreEdited, setSkillsAreEdited] = useState(false);
 	const [currentSkills, setCurrentSkills] = useState(cooperatorData.skill)
 	const [focusedSkill, setFocusedSkill] = useState(null)
 
@@ -17,7 +16,6 @@ const CooperatorSkills = ({handleAdd}) => {
 
 	const handleCancel = () => {
 		setShowModal(false)
-		skillsAreEdited(false)
 		if (!focusedSkill.id) {
 			let newCurrentSkills = [...currentSkills]
 			newCurrentSkills.splice(-1)
@@ -28,7 +26,6 @@ const CooperatorSkills = ({handleAdd}) => {
 
 	const handleSave = () => {
 		setShowModal(false)
-		skillsAreEdited(false)
 		if (focusedSkill) {
 			handleAdd(
 				focusedSkill,
@@ -41,7 +38,7 @@ const CooperatorSkills = ({handleAdd}) => {
 		<section className="coop-detail-container">
 			<div className="label-container">
 				<span className='field-label'>Skills:</span>
-				{skillsAreEdited &&
+				{focusedSkill &&
 					<>
 						<button className="btn-save"
 										onClick={handleSave}
@@ -58,11 +55,10 @@ const CooperatorSkills = ({handleAdd}) => {
 					</>
 				}
 
-				{!skillsAreEdited &&
+				{!focusedSkill &&
 					<button className="btn-add"
 									onClick={() => {
 										handleShowModal();
-										setSkillsAreEdited(true)
 									}}
 					>
 						<img src="/assets/plus.png" alt="add"/>
@@ -73,7 +69,8 @@ const CooperatorSkills = ({handleAdd}) => {
 				{currentSkills.map(skill => {
 					return (
 					<CoopSkill skill={skill} key={uuid()}
-										 setSkillsAreEdited={setSkillsAreEdited}
+										 focusedSkill={focusedSkill}
+										 setFocusedSkill={setFocusedSkill}
 
 					/>)}
 				)}
