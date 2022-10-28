@@ -20,11 +20,12 @@ const Login = () => {
     }
 
     return (
-        <>
+        <div className="login">
+            <h1>Login</h1>
             <input type="text" onChange={event => setUsername(event.target.value)}/>
             <input type="text" onChange={event => setPassword(event.target.value)}/>
             <button onClick={() => handleLogin(username, password)}>login</button>
-        </>
+        </div>
     );
 };
 

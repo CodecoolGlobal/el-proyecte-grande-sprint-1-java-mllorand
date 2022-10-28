@@ -8,9 +8,11 @@ const Navbar = () => {
 			<nav>
 				<button className="btn-opp-browse btn-nav">Opportunities</button>
 				<ul className='nav-links'>
-					<button className="btn-nav btn-forum">Forum</button>
 					<button className="btn-nav">
 						<Link to='/profile'>Profile</Link>
+					</button>
+					<button className="btn-nav">
+						<Link to='/login'>Login</Link>
 					</button>
 					<button className="btn-nav">Logout</button>
 				</ul>

@@ -25,23 +25,7 @@ const CoopSkill = ({
 		setLabels
 	} = useContext(ProfileContext);
 
-
-	// useEffect(() => {
-	// 	let skillItem = {
-	// 		id: skill.id,
-	// 		label: skill.label,
-	// 		skillQuantity: skillQuantity,
-	// 		skillUnit: skillUnit
-	// 	};
-	// 	setCurrentSkills(currentSkills.map(item => (
-	// 		item.id === skillItem.id ? skillItem : item
-	// 	)));
-	// 	setAddedSkills([...addedSkills, skillItem]);
-	// }, [skillUnit]);
-
 	const handleSelect = (value) => {
-		console.log(value)
-		setSkillUnit(value);
 		let skillItem = {
 			id: skill.id,
 			label: skill.label,
@@ -50,21 +34,27 @@ const CoopSkill = ({
 		};
 		let newCooperatorData = {...cooperatorData}
 		newCooperatorData.skill.skillUnit = skillUnit;
-		setCooperatorData(newCooperatorData);
 		setCurrentSkills(currentSkills.map(item => (
 			item.id === skillItem.id ? skillItem : item
 		)));
 		setAddedSkills([...addedSkills, skillItem]);
-
+		setCooperatorData(newCooperatorData);
 	}
 
 	const handleChange = (value) => {
 		console.log(value)
 		setSkillQuantity(value)
+		let skillItem = {
+			id: skill.id,
+			label: skill.label,
+			skillQuantity: skillQuantity,
+			skillUnit: skillUnit
+		};
+
 		setCurrentSkills(currentSkills.map(item => (
-			item.id === skill.id ? skill : item
+			item.id === skillItem.id ? skillItem : item
 		)));
-		setAddedSkills([...addedSkills, skill])
+		// setAddedSkills([...addedSkills, skill])
 
 		// let newCooperatorData = {...cooperatorData};
 		// newCooperatorData['skill'].skillQuantity = value;
@@ -76,11 +66,6 @@ const CoopSkill = ({
 		// 	skillQuantity: skillQuantity,
 		// 	skillUnit: skillUnit
 		// };
-
-
-
-
-
 	}
 
 
@@ -134,7 +119,7 @@ const CoopSkill = ({
 					/>
 					<button className='skill-unit'
 									onClick={() => setUnitSelectOn(true)}
-					>{skill.skillUnit}dadaadadadad
+					>{skill.skillUnit}
 					</button>
 				</div>}
 		</div>
