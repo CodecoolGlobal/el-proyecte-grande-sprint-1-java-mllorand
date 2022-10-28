@@ -1,7 +1,7 @@
 import React, {useContext} from "react";
 import {ProfileContext} from "../../context/ProfileContext";
 
-const Modal = ({currentItems, setCurrentItems, itemTemplate, addedItems, setAddedItems}) => {
+const Modal = ({itemTemplate, setShowModal, currentSkills, setCurrentSkills, setFocusedSkill}) => {
 	const {labels} = useContext(ProfileContext);
 
 	return (
@@ -13,8 +13,11 @@ const Modal = ({currentItems, setCurrentItems, itemTemplate, addedItems, setAdde
 					<button className="btn-label"
 									onClick={() => {
 										itemTemplate.label = label;
-										setCurrentItems([...currentItems, itemTemplate])
-										// setAddedItems([...addedItems, itemTemplate])
+										let newCurrentSkills = {...currentSkills}
+										newCurrentSkills.skill = [...newCurrentSkills.skill, itemTemplate]
+										setCurrentSkills(newCurrentSkills)
+										setFocusedSkill(itemTemplate)
+										setShowModal(false)
 									}
 									}>
 						<img src={`/tech_icons/${label.internalName}.png`} alt={label.tooltipText}/>
