@@ -7,39 +7,34 @@ import {v4 as uuid} from 'uuid';
 const CooperatorSkills = ({handleAdd}) => {
 	const {cooperatorData} = useContext(ProfileContext);
 	const [showModal, setShowModal] = useState(false);
-	const [currentSkills, setCurrentSkills] = useState(cooperatorData.skill);
 	const [skillsAreEdited, setSkillsAreEdited] = useState(false);
-	const [editedSkills, setEditedSkills] = useState([]);
-	const [addedSkills, setAddedSkills] = useState([]);
-
-	// console.log(cooperatorData)
-
-	useEffect(() => {
-		console.log("current skills: ", currentSkills)
-	}, [currentSkills])
-
+	const [currentSkills, setCurrentSkills] = useState(cooperatorData.skill)
+	const [focusedSkill, setFocusedSkill] = useState(null)
 
 	const handleShowModal = () => {
 		setShowModal(true)
 	}
 
 	const handleCancel = () => {
-		let canceledSkillIds = [];
-		canceledSkillIds.concat(editedSkills.map(skill => skill.id));
-		canceledSkillIds.concat(addedSkills.map(skill => skill.id));
-		setCurrentSkills(currentSkills.filter(skill => !(canceledSkillIds.includes(skill.label.id)))
-		)
-		setAddedSkills([]);
-		setEditedSkills([]);
+		setShowModal(false)
+		skillsAreEdited(false)
+		if (!focusedSkill.id) {
+			let newCurrentSkills = [...currentSkills]
+			newCurrentSkills.splice(-1)
+			setCurrentSkills(newCurrentSkills)
+		}
+		setFocusedSkill(null)
 	}
 
 	const handleSave = () => {
-		// console.log('added: ', addedSkills)
-		// editedSkills.forEach(skill => handleAdd(skill.label, 'skills', null, null, skill.skillQuantity, skill.skillUnit, 'patch'));
-		addedSkills.forEach(skill => {
-			console.log(skill)
-			handleAdd(skill.label, 'skill', null, null, skill.skillQuantity, skill.skillUnit, 'post')
-		});
+		setShowModal(false)
+		skillsAreEdited(false)
+		if (focusedSkill) {
+			handleAdd(
+				focusedSkill,
+				'skill'
+			)
+		}
 	}
 
 	return (
@@ -49,21 +44,14 @@ const CooperatorSkills = ({handleAdd}) => {
 				{skillsAreEdited &&
 					<>
 						<button className="btn-save"
-										onClick={() => {
-											setSkillsAreEdited(false);
-											handleSave()
-											setShowModal(false)
-										}}
+										onClick={handleSave}
 						>
 							<img src="/assets/checkmark.png" alt="save"/>
 						</button>
 
 						<button className="btn-cancel"
-										onClick={() => {
-											setSkillsAreEdited(false);
-											handleCancel();
-											setShowModal(false)
-										}}
+										onClick={handleCancel}
+
 						>
 							<img src="/assets/cancel.png" alt="cancel"/>
 						</button>
@@ -86,12 +74,7 @@ const CooperatorSkills = ({handleAdd}) => {
 					return (
 					<CoopSkill skill={skill} key={uuid()}
 										 setSkillsAreEdited={setSkillsAreEdited}
-										 currentSkills={currentSkills}
-										 setCurrentSkills={setCurrentSkills}
-										 editedSkills={editedSkills}
-										 setEditedSkills={setEditedSkills}
-										 addedSkills={addedSkills}
-										 setAddedSkills={setAddedSkills}
+
 					/>)}
 				)}
 			</div>
@@ -99,16 +82,16 @@ const CooperatorSkills = ({handleAdd}) => {
 				showModal
 				&&
 				<Modal
-					currentItems={currentSkills}
-					setCurrentItems={setCurrentSkills}
-					addedItems={addedSkills}
-					setAddedItems={setAddedSkills}
 					itemTemplate={{
-						"id": uuid(),
+						"id": null,
 						"label": null,
 						"skillQuantity": 0,
 						"skillUnit": "-"
 					}}
+					setShowModal={setShowModal}
+					currentSkills = {currentSkills}
+					setCurrentSkills = {setCurrentSkills}
+					setFocusedSkill = {setFocusedSkill}
 				/>
 			}
 		</section>
