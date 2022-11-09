@@ -11,7 +11,6 @@ import com.codecool.elproyectegrande.model.label.SkillLabel;
 import com.codecool.elproyectegrande.model.label.TechLabel;
 import com.codecool.elproyectegrande.repository.CooperatorRepo;
 import com.codecool.elproyectegrande.repository.RoleRepo;
-import com.codecool.elproyectegrande.repository.SkillLabelRepo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -35,7 +34,7 @@ import java.util.Optional;
 public class CooperatorService implements UserDetailsService {
     private final CooperatorRepo cooperatorRepo;
     private final RoleRepo roleRepo;
-    private final SkillLabelRepo skillLabelRepo;
+    private final LabelService labelService;
     private final PasswordEncoder passwordEncoder;
     public static final int MINIMUM_AGE = 14;
     public static final int MAXIMUM_AGE = 150;
@@ -96,9 +95,8 @@ public class CooperatorService implements UserDetailsService {
     }
 
     public Cooperator addNewSkill(Cooperator cooperator, @Validated SkillLabel newSkill) {
-        skillLabelRepo.save(newSkill);
+        cooperator.getSkills().add(labelService.createSkillLabel(newSkill));
         log.info("new skill with id: {} created", newSkill.getId());
-        cooperator.getSkills().add(newSkill);
         return cooperator;
     }
 

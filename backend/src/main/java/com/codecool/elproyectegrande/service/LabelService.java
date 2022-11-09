@@ -30,7 +30,7 @@ public class LabelService {
     private final TechLabelRepo techLabelRepo;
     private final SkillLabelRepo skillLabelRepo;
     private final InterestLabelRepo interestLabelRepo;
-    private final CooperatorService cooperatorService;
+    //private final CooperatorService cooperatorService;
     private final TagRepo tagRepo;
 
     public SkillLabel getSkill(Long id) {
@@ -76,6 +76,11 @@ public class LabelService {
         }
         log.error("interest {} not in cooperator", updatedInterest);
         throw new RuntimeException("interest not in cooperator");
+    }
+
+    public SkillLabel createSkillLabel(SkillLabel skillLabel) {
+        skillLabel.setLabel(techLabelRepo.findOne(Example.of(skillLabel.getLabel())).orElseThrow());
+        return skillLabelRepo.save(skillLabel);
     }
 
     public InterestLabel createInterestLabel(InterestLabel interestLabel) {
