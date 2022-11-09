@@ -101,7 +101,8 @@ public class CooperatorService implements UserDetailsService {
     }
 
     public Cooperator addNewInterest(Cooperator cooperator, InterestLabel newInterest) {
-        cooperator.getInterests().add(newInterest);
+        cooperator.getInterests().add(labelService.createInterestLabel(newInterest));
+        log.info("new interest with id: {} created", newInterest.getId());
         return cooperator;
     }
 
