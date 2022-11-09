@@ -2,32 +2,36 @@ import React, {useContext, useState} from 'react';
 import {ProfileContext} from "../../../context/ProfileContext";
 import Modal from "../Modal";
 import CoopInterest from "./CoopInterest";
+import {v4 as uuid} from "uuid";
 
 const CooperatorInterests = ({handleAdd}) => {
 	const {cooperatorData} = useContext(ProfileContext);
 	const [showModal, setShowModal] = useState(false);
-	const [currentInterests, setCurrentInterests] = useState(cooperatorData.interest);
-	const [interestsAreEdited, setInterestsAreEdited] = useState(false);
-	const [editedInterests, setEditedInterests] = useState([]);
-	const [addedInterests, setAddedInterests] = useState([]);
+	const [currentInterests, setCurrentInterests] = useState(cooperatorData.interest)
+	const [focusedInterest, setFocusedInterest] = useState(null)
 
 	const handleShowModal = () => {
 		setShowModal(true)
 	}
 
 	const handleCancel = () => {
-		let canceledInterestIds = [];
-		canceledInterestIds.concat(editedInterests.map(interest => interest.id));
-		canceledInterestIds.concat(addedInterests.map(interest => interest.id));
-		setCurrentInterests(currentInterests.filter(interest => !(canceledInterestIds.includes(interest.label.id)))
-		)
-		setAddedInterests([]);
-		setEditedInterests([]);
+		setShowModal(false)
+		if (!focusedInterest.id) {
+			let newCurrentInterests = [...currentInterests]
+			newCurrentInterests.splice(-1)
+			setCurrentInterests(newCurrentInterests)
+		}
+		setFocusedInterest(null)
 	}
 
 	const handleSave = () => {
-		editedInterests.forEach(interest => handleAdd(interest.label, 'interest', interest.interestPriority, interest.tags, null, null, 'patch'));
-		addedInterests.forEach(interest => handleAdd(interest.label, 'interest', interest.interestPriority, interest.tags, null, null, 'post'));
+		setShowModal(false)
+		if (focusedInterest) {
+			handleAdd(
+				focusedInterest,
+				'interest'
+			)
+		}
 	}
 
 	return (
@@ -35,69 +39,53 @@ const CooperatorInterests = ({handleAdd}) => {
 			<div className="label-container">
 				<span className='field-label'>Interests:</span>
 
-				{interestsAreEdited &&
+				{focusedInterest &&
 					<>
 						<button className="btn-save"
-										onClick={() => {
-											setInterestsAreEdited(false);
-											handleSave()
-										}}
+										onClick={handleSave}
 						>
 							<img src="/assets/checkmark.png" alt="save"/>
 						</button>
 
 						<button className="btn-cancel"
-										onClick={() => {
-											setInterestsAreEdited(false);
-											handleCancel();
-										}}
+										onClick={handleCancel}
 						>
 							<img src="/assets/cancel.png" alt="cancel"/>
 						</button>
 					</>
 				}
-				
-				{!interestsAreEdited &&
+
+				{!focusedInterest &&
 					<button className="btn-add"
-									onClick={() => {
-										handleShowModal();
-										setInterestsAreEdited(true)
-									}}
+									onClick={handleShowModal}
 					>
 						<img src="/assets/plus.png" alt="add"/>
 					</button>
 				}
 			</div>
-
 			<div className="coop-detail-item-container">
 				{currentInterests.map(interest => (
-					<CoopInterest interest={interest} key={interest.id}
-										 setInterestsAreEdited={setInterestsAreEdited}
-										 currentInterests={currentInterests}
-										 setCurrentInterests={setCurrentInterests}
-										 editedInterests={editedInterests}
-										 setEditedInterests={setEditedInterests}
-					/>
-				))}
+					<CoopInterest interest={interest} key={uuid()}
+												focusedInterest={focusedInterest}
+												setFocusedInterest={setFocusedInterest}
+					/>))}
 			</div>
-
 			{
 				showModal
 				&&
 				<Modal
-					fieldName='interest'
-					currentItems={currentInterests}
-					setCurrentItems={setCurrentInterests}
-					addedItems={addedInterests}
-					setAddedItems={setAddedInterests}
 					itemTemplate={{
+						"id": null,
 						"label": null,
 						"interestPriority": null,
 						"tags": []
 					}}
+					setShowModal={setShowModal}
+					currentItems={currentInterests}
+					setCurrentItems={setCurrentInterests}
+					setFocusedItem={setFocusedInterest}
 				/>
 			}
-			
 		</section>
 	);
 };

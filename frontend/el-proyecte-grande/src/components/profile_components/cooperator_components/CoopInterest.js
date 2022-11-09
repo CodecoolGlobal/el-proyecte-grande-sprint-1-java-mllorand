@@ -1,37 +1,22 @@
 import React, {useState} from 'react';
-import Tag from "../../Tag";
+import TechLabel from "./TechLabel";
+import InterestData from "./InterestData";
 
-const CoopInterest = ({
-												interest,
-												setInterestsAreEdited,
-												currentInterests,
-												setCurrentInterests,
-												editedInterests,
-												setEditedInterests
-											}) => {
-
-	const [edited, setEdited] = useState(false);
-	const [currentTags, setCurrentTags] = useState(interest.tags);
-	const [tagsAreEdited, setTagsAreEdited] = useState(false);
-	const [editedTags, setEditedTags] = useState();
-
-	const handleDrag = () => {
-		return null;
-	}
+const CoopInterest = ({interest, focusedInterest, setFocusedInterest}) => {
+	const [tags, setTags] = useState(interest.tags);
+	const [focusedTag, setFocusedTag] = useState(null);
 
 	return (
-		<>
-			<div className={edited ? "detail-item" : "detail-item edited"}>
-				<img src={`/tech_icons/${interest}.label.internalName}.png`} alt={interest.label.tooltipText}/>
-				<div className="tag-container">
-					{interest.tags.map(tag => (
-						<Tag key={tag.id}
-								 name={tag.name}
-						/>
-					))}
-				</div>
-			</div>
-		</>
+		<div>
+			<TechLabel label={interest.label}/>
+			<InterestData interest={interest}
+										focusedInterest={focusedInterest}
+										setFocusedInterest={setFocusedInterest}
+										tags={tags}
+										setTags={setTags}
+										setFocusedTag={setFocusedTag}
+			/>
+		</div>
 	);
 };
 
