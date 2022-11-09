@@ -41,7 +41,7 @@ header nav {
 }
 
 li, a, button {
-    color: var(--almost-white);
+    color: var(--dark-gray);
     font-weight: 500;
     font-size: clamp(14px, 1vw, 100px);
     text-decoration: none;
@@ -200,9 +200,15 @@ footer, #nav-social, #nav-other, #nav-social ul, #nav-other ul {
     width: 3vw;
 }
 
+.tag-container {
+    width: 20vw;
+    height: 10vh;
+    border: 1px solid black;
+}
+
 .detail-item img {
     height: 2vh;
-    width: auto;
+    width: 2vw;
 }
 
 .btn-add, .btn-add * {

@@ -1,4 +1,4 @@
-import React, {useContext, useState, useEffect} from 'react';
+import React, {useContext, useState} from 'react';
 import CoopSkill from "./CoopSkill";
 import {ProfileContext} from "../../../context/ProfileContext";
 import Modal from "../Modal";
@@ -57,23 +57,19 @@ const CooperatorSkills = ({handleAdd}) => {
 
 				{!focusedSkill &&
 					<button className="btn-add"
-									onClick={() => {
-										handleShowModal();
-									}}
+									onClick={handleShowModal}
 					>
 						<img src="/assets/plus.png" alt="add"/>
 					</button>
 				}
 			</div>
 			<div className="coop-detail-item-container">
-				{currentSkills.map(skill => {
-					return (
+				{currentSkills.map(skill => (
 					<CoopSkill skill={skill} key={uuid()}
 										 focusedSkill={focusedSkill}
 										 setFocusedSkill={setFocusedSkill}
 
-					/>)}
-				)}
+					/>))}
 			</div>
 			{
 				showModal
@@ -86,9 +82,9 @@ const CooperatorSkills = ({handleAdd}) => {
 						"skillUnit": "-"
 					}}
 					setShowModal={setShowModal}
-					currentSkills = {currentSkills}
-					setCurrentSkills = {setCurrentSkills}
-					setFocusedSkill = {setFocusedSkill}
+					currentItems = {currentSkills}
+					setCurrentItems = {setCurrentSkills}
+					setFocusedItem = {setFocusedSkill}
 				/>
 			}
 		</section>

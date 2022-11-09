@@ -2,13 +2,11 @@ import React, {useState} from 'react';
 
 const SkillData = ({skill, focusedSkill, setFocusedSkill}) => {
 	const [unitSelectOn, setUnitSelectOn] = useState(false);
-	console.log('skill', skill)
-	console.log('focused', focusedSkill)
+	const [skillQuantity, setSkillQuantity] = useState(focusedSkill ? focusedSkill.skillQuantity : skill.skillQuantity);
 
-
-	function handleChange(value) {
+	function handleBlur() {
 		const newFocusedSkill = {...focusedSkill}
-		newFocusedSkill.skillQuantity = value
+		newFocusedSkill.skillQuantity = skillQuantity
 		setFocusedSkill(newFocusedSkill)
 	}
 
@@ -19,6 +17,7 @@ const SkillData = ({skill, focusedSkill, setFocusedSkill}) => {
 		setUnitSelectOn(false)
 	}
 
+
 	return (
 		<div className="skill-data-container">
 			{focusedSkill && focusedSkill.id === skill.id &&
@@ -26,8 +25,9 @@ const SkillData = ({skill, focusedSkill, setFocusedSkill}) => {
 					{!unitSelectOn &&
 						<>
 							<input className='skill-quantity'
-										 value={focusedSkill.skillQuantity}
-										 onChange={e => handleChange(e.target.value)}
+										 value={skillQuantity}
+										 onChange={e => setSkillQuantity(e.target.value)}
+										 onBlur={handleBlur}
 							/>
 							<button onClick={() => setUnitSelectOn(true)}
 							>
@@ -49,8 +49,8 @@ const SkillData = ({skill, focusedSkill, setFocusedSkill}) => {
 				</>
 			}
 			{/*skill is displayed*/}
-			{focusedSkill && focusedSkill.id !== skill.id &&
-				<div onClick={setFocusedSkill(skill)}>
+			{!focusedSkill &&
+				<div onClick={() => setFocusedSkill(skill)}>
 					<p>{skill.skillQuantity}</p>
 					<p>{skill.skillUnit}</p>
 				</div>
