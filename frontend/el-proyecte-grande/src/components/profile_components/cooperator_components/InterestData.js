@@ -2,11 +2,7 @@ import React, {useState} from 'react';
 import {v4 as uuid} from 'uuid';
 import Tag from "./Tag";
 
-const InterestData = ({interest, focusedInterest, setFocusedInterest}) => {
-	const [tags, setTags] = useState(interest.tags);
-	const [focusedTag, setFocusedTag] = useState(null);
-
-
+const InterestData = ({interest, focusedInterest, setFocusedInterest, tags, setTags, focusedTag, setFocusedTag}) => {
 	function handleAddTag() {
 		const newTag = {
 			id: null,

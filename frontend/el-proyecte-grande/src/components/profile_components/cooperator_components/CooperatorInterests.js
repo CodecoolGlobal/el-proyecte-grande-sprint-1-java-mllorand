@@ -4,14 +4,27 @@ import Modal from "../Modal";
 import CoopInterest from "./CoopInterest";
 import {v4 as uuid} from "uuid";
 
+const MAX_INTEREST_LABELS = 5;
+
 const CooperatorInterests = ({handleAdd}) => {
 	const {cooperatorData} = useContext(ProfileContext);
 	const [showModal, setShowModal] = useState(false);
 	const [currentInterests, setCurrentInterests] = useState(cooperatorData.interest)
 	const [focusedInterest, setFocusedInterest] = useState(null)
 
+	const interestPriorityValues = {
+		1: "FIRST",
+		2: "SECOND",
+		3: "THIRD",
+		4: "FOURTH",
+		5: "FIFTH",
+	};
+	const interestLabelCount = currentInterests.length;
+
 	const handleShowModal = () => {
-		setShowModal(true)
+		if (interestLabelCount < MAX_INTEREST_LABELS) {
+			setShowModal(true)
+		}
 	}
 
 	const handleCancel = () => {
@@ -27,6 +40,7 @@ const CooperatorInterests = ({handleAdd}) => {
 	const handleSave = () => {
 		setShowModal(false)
 		if (focusedInterest) {
+			focusedInterest.interestPriority = interestPriorityValues[interestLabelCount];
 			handleAdd(
 				focusedInterest,
 				'interest'

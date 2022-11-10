@@ -14,6 +14,7 @@ const CoopInterest = ({interest, focusedInterest, setFocusedInterest}) => {
 										setFocusedInterest={setFocusedInterest}
 										tags={tags}
 										setTags={setTags}
+						  				focusedTag={focusedTag}
 										setFocusedTag={setFocusedTag}
 			/>
 		</div>
