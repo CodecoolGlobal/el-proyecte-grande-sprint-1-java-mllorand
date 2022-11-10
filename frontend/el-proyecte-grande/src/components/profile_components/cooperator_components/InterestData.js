@@ -23,19 +23,20 @@ const InterestData = ({interest, focusedInterest, setFocusedInterest}) => {
 					<button onClick={handleAddTag}
 					>#
 					</button>
-					{
-						tags.map(tag => (
-							<Tag tag={tag} key={uuid()}
-									 tags={tags}
-									 setTags={setTags}
-									 focusedTag={focusedTag}
-									 setFocusedTag={setFocusedTag}
-									 focusedInterest={focusedInterest}
-									 setFocusedInterest={setFocusedInterest}
-							/>
-						))
-					}
 				</div>
+			}
+			{
+				tags.map(tag => (
+					<Tag tag={tag} key={uuid()}
+						 tags={tags}
+						 setTags={setTags}
+						 focusedTag={focusedTag}
+						 setFocusedTag={setFocusedTag}
+						 focusedInterest={focusedInterest}
+						 setFocusedInterest={setFocusedInterest}
+						 interestBeingEdited={focusedInterest && focusedInterest.id === interest.id}
+					/>
+				))
 			}
 		</div>
 	);
